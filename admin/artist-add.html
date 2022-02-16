@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>TripleExhibition Management</title>
+        <link href="css/styles.css" rel="stylesheet" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+    </head>
+    <body class="sb-nav-fixed">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+            <!-- Navbar Brand-->
+            <a class="navbar-brand ps-3" href="index.html">사이버전시회 - 관리</a>
+            <!-- Sidebar Toggle-->
+            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+            <!-- Navbar Search-->
+            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+                <!-- 
+                <div class="input-group">
+                    <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+                    <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+                </div>
+                -->
+            </form>
+            <!-- Navbar-->
+            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#">Settings</a></li>
+                        <li><a class="dropdown-item" href="#">Activity Log</a></li>
+                        <li><hr class="dropdown-divider" /></li>
+                        <li><a class="dropdown-item" href="#">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+                        <div class="nav">
+                            <div class="sb-sidenav-menu-heading">Exhibition</div>
+                            <a class="nav-link" href="exhibition-list.html">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                전시회
+                            </a>
+                            <a class="nav-link" href="artist-list.html">
+                                <div class="sb-nav-link-icon"><i class="fas fa-paint-brush"></i></div>
+                                작가
+                            </a>
+                            <a class="nav-link" href="artwork-list.html">
+                                <div class="sb-nav-link-icon"><i class="fas fa-images"></i></div>
+                                작품
+                            </a>
+                            <div class="sb-sidenav-menu-heading">Shopping</div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fas fa-receipt"></i></div>
+                                주문
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="order-list-now.html">현재 주문 관리</a>
+                                    <a class="nav-link" href="order-list-prev.html">이전 주문 관리</a>
+                                </nav>
+                            </div>
+                            <a class="nav-link" href="storage-list.html">
+                                <div class="sb-nav-link-icon"><i class="fas fa-warehouse"></i></div>
+                                보관
+                            </a>
+                            <div class="sb-sidenav-menu-heading">Member</div>
+                            <a class="nav-link" href="member-list.html">
+                                <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+                                회원
+                            </a>
+                            <a class="nav-link" href="appraise-list.html">
+                                <div class="sb-nav-link-icon"><i class="fas fa-question-circle"></i></div>
+                                감정평가사
+                            </a>
+                            <div class="sb-sidenav-menu-heading">Other</div>
+                            <a class="nav-link" href="faq-list.html">
+                                <div class="sb-nav-link-icon"><i class="fas fa-question-circle"></i></div>
+                                FAQ
+                            </a>
+                        </div>
+                    </div>
+                    <div class="sb-sidenav-footer">
+                        <div class="small">Logged in as:</div>
+                        Start Bootstrap
+                    </div>
+                </nav>
+            </div>
+            <div id="layoutSidenav_content">
+                <main>
+                    <form id="mainForm" action="./artist-add.do" method="post" enctype="multipart/form-data">
+                        <div class="container-fluid px-4">
+                            <h1 class="mt-4 mb-4">작가 등록</h1>
+                            <div id="warning-box"></div>
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <i class="fas fa-search"></i>
+                                    기본 정보 입력
+                                </div>
+                                <div class="card-body">
+                                    <div class="d-md-flex justify-content-md-between m-md-1">
+                                        <div class="col-md-9">
+                                            <div class="form-group row mb-3">
+                                                <label for="nameKOR" class="col-sm-3 col-form-label">이름(한)</label>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control" name="nameKOR" id="nameKOR" placeholder="Name(KOR)">
+                                                    <div class="invalid-feedback">
+                                                        이름(한)을 입력하세요
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row mb-3">
+                                                <label for="nameENG" class="col-sm-3 col-form-label">이름(영)</label>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control" name="nameENG" id="nameENG" placeholder="Name(Eng)">
+                                                    <div class="invalid-feedback">
+                                                        이름(영)을 입력하세요
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row mb-3">
+                                                <label for="birthday"  class="col-sm-3 col-form-label">생년월일</label>
+                                                <div class="col-sm-6">
+                                                    <input type="datetime-local" class="form-control" name="birthday" id="birthday">
+                                                    <div class="invalid-feedback">
+                                                        생년월일을 입력하세요.
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                            <div class="form-group row mb-3">
+                                                <label for="profile" class="col-sm-3 col-form-label">프로필사진</label>
+                                                <div class="col-sm-6">
+                                                    <input type="file" class="form-control" name="profile" id="profile">
+                                                    <div class="invalid-feedback">
+                                                        파일을 선택하세요.
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                        </div>
+                                        <div class="col-md-3 m-md-1">
+                                            <div>
+                                                <!-- TODO -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <i class="fas fa-search"></i>
+                                    연락처 및 주소
+                                </div>
+                                <div class="card-body">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">
+                                            <div class="form-group row mb-3" id="phoneRow1">
+                                                <label for="phone1" class="col-sm-2 col-form-label">대표 연락처</label>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control" name="phone" id="phone1">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row mb-3" id="phoneRow2" hidden>
+                                                <label for="phone2" class="col-sm-2 col-form-label">연락처2</label>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control" name="phone" id="phone2" disabled>
+                                                </div>
+                                            </div> 
+                                            <div class="form-group row mb-3" id="phoneRow3" hidden>
+                                                <label for="phone3" class="col-sm-2 col-form-label">연락처3</label>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control" name="phone" id="phone3" disabled>
+                                                </div>
+                                            </div> 
+                                            <div class="form-group row mb-3" id="phoneRow4" hidden>
+                                                <label for="phone4" class="col-sm-2 col-form-label">연락처4</label>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control" name="phone" id="phone4" disabled>
+                                                </div>
+                                            </div> 
+                                            <div class="form-group row mb-3" id="phoneRow5" hidden>
+                                                <label for="phone5" class="col-sm-2 col-form-label">연락처5</label>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control" name="phone" id="phone5" disabled>
+                                                </div>
+                                            </div> 
+                                            <div class="form-group row mb-3">
+                                                <div class="col-sm-2 col-form-label">연락처 추가</div>
+                                                <div class="col-sm-10">
+                                                    <button class="btn btn-secondary" id="btnAddPhone" type="button"><i class="fas fa-plus"></i></button>
+                                                    <button class="btn btn-secondary" id="btnRemovePhone" type="button"><i class="fas fa-minus"></i></button>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <div class="form-group row mt-3" id="addressRow1">
+                                                <div class="col-sm-2 col-form-label">주소</div>
+                                                <div class="col-sm-10 row">
+                                                    <div class="col-sm-12 mb-2 row">
+                                                        <div class="col-sm-6">
+                                                            <input type="text" class="form-control" name="addr_1" id="addressName1" placeholder="주소지 이름">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-4 mb-2">
+                                                        <input type="text" class="form-control" name="addr_1" id="addressN1" readonly>
+                                                    </div>
+                                                    <div class="col-6 mb-2">
+                                                        <button type="button" class="btn btn-secondary btn-search-address" data-nthrow="1">주소지 검색</button>
+                                                    </div>
+                                                    <div class="col-sm-10 mb-2">
+                                                        <input type="text" class="form-control" name="addr_1" id="address1-1" readonly>
+                                                    </div>
+                                                    <div class="col-sm-10 mb-3">
+                                                        <input type="text" class="form-control" name="addr_1" id="address1-2">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row mt-3" id="addressRow2" hidden>
+                                                <div class="col-sm-2 col-form-label">주소</div>
+                                                <div class="col-sm-10 row">
+                                                    <div class="col-sm-12 mb-2 row">
+                                                        <div class="col-sm-6">
+                                                            <input type="text" class="form-control" name="addr_2" id="addressName2" placeholder="주소지 이름" disabled>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-4 mb-2">
+                                                        <input type="text" class="form-control" name="addr_2" id="addressN2" disabled readonly>
+                                                    </div>
+                                                    <div class="col-6 mb-2">
+                                                        <button type="button" class="btn btn-secondary btn-search-address" data-nthrow="2">주소지 검색</button>
+                                                    </div>
+                                                    <div class="col-sm-10 mb-2">
+                                                        <input type="text" class="form-control" name="addr_2" id="address2-1" disabled readonly>
+                                                    </div>
+                                                    <div class="col-sm-10 mb-3">
+                                                        <input type="text" class="form-control" name="addr_2" id="address2-2" disabled>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row mt-3" id="addressRow3" hidden>
+                                                <div class="col-sm-2 col-form-label">주소</div>
+                                                <div class="col-sm-10 row">
+                                                    <div class="col-sm-12 mb-2 row">
+                                                        <div class="col-sm-6">
+                                                            <input type="text" class="form-control" name="addr_3" id="addressName3" placeholder="주소지 이름" disabled>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-4 mb-2">
+                                                        <input type="text" class="form-control" name="addr_3" id="addressN3" disabled readonly>
+                                                    </div>
+                                                    <div class="col-6 mb-2">
+                                                        <button type="button" class="btn btn-secondary btn-search-address" data-nthrow="3">주소지 검색</button>
+                                                    </div>
+                                                    <div class="col-sm-10 mb-2">
+                                                        <input type="text" class="form-control" name="addr_3" id="address3-1" disabled readonly>
+                                                    </div>
+                                                    <div class="col-sm-10 mb-3">
+                                                        <input type="text" class="form-control" name="addr_3" id="address3-2" disabled>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row mt-3" id="addressRow4" hidden>
+                                                <div class="col-sm-2 col-form-label">주소</div>
+                                                <div class="col-sm-10 row">
+                                                    <div class="col-sm-12 mb-2 row">
+                                                        <div class="col-sm-6">
+                                                            <input type="text" class="form-control" name="addr_4" id="addressName4" placeholder="주소지 이름" disabled>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-4 mb-2">
+                                                        <input type="text" class="form-control" name="addr_4" id="addressN4" disabled readonly>
+                                                    </div>
+                                                    <div class="col-6 mb-2">
+                                                        <button type="button" class="btn btn-secondary btn-search-address" data-nthrow="4">주소지 검색</button>
+                                                    </div>
+                                                    <div class="col-sm-10 mb-2">
+                                                        <input type="text" class="form-control" name="addr_4" id="address4-1" disabled readonly>
+                                                    </div>
+                                                    <div class="col-sm-10 mb-3">
+                                                        <input type="text" class="form-control" name="addr_4" id="address4-2" disabled>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row mt-3" id="addressRow5" hidden>
+                                                <div class="col-sm-2 col-form-label">주소</div>
+                                                <div class="col-sm-10 row">
+                                                    <div class="col-sm-12 mb-2 row">
+                                                        <div class="col-sm-6">
+                                                            <input type="text" class="form-control" name="addr_5" id="addressName5" placeholder="주소지 이름" disabled>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-4 mb-2">
+                                                        <input type="text" class="form-control" name="addr_5" id="addressN5" disabled readonly>
+                                                    </div>
+                                                    <div class="col-6 mb-2">
+                                                        <button type="button" class="btn btn-secondary btn-search-address" data-nthrow="5">주소지 검색</button>
+                                                    </div>
+                                                    <div class="col-sm-10 mb-2">
+                                                        <input type="text" class="form-control" name="addr_5" id="address5-1" disabled readonly>
+                                                    </div>
+                                                    <div class="col-sm-10 mb-3">
+                                                        <input type="text" class="form-control" name="addr_5" id="address5-2" disabled>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row mb-3">
+                                                <div class="col-sm-2 col-form-label">주소 추가</div>
+                                                <div class="col-sm-10">
+                                                    <button type="button" class="btn btn-secondary" id="btnAddAddress"><i class="fas fa-plus"></i></button>
+                                                    <button type="button" class="btn btn-secondary" id="btnRemoveAddress"><i class="fas fa-minus"></i></button>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <i class="fas fa-align-justify"></i>
+                                    작가 소개/연혁
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-group">
+                                      <label class="mb-1" for="introduceText">작가 소개</label>
+                                      <textarea class="form-control mb-2" name="introduce" id="introduceText" rows="5" placeholder="작가 소개"></textarea>
+                                    </div>
+                                    <div class="form-group mb-2">
+                                      <label class="mb-1" for="historyText">작가 연혁</label>
+                                      <textarea class="form-control" name="history" id="historyText" rows="5" placeholder="작가 연혁"></textarea>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-md-end">
+                                <div class="mb-5">
+                                    <button class="btn btn-primary" type="submit">등록하기</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </main>
+                <footer class="py-4 bg-light mt-auto">
+                    <div class="container-fluid px-4">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-muted">Copyright &copy; TripleAims 2022</div>
+                            <div>
+                                <a href="#">Privacy Policy</a>
+                                &middot;
+                                <a href="#">Terms &amp; Conditions</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script src="js/scripts.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+        <script>
+            let cnt_phone = 1;
+            let cnt_address = 1;
+            // DOM
+            $(function() {
+                // Phone 리스트 추가
+                $('#btnAddPhone').click(function() {
+                    if(cnt_phone < 5) {
+                        ++cnt_phone;
+                        showPhoneList(cnt_phone);
+                    }
+                });
+                // Phone 리스트 삭제
+                $('#btnRemovePhone').click(function() {
+                    if(cnt_phone > 1) {
+                        --cnt_phone;
+                        showPhoneList(cnt_phone);
+                    }
+                });
+
+                // Address 리스트 추가
+                $('#btnAddAddress').click(function() {
+                    if(cnt_address < 5) {
+                        ++cnt_address;
+                        showAddressList(cnt_address);
+                    }
+                });
+                // Address 리스트 삭제
+                $('#btnRemoveAddress').click(function() {
+                    if(cnt_address > 1) {
+                        --cnt_address;
+                        showAddressList(cnt_address);
+                    }
+                });
+
+                // 주소지 검색
+                $('.btn-search-address').click(function(e) {
+                    var nthrow = $(this).data('nthrow');
+                    new daum.Postcode({
+                        oncomplete: function(data) {
+                            var addr = '';
+                            var extraAddr = '';
+
+                            if(data.userSelectType === 'R') {
+                                addr = data.roadAddress;
+                            } else {
+                                addr = data.jibunAddress;
+                            }
+
+                            if(data.userSelectedType === 'R'){
+                                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                                    extraAddr += data.bname;
+                                }
+                                // 건물명이 있고, 공동주택일 경우 추가한다.
+                                if(data.buildingName !== '' && data.apartment === 'Y'){
+                                    extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                                }
+                                // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                                if(extraAddr !== ''){
+                                    extraAddr = ' (' + extraAddr + ')';
+                                }
+                            } 
+
+                            // document.getElementById('sample6_postcode').value = data.zonecode;
+                            $('#addressN' + nthrow).val(data.zonecode);
+                            // document.getElementById("sample6_address").value = addr;
+                            addr = addr + ' ' + extraAddr;
+                            $('#address' + nthrow + '-1').val(addr);
+                            // 커서를 상세주소 필드로 이동한다.
+                            $('#addressN' + nthrow + '-2').focus();
+                        }
+                    }).open();
+                })
+
+                // 등록하기 (form submit)
+                $('#mainForm').submit(function(e){
+                    var nameKor = $('#nameKOR').val();
+                    var message = '';
+
+                    if(nameKor == null || nameKor == '') {
+                        e.preventDefault();
+                        message = '이름(한)을 입력해 주세요.';
+                        
+                        $('#nameKOR').focus();
+                    }
+
+                    var div = '<div class="alert alert-warning d-flex align-items-center alert-dismissible fade show" role="alert"><div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:"><path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/></svg>' + message + '</div><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>'
+                    $('#warning-box').html(div);
+
+                })
+            });
+
+            function showPhoneList(cnt) {
+                for (let i = 1; i <= cnt; i++) {
+                    $('#phoneRow' + i).attr('hidden', false);
+                    $('#phoneRow' + i + " input").attr('disabled', false);
+                }
+
+                for (let i = cnt + 1; i <= 5; i++) {
+                    $('#phoneRow' + i).attr('hidden', true);
+                    $('#phoneRow' + i + " input").attr('disabled', true);
+                    $('#phoneRow' + i + " input").val('');
+                }
+            }
+
+            function showAddressList(cnt) {
+                for (let i = 1; i <= cnt; i++) {
+                    $('#addressRow' + i).attr('hidden', false);
+                    $('#addressRow' + i + " input").attr('disabled', false);
+                }
+
+                for (let i = cnt + 1; i <= 5; i++) {
+                    $('#addressRow' + i).attr('hidden', true);
+                    $('#addressRow' + i + " input").attr('disabled', true);
+                    $('#addressRow' + i + " input").val('');
+                }
+            }
+
+
+        </script>
+    </body>
+</html>
