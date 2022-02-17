@@ -787,7 +787,7 @@ body {
   font-size: 20px;
   font-weight: 700;
 }
-.post-year { padding-left: 10px;}
+.post-year { padding-left: 0px;}
 .post-year p {font-weight: 700;}
 .like-share {padding: 12px 0;}
 .like-share a {
