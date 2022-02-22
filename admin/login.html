@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Login - Admin</title>
+        <link href="css/styles.css" rel="stylesheet" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+    </head>
+    <body class="bg-primary">
+        <div id="layoutAuthentication">
+            <div id="layoutAuthentication_content">
+                <main>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-5">
+                                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Login</h3></div>
+                                    <div class="card-body">
+                                        <form id="loginForm">
+                                            <div class="form-floating mb-3">
+                                                <input class="form-control" name="id" id="inputID" type="text" placeholder="ID" />
+                                                <label for="inputID">ID</label>
+                                            </div>
+                                            <div class="form-floating mb-3">
+                                                <input class="form-control" name="pw" id="inputPassword" type="password" placeholder="Password" />
+                                                <label for="inputPassword">Password</label>
+                                            </div>
+                                            <div class="d-flex flex-row-reverse align-items-center mb-2">
+                                                <button class="btn btn-primary">Login</button>
+                                                <div id="errorMessage" class="text-danger" hidden>회원정보가 올바르지 않습니다.&nbsp;&nbsp;&nbsp;</div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+            <div id="layoutAuthentication_footer">
+                <footer class="py-4 bg-light mt-auto">
+                    <div class="container-fluid px-4">
+                        <div class="small">
+                            <div class="text-muted">Copyright &copy; TripleAims 2022</div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script>
+            // document ready
+            $(function() {
+                console.log('>> Jquery is ready.');
+
+                // check already login
+                if(sessionStorage.getItem("adminData"))
+                    location.href='exhibition-list.html';
+
+
+                // login manager
+                $('#loginForm').submit(function () {
+                    // --- set elements
+                    let inputID = $('#inputID').val();
+                    let inputPassword = $('#inputPassword').val();
+                    // console.log('login:{id:' + inputID + ',pw:' + inputPassword + '}');
+                    // --- set elements
+
+                    // --- ID check
+                    if(!inputID){
+                        $('#inputID').focus();
+                        return false;
+                    }
+                    // --- ID check
+
+                    // --- PW check
+                    if(!inputPassword) {
+                        $('#inputPassword').focus();
+                        return false;
+                    }
+                    // --- PW check
+
+                    // --- Ajax Post
+                    $.post(
+                        'http://localhost:8888/member/adminLogin.do', {
+                            id: $('#inputID').val(),
+                            pw: $('#inputPassword').val()
+                        }, function (data, textStatus, jqXHR) {
+                            console.log(data);
+                            if(data.isSuccess) {
+                                // --- 로그인 성공
+                                sessionStorage.setItem("adminData",data.memberDto);
+                                location.href='exhibition-list.html';
+                                // --- 로그인 성공
+                            } else {
+                                // --- 로그인 실패
+                                $('#errorMessage').attr('hidden',false);
+                                $('#inputPassword').val('');
+                                $('#inputPassword').focus();
+                                // --- 로그인 실패
+                            }
+                        }, "JSON"
+                    );
+                    // --- Ajax Post
+
+                    return false;
+                });
+
+            });
+        </script>
+    </body>
+</html>
