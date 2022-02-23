@@ -30,8 +30,8 @@
                                                 <label for="inputPassword">Password</label>
                                             </div>
                                             <div class="d-flex flex-row-reverse align-items-center mb-2">
-                                                <button class="btn btn-primary">Login</button>
-                                                <div id="errorMessage" class="text-danger" hidden>회원정보가 올바르지 않습니다.&nbsp;&nbsp;&nbsp;</div>
+                                                <button id="loginBtn" class="btn btn-primary">Login</button>
+                                                <div id="errorMessage" class="text-danger" hidden></div>
                                             </div>
                                         </form>
                                     </div>
@@ -85,6 +85,8 @@
                     }
                     // --- PW check
 
+                    $('#loginBtn').attr('disabled',true);
+
                     // --- Ajax Post
                     $.post(
                         'http://localhost:8888/member/adminLogin.do', {
@@ -93,19 +95,23 @@
                         }, function (data, textStatus, jqXHR) {
                             console.log(data);
                             if(data.isSuccess) {
-                                // --- 로그인 성공
+                                // 로그인 성공
                                 sessionStorage.setItem("adminData",data.memberDto);
                                 location.href='exhibition-list.html';
-                                // --- 로그인 성공
                             } else {
-                                // --- 로그인 실패
+                                // 로그인 실패
+                                $('#errorMessage').html('회원정보가 올바르지 않습니다.&nbsp;&nbsp;&nbsp;');
                                 $('#errorMessage').attr('hidden',false);
                                 $('#inputPassword').val('');
-                                $('#inputPassword').focus();
-                                // --- 로그인 실패
+                                $('#inputPassword').focus();                                
                             }
-                        }, "JSON"
-                    );
+                            $('#loginBtn').attr('disabled',false);
+                        }, "JSON" 
+                    ).fail(function(response) {
+                        $('#errorMessage').html('서버에 오류가 발생하였습니다.&nbsp;&nbsp;&nbsp;');
+                        $('#errorMessage').attr('hidden',false);
+                        $('#loginBtn').attr('disabled',false);
+                    });
                     // --- Ajax Post
 
                     return false;
