@@ -106,10 +106,10 @@
                                         <label for="artistName" class="col-sm-2 mb-2 col-form-label">
                                             이름
                                         </label>
-                                        <div class="col-sm-6 from-check">
+                                        <div class="col-sm-6 from-check mb-2">
                                             <input type="text" class="form-control" name="name" id="artistName" placeholder="이름 입력">
                                         </div>
-                                        <div class="col-sm-4 d-flex align-items-center">
+                                        <div class="col-sm-4 d-flex align-items-center mb-2">
                                             <div>
                                                 <input type="checkbox" class="form-check-inline" name="deleteN" id="deleteN" checked>
                                                 <label for="deleteN">이용</label>
@@ -207,7 +207,7 @@
                 // -- Table 작성
                 var deleteYn = paramDeleteN && paramDeleteY ? null : (paramDeleteY ? 'Y' : 'N');
                 $.post(
-                    'http://localhost:8888/artist/selectList.do', {
+                    backURL + '/artist/selectList.do', {
                         nameKor: paramName,
                         nameEng: paramName,
                         deleteYn: deleteYn

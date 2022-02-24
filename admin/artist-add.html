@@ -93,7 +93,7 @@
             </div>
             <div id="layoutSidenav_content">
                 <main>
-                    <form id="mainForm" action="./artist-add.do" method="post" enctype="multipart/form-data">
+                    <form id="mainForm" method="post" enctype="multipart/form-data">
                         <div class="container-fluid px-4">
                             <h1 class="mt-4 mb-4">작가 등록</h1>
                             <div id="warning-box"></div>
@@ -126,25 +126,20 @@
                                             <div class="form-group row mb-3">
                                                 <label for="birthday"  class="col-sm-3 col-form-label">생년월일</label>
                                                 <div class="col-sm-6">
-                                                    <input type="datetime-local" class="form-control" name="birthday" id="birthday">
-                                                    <div class="invalid-feedback">
-                                                        생년월일을 입력하세요.
-                                                    </div>
+                                                    <input type="date" class="form-control" name="birthday" id="birthday">
                                                 </div>
                                             </div> 
                                             <div class="form-group row mb-3">
                                                 <label for="profile" class="col-sm-3 col-form-label">프로필사진</label>
                                                 <div class="col-sm-6">
-                                                    <input type="file" class="form-control" name="profile" id="profile">
-                                                    <div class="invalid-feedback">
-                                                        파일을 선택하세요.
-                                                    </div>
+                                                    <input type="file" class="form-control" name="profile" id="profile" accept="image/jpeg,image/png">
+                                                    <div id="profileErrorMsg" class="text-danger" hidden></div>
                                                 </div>
                                             </div> 
                                         </div>
                                         <div class="col-md-3 m-md-1">
                                             <div>
-                                                <!-- TODO -->
+                                                <img id="profileImage" src="./assets/img/no_image.PNG" class="w-100 img-thumbnail">
                                             </div>
                                         </div>
                                     </div>
@@ -367,6 +362,29 @@
             let cnt_address = 1;
             // DOM
             $(function() {
+
+                $('#mainForm').attr('action', backURL + '/artist/add.do')
+
+                // 이미지 등록
+                $('#profile').change(function() {
+                    var profileVal = $('#profile').val();
+                    console.log(profileVal);
+                    var pathPoint = profileVal.lastIndexOf('.');
+                    var filePoint = profileVal.substring(pathPoint+1,profileVal.length);
+                    var fileType = filePoint.toLowerCase();
+                    
+                    if(fileType != 'jpg' && fileType != 'png' && fileType != 'jpeg') {
+                        $('#profileErrorMsg').html('이미지 파일을 선택해 주세요.<br/> (허용된 확장자: jpg, png, jpeg)');
+                        $('#profileErrorMsg').attr('hidden',false);
+                        $('#profile').val('');
+                        return false;
+                    }
+                    $('#profileErrorMsg').attr('hidden',true);
+
+                    const file = URL.createObjectURL($('#profile')[0].files[0]);
+                    $('#profileImage').attr('src', file);
+                });
+
                 // Phone 리스트 추가
                 $('#btnAddPhone').click(function() {
                     if(cnt_phone < 5) {
