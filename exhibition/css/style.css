@@ -1982,6 +1982,7 @@ input.cart-plus-minus-box {
 /* ---------------------------------
 	17. 404
 ----------------------------------- */
+
 .error-content {
   border: 30px solid #fff;
   padding: 100px 0;
@@ -1999,20 +2000,14 @@ input.cart-plus-minus-box {
 }
 .error-form input {
   background: #fff none repeat scroll 0 0;
-  padding-right: 50px;
+ 
 }
-.error-form button {
-  color: #999;
-  font-size: 20px;
-  font-weight: 700;
-  height: 40px;
-  padding: 0;
-  position: absolute;
-  right: 0;
-  top: 0;
-  transition: all 0.3s ease 0s;
-  width: 50px;
+.error-form #bday{
+  border: none;
+  padding: 10px;
+  width: 100%;
 }
+
 .error-form button:hover { color: #C8A165;}
 .go-to-home {
   background: #fff none repeat scroll 0 0;
