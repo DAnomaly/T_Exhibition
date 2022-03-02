@@ -94,6 +94,7 @@
             <div id="layoutSidenav_content">
                 <main>
                     <form id="mainForm" method="post" enctype="multipart/form-data">
+                        <input type="hidden"/>
                         <div class="container-fluid px-4">
                             <h1 class="mt-4 mb-4">작가 등록</h1>
                             <div id="warning-box"></div>
@@ -159,7 +160,7 @@
                                                     <input type="text" class="form-control" name="phone" id="phone1">
                                                 </div>
                                             </div>
-                                            <div class="form-group row mb-3" id="phoneRow2" hidden>
+                                            <div class="form-group row mb-3" id="phoneRow2" hidden >
                                                 <label for="phone2" class="col-sm-2 col-form-label">연락처2</label>
                                                 <div class="col-sm-6">
                                                     <input type="text" class="form-control" name="phone" id="phone2" disabled>
@@ -310,6 +311,45 @@
                                                 </div>
                                             </div>
                                         </li>
+                                        <li class="list-group-item">
+                                            <div class="form-group row mb-3 mt-3" id="emailRow1">
+                                                <label class="col-sm-2 col-form-label">이메일</label>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control" name="email" id="email1">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row mb-3" id="emailRow2" hidden>
+                                                <div class="col-sm-2 col-form-label"></div>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control" name="email" id="email2" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row mb-3" id="emailRow3" hidden>
+                                                <div class="col-sm-2 col-form-label"></div>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control" name="email" id="email3" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row mb-3" id="emailRow4" hidden>
+                                                <div class="col-sm-2 col-form-label"></div>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control" name="email" id="email4" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row mb-3" id="emailRow5" hidden>
+                                                <div class="col-sm-2 col-form-label"></div>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control" name="email" id="email5" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row mb-3">
+                                                <div class="col-sm-2 col-form-label">이메일 추가</div>
+                                                <div class="col-sm-10">
+                                                    <button type="button" class="btn btn-secondary" id="btnAddEmail"><i class="fas fa-plus"></i></button>
+                                                    <button type="button" class="btn btn-secondary" id="btnRemoveEmail"><i class="fas fa-minus"></i></button>
+                                                </div>
+                                            </div>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -331,10 +371,10 @@
                                 </div>
                             </div>
                             <div class="d-flex justify-content-md-end">
-                                <div class="mb-5">
+                                <div class="mb-5 d-flex align-items-center">
                                     <div class="d-inline-block">
-                                        <input type="checkbox" name="" class="form-check-inline"/>
-                                        <label></label>
+                                        <label for="openY">열람가능</label>
+                                        <input type="checkbox" id="openY" name="openY" class="form-check-inline"/>
                                     </div>
                                     <button class="btn btn-primary" type="submit">등록하기</button>
                                 </div>
@@ -364,10 +404,12 @@
         <script>
             let cnt_phone = 1;
             let cnt_address = 1;
+            let cnt_email = 1;
+
             // DOM
             $(function() {
 
-                $('#mainForm').attr('action', backURL + '/artist/add.do')
+                $('#mainForm').attr('action', backURL + '/artist/insert.do')
 
                 // 이미지 등록
                 $('#profile').change(function() {
@@ -418,6 +460,22 @@
                         showAddressList(cnt_address);
                     }
                 });
+
+                // Email 리스트 추가
+                $('#btnAddEmail').click(function() {
+                    if(cnt_email < 5) {
+                        ++cnt_email;
+                        showEmailList(cnt_email);
+                    }
+                })
+
+                // Email 리스트 삭제
+                $('#btnRemoveEmail').click(function() {
+                    if(cnt_email > 1) {
+                        --cnt_email;
+                        showEmailList(cnt_email);
+                    }
+                })
 
                 // 주소지 검색
                 $('.btn-search-address').click(function(e) {
@@ -504,6 +562,18 @@
                 }
             }
 
+            function showEmailList(cnt) {
+                for (let i = 1; i <= cnt; i++) {
+                    $('#emailRow' + i).attr('hidden', false);
+                    $('#emailRow' + i + " input").attr('disabled', false);
+                }
+
+                for (let i = cnt + 1; i <= 5; i++) {
+                    $('#emailRow' + i).attr('hidden', true);
+                    $('#emailRow' + i + " input").attr('disabled', true);
+                    $('#emailRow' + i + " input").val('');
+                }
+            }
 
         </script>
     </body>
