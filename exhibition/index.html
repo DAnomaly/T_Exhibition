@@ -59,7 +59,6 @@
 								<div class="table">
 									<div class="table-cell">
 										<ul>
-											<li><a class="search-open" href="#"><i class="zmdi zmdi-search"></i></a></li>
 											<li><a href="login.html"><i class="zmdi zmdi-lock"></i></a></li>
 											<li><a href="my-account.html"><i class="zmdi zmdi-account"></i></a></li>
 											<li><a href="wishlist.html"><i class="zmdi zmdi-favorite"></i></a></li>
@@ -201,21 +200,18 @@
 					<div class="table">
 						<div class="table-cell">
 							<ul>
-								<li><a class="search-open" href="#" title="Search"><i class="zmdi zmdi-search"></i></a></li>
-								<li><a href="#" title="Login"><i class="zmdi zmdi-lock"></i></a>
+								<li id="logicon"><a href="#" title="Login" ><i class="zmdi zmdi-lock" ></i></a>
+								
 									<div class="customer-login text-left">
-										<form action="#">
-											<h4 class="title-1 title-border text-uppercase mb-30">Registered customers</h4>
-											<p class="text-gray">If you have an account with us, Please login!</p>
-											<input type="text" name="email" placeholder="Email here..." />
-											<input type="password" placeholder="Password" />
-											<p><a class="text-gray" href="#">Forget your password?</a></p>
-											<button class="button-one submit-button mt-15" data-text="login" type="submit">login</button>
-										</form>
+										<h4 class="title-1 title-border text-uppercase mb-30">LOGIN</h4>
+										<p class="text-gray">계정이 있는 경우 로그인해주세요.</p>
+										<input type="text" id="id" placeholder="ID HERE..." >
+										<input type="password" id="pw" placeholder="PASSWORD" >
+										<p> <a class="text-gray" href="signup.html" >회원가입</a> &nbsp;&nbsp; <a class="text-gray" href="#">비밀번호 찾기</a></p>
+										
+										 <button class="button-one submit-button mt-15" data-text="login" id="login">login</button> 
 									</div>
 								</li>
-								<li><a href="my-account.html" title="My-Account"><i class="zmdi zmdi-account"></i></a></li>
-								<li><a href="wishlist.html" title="Wishlist"><i class="zmdi zmdi-favorite"></i></a></li>
 							</ul>
 						</div>
 					</div>
@@ -223,29 +219,7 @@
 				<!-- Sidebar-social-media start -->
 			</section>
 			<!-- End Slider-section -->
-			<!-- sidebar-search Start -->
-			<div class="sidebar-search animated slideOutUp">
-				<div class="table">
-					<div class="table-cell">
-						<div class="container">
-							<div class="row">
-								<div class="col-sm-8 col-sm-offset-2 p-0">
-									<div class="search-form-wrap">
-										<button class="close-search"><i class="zmdi zmdi-close"></i></button>
-										<form action="#">
-											<input type="text" placeholder="Search here..." />
-											<button class="search-button" type="submit">
-												<i class="zmdi zmdi-search"></i>
-											</button>
-										</form>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- sidebar-search End -->
+			
 			<!-- PRODUCT-AREA START -->
 			<div class="product-area pt-80 pb-35">
 				<div class="container">
@@ -1099,7 +1073,7 @@
 												<a href="single-product.html"><img src="img/product/7.jpg" alt="" /></a>
 												<div class="product-action clearfix">
 													<a href="#" data-toggle="tooltip" data-placement="top" title="Wishlist"><i class="zmdi zmdi-favorite-outline"></i></a>
-													<a href="#" data-toggle="modal"  data-target="#productModal" title="Quick View"><i class="zmdi zmdi-zoom-in"></i></a>
+													<a href="#" data-toggle="modal"  data-target="#productModal" title="Quick Vie`"><i class="zmdi zmdi-zoom-in"></i></a>
 													<a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="zmdi zmdi-refresh"></i></a>
 													<a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="zmdi zmdi-shopping-cart-plus"></i></a>
 												</div>
@@ -1278,28 +1252,11 @@
 			</div>
 			<!-- PURCHASE-ONLINE-AREA END -->
 			<!-- BLGO-AREA END -->
-			<!-- SUBSCRIVE-AREA START -->
-			<div class="subscribe-area pt-80">
-				<div class="container">
-					<div class="row">
-						<div class="col-lg-12">
-							<div class="subscribe">
-								<form action="#">
-									<input type="text" placeholder="Enter your email address"/>
-									<button class="submit-button submit-btn-2 button-one" data-text="subscribe" type="submit" >subscribe</button>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- SUBSCRIVE-AREA END -->
+
 			<!-- FOOTER START -->
-			
 			<div id="footer"></div>
-
-
 			<!-- FOOTER END -->
+
 			<!-- QUICKVIEW PRODUCT -->
 			<div id="quickview-wrapper">
 			   <!-- Modal -->
@@ -1363,11 +1320,55 @@
 		</div>
 
 		<script type="text/javascript">
+
 			$(document).ready( function() {	
+
 				$("#header").load("header.html")
 				$("#menu").load("menu.html")
 				$("#footer").load("footer.html")
+
+				let login = JSON.parse(sessionStorage.getItem("login"));
+				if (login!= null){
+					$("#logicon").remove();
+				}
 			});
+
+						
+            $('#login').click(function() {   
+                $.ajax({
+                    url:"http://localhost:3300/member/login",
+                    type:'POST',
+                    data:{ id:$('#id').val(), pw:$('#pw').val() },
+                    datatype:'json',
+                    success:function(data){          
+                      	alert('login success');            
+                    if(data == ''){
+                    	alert('login fail');
+                    }else{
+                    //   alert('login success');
+                   		sessionStorage.setItem("login", JSON.stringify(data));
+                        location.href = "index.html";
+                    }
+                    },
+                    error:function(){
+                    alert('비밀번호가 잘못되었습니다.');
+                    }
+                    
+                });
+                
+            });
+			
+			// 로그인 엔터키 
+			$('#pw').on('keypress', function(e){
+				if(e.keyCode == '13'){
+					$('#login').click();
+					}
+			});
+
+
+
+
+
 		</script>
 
 
