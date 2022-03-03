@@ -93,7 +93,8 @@
             </div>
             <div id="layoutSidenav_content">
                 <main>
-                    <form id="mainForm" action="./artist-add.do" method="post" enctype="multipart/form-data">
+                    <form id="mainForm" method="post" enctype="multipart/form-data">
+                        <input type="hidden"/>
                         <div class="container-fluid px-4">
                             <h1 class="mt-4 mb-4">작가 등록</h1>
                             <div id="warning-box"></div>
@@ -108,7 +109,7 @@
                                             <div class="form-group row mb-3">
                                                 <label for="nameKOR" class="col-sm-3 col-form-label">이름(한)</label>
                                                 <div class="col-sm-6">
-                                                    <input type="text" class="form-control" name="nameKOR" id="nameKOR" placeholder="Name(KOR)">
+                                                    <input type="text" class="form-control" name="nameKor" id="nameKOR" placeholder="Name(KOR)">
                                                     <div class="invalid-feedback">
                                                         이름(한)을 입력하세요
                                                     </div>
@@ -117,7 +118,7 @@
                                             <div class="form-group row mb-3">
                                                 <label for="nameENG" class="col-sm-3 col-form-label">이름(영)</label>
                                                 <div class="col-sm-6">
-                                                    <input type="text" class="form-control" name="nameENG" id="nameENG" placeholder="Name(Eng)">
+                                                    <input type="text" class="form-control" name="nameEng" id="nameENG" placeholder="Name(Eng)">
                                                     <div class="invalid-feedback">
                                                         이름(영)을 입력하세요
                                                     </div>
@@ -126,25 +127,20 @@
                                             <div class="form-group row mb-3">
                                                 <label for="birthday"  class="col-sm-3 col-form-label">생년월일</label>
                                                 <div class="col-sm-6">
-                                                    <input type="datetime-local" class="form-control" name="birthday" id="birthday">
-                                                    <div class="invalid-feedback">
-                                                        생년월일을 입력하세요.
-                                                    </div>
+                                                    <input type="date" class="form-control" name="birthday" id="birthday">
                                                 </div>
                                             </div> 
                                             <div class="form-group row mb-3">
                                                 <label for="profile" class="col-sm-3 col-form-label">프로필사진</label>
                                                 <div class="col-sm-6">
-                                                    <input type="file" class="form-control" name="profile" id="profile">
-                                                    <div class="invalid-feedback">
-                                                        파일을 선택하세요.
-                                                    </div>
+                                                    <input type="file" class="form-control" name="profile" id="profile" accept="image/jpeg,image/png">
+                                                    <div id="profileErrorMsg" class="text-danger" hidden></div>
                                                 </div>
                                             </div> 
                                         </div>
                                         <div class="col-md-3 m-md-1">
                                             <div>
-                                                <!-- TODO -->
+                                                <img id="profileImage" src="./assets/img/no_image.PNG" class="w-100 img-thumbnail">
                                             </div>
                                         </div>
                                     </div>
@@ -164,7 +160,7 @@
                                                     <input type="text" class="form-control" name="phone" id="phone1">
                                                 </div>
                                             </div>
-                                            <div class="form-group row mb-3" id="phoneRow2" hidden>
+                                            <div class="form-group row mb-3" id="phoneRow2" hidden >
                                                 <label for="phone2" class="col-sm-2 col-form-label">연락처2</label>
                                                 <div class="col-sm-6">
                                                     <input type="text" class="form-control" name="phone" id="phone2" disabled>
@@ -315,6 +311,45 @@
                                                 </div>
                                             </div>
                                         </li>
+                                        <li class="list-group-item">
+                                            <div class="form-group row mb-3 mt-3" id="emailRow1">
+                                                <label class="col-sm-2 col-form-label">이메일</label>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control" name="email" id="email1">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row mb-3" id="emailRow2" hidden>
+                                                <div class="col-sm-2 col-form-label"></div>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control" name="email" id="email2" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row mb-3" id="emailRow3" hidden>
+                                                <div class="col-sm-2 col-form-label"></div>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control" name="email" id="email3" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row mb-3" id="emailRow4" hidden>
+                                                <div class="col-sm-2 col-form-label"></div>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control" name="email" id="email4" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row mb-3" id="emailRow5" hidden>
+                                                <div class="col-sm-2 col-form-label"></div>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control" name="email" id="email5" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row mb-3">
+                                                <div class="col-sm-2 col-form-label">이메일 추가</div>
+                                                <div class="col-sm-10">
+                                                    <button type="button" class="btn btn-secondary" id="btnAddEmail"><i class="fas fa-plus"></i></button>
+                                                    <button type="button" class="btn btn-secondary" id="btnRemoveEmail"><i class="fas fa-minus"></i></button>
+                                                </div>
+                                            </div>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -336,7 +371,11 @@
                                 </div>
                             </div>
                             <div class="d-flex justify-content-md-end">
-                                <div class="mb-5">
+                                <div class="mb-5 d-flex align-items-center">
+                                    <div class="d-inline-block">
+                                        <label for="openY">열람가능</label>
+                                        <input type="checkbox" id="openY" name="openY" class="form-check-inline"/>
+                                    </div>
                                     <button class="btn btn-primary" type="submit">등록하기</button>
                                 </div>
                             </div>
@@ -365,8 +404,33 @@
         <script>
             let cnt_phone = 1;
             let cnt_address = 1;
+            let cnt_email = 1;
+
             // DOM
             $(function() {
+
+                $('#mainForm').attr('action', backURL + '/artist/insert.do')
+
+                // 이미지 등록
+                $('#profile').change(function() {
+                    var profileVal = $('#profile').val();
+                    console.log(profileVal);
+                    var pathPoint = profileVal.lastIndexOf('.');
+                    var filePoint = profileVal.substring(pathPoint+1,profileVal.length);
+                    var fileType = filePoint.toLowerCase();
+                    
+                    if(fileType != 'jpg' && fileType != 'png' && fileType != 'jpeg') {
+                        $('#profileErrorMsg').html('이미지 파일을 선택해 주세요.<br/> (허용된 확장자: jpg, png, jpeg)');
+                        $('#profileErrorMsg').attr('hidden',false);
+                        $('#profile').val('');
+                        return false;
+                    }
+                    $('#profileErrorMsg').attr('hidden',true);
+
+                    const file = URL.createObjectURL($('#profile')[0].files[0]);
+                    $('#profileImage').attr('src', file);
+                });
+
                 // Phone 리스트 추가
                 $('#btnAddPhone').click(function() {
                     if(cnt_phone < 5) {
@@ -396,6 +460,22 @@
                         showAddressList(cnt_address);
                     }
                 });
+
+                // Email 리스트 추가
+                $('#btnAddEmail').click(function() {
+                    if(cnt_email < 5) {
+                        ++cnt_email;
+                        showEmailList(cnt_email);
+                    }
+                })
+
+                // Email 리스트 삭제
+                $('#btnRemoveEmail').click(function() {
+                    if(cnt_email > 1) {
+                        --cnt_email;
+                        showEmailList(cnt_email);
+                    }
+                })
 
                 // 주소지 검색
                 $('.btn-search-address').click(function(e) {
@@ -482,6 +562,18 @@
                 }
             }
 
+            function showEmailList(cnt) {
+                for (let i = 1; i <= cnt; i++) {
+                    $('#emailRow' + i).attr('hidden', false);
+                    $('#emailRow' + i + " input").attr('disabled', false);
+                }
+
+                for (let i = cnt + 1; i <= 5; i++) {
+                    $('#emailRow' + i).attr('hidden', true);
+                    $('#emailRow' + i + " input").attr('disabled', true);
+                    $('#emailRow' + i + " input").val('');
+                }
+            }
 
         </script>
     </body>

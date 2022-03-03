@@ -106,10 +106,10 @@
                                         <label for="artistName" class="col-sm-2 mb-2 col-form-label">
                                             이름
                                         </label>
-                                        <div class="col-sm-6 from-check">
+                                        <div class="col-sm-6 from-check mb-2">
                                             <input type="text" class="form-control" name="name" id="artistName" placeholder="이름 입력">
                                         </div>
-                                        <div class="col-sm-4 d-flex align-items-center">
+                                        <div class="col-sm-4 d-flex align-items-center mb-2">
                                             <div>
                                                 <input type="checkbox" class="form-check-inline" name="deleteN" id="deleteN" checked>
                                                 <label for="deleteN">이용</label>
@@ -180,18 +180,6 @@
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>
         <script>
-            window.addEventListener('DOMContentLoaded', event => {
-                // Simple-DataTables
-                // https://github.com/fiduswriter/Simple-DataTables/wiki
-                const datatablesSimple = document.getElementById('datatablesSimple');
-                if (datatablesSimple) {
-                    new simpleDatatables.DataTable(datatablesSimple, {
-                        searchable: false,
-                        perPage: 10
-                    });
-                }
-            });
-
             $(function() {
                 console.log(">> Jqery is ready!");
                 
@@ -219,7 +207,7 @@
                 // -- Table 작성
                 var deleteYn = paramDeleteN && paramDeleteY ? null : (paramDeleteY ? 'Y' : 'N');
                 $.post(
-                    'http://localhost:8888/artist/selectList.do', {
+                    backURL + '/artist/selectList.do', {
                         nameKor: paramName,
                         nameEng: paramName,
                         deleteYn: deleteYn
@@ -227,17 +215,23 @@
                         console.log(data);
                         $.each(data.result, function (index, vo) { 
                             var tr = $('<tr>');
+                            tr.attr('onclick', "location.href='artist-view.html?artistNo=" + vo.artistNo + "'")
                             tr.append('<td>' + vo.nameKor + '</td>');
                             tr.append('<td>' + vo.nameEng + '</td>');
-                            tr.append('<td>' + vo. + '</td>');
+                            tr.append('<td>' + vo.phone + '</td>');
+                            tr.append('<td>' + vo.openYn + '</td>');
+                            tr.append('<td>' + vo.deleteYn + '</td>');
+                            tr.append('<td>' + vo.regDate + '</td>');
                             $('#tableBody').append(tr);
+                        });
+                        new simpleDatatables.DataTable($('#datatablesSimple')[0], {
+                            searchable: false,
+                            perPage: 10
                         });
                     }, "JSON" 
                 );
                 // -- Table 작성 : END
-
             })
-
         </script>
     </body>
 </html>
