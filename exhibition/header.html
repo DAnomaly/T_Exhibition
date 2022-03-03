@@ -42,6 +42,7 @@
 		<link rel="stylesheet" href="css/responsive.css">
 		<!-- modernizr css -->
 		<script src="js/vendor/modernizr-2.8.3.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         
 	</head>
 	<body>
@@ -57,6 +58,13 @@
 					<div class="col-sm-4 col-xs-5">
 						<div class="mini-cart text-right">
 							<ul>
+								<li>
+									<div class="logout"></div>
+								</li>
+								<li>
+									<div class="uname"></div>
+								</li>
+
 								<li>
 									<a class="cart-icon" href="#">
 										<i class="zmdi zmdi-shopping-cart"></i>
@@ -105,5 +113,35 @@
 				</div>
 			</div>
 		</div>
+
+
+		<script type="text/javascript">
+
+			let login = JSON.parse(sessionStorage.getItem("login"));
+
+			$(document).ready( function() {	
+
+				if (login!= null){
+					let logout = '<p><a href="#" onclick="logout()">로그아웃</a><p>'
+					let uname = '<h5><a href="mypage.html">' + login.id +'</a></h5>'
+								
+					$(".logout").html(logout);
+					$(".uname").html(uname);
+				
+				}
+			});
+
+			// 로그아웃
+			function logout(){
+				sessionStorage.clear();
+				location.href="index.html"
+			}
+
+
+
+
+
+
+		</script>
 	</body>
 </html>

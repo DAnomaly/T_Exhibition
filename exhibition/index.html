@@ -59,7 +59,6 @@
 								<div class="table">
 									<div class="table-cell">
 										<ul>
-											<li><a class="search-open" href="#"><i class="zmdi zmdi-search"></i></a></li>
 											<li><a href="login.html"><i class="zmdi zmdi-lock"></i></a></li>
 											<li><a href="my-account.html"><i class="zmdi zmdi-account"></i></a></li>
 											<li><a href="wishlist.html"><i class="zmdi zmdi-favorite"></i></a></li>
@@ -201,19 +200,18 @@
 					<div class="table">
 						<div class="table-cell">
 							<ul>
-								<li><a href="#" title="Login" ><i class="zmdi zmdi-lock"></i></a>
+								<li id="logicon"><a href="#" title="Login" ><i class="zmdi zmdi-lock" ></i></a>
+								
 									<div class="customer-login text-left">
-											<h4 class="title-1 title-border text-uppercase mb-30">LOGIN</h4>
-											<p class="text-gray">계정이 있는 경우 로그인해주세요.</p>
-											<input type="text" id="id" placeholder="ID HERE..." >
-											<input type="password" id="pw" placeholder="PASSWORD">
-											<p> <a class="text-gray" href="signup.html" >회원가입</a> &nbsp;&nbsp; <a class="text-gray" href="#">비밀번호 찾기</a></p>
-											<button class="button-one submit-button mt-15" data-text="login" id="login">login</button>
+										<h4 class="title-1 title-border text-uppercase mb-30">LOGIN</h4>
+										<p class="text-gray">계정이 있는 경우 로그인해주세요.</p>
+										<input type="text" id="id" placeholder="ID HERE..." >
+										<input type="password" id="pw" placeholder="PASSWORD" >
+										<p> <a class="text-gray" href="signup.html" >회원가입</a> &nbsp;&nbsp; <a class="text-gray" href="#">비밀번호 찾기</a></p>
+										
+										 <button class="button-one submit-button mt-15" data-text="login" id="login">login</button> 
 									</div>
 								</li>
-							
-								<li><a href="my-account.html" title="My-Account"><i class="zmdi zmdi-account"></i></a></li>
-								<li><a href="wishlist.html" title="Wishlist"><i class="zmdi zmdi-favorite"></i></a></li>
 							</ul>
 						</div>
 					</div>
@@ -1075,7 +1073,7 @@
 												<a href="single-product.html"><img src="img/product/7.jpg" alt="" /></a>
 												<div class="product-action clearfix">
 													<a href="#" data-toggle="tooltip" data-placement="top" title="Wishlist"><i class="zmdi zmdi-favorite-outline"></i></a>
-													<a href="#" data-toggle="modal"  data-target="#productModal" title="Quick View"><i class="zmdi zmdi-zoom-in"></i></a>
+													<a href="#" data-toggle="modal"  data-target="#productModal" title="Quick Vie`"><i class="zmdi zmdi-zoom-in"></i></a>
 													<a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="zmdi zmdi-refresh"></i></a>
 													<a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="zmdi zmdi-shopping-cart-plus"></i></a>
 												</div>
@@ -1324,15 +1322,21 @@
 		<script type="text/javascript">
 
 			$(document).ready( function() {	
+
 				$("#header").load("header.html")
 				$("#menu").load("menu.html")
 				$("#footer").load("footer.html")
+
+				let login = JSON.parse(sessionStorage.getItem("login"));
+				if (login!= null){
+					$("#logicon").remove();
+				}
 			});
 
-			
+						
             $('#login').click(function() {   
                 $.ajax({
-                    url:"http://localhost:8888/member/login",
+                    url:"http://localhost:3300/member/login",
                     type:'POST',
                     data:{ id:$('#id').val(), pw:$('#pw').val() },
                     datatype:'json',
@@ -1342,7 +1346,7 @@
                     	alert('login fail');
                     }else{
                     //   alert('login success');
-                  	//     sessionStorage.setItem("login", JSON.stringify(data));
+                   		sessionStorage.setItem("login", JSON.stringify(data));
                         location.href = "index.html";
                     }
                     },
@@ -1353,18 +1357,15 @@
                 });
                 
             });
+			
+			// 로그인 엔터키 
+			$('#pw').on('keypress', function(e){
+				if(e.keyCode == '13'){
+					$('#login').click();
+					}
+			});
 
 
-
-
-
-
-
-
-
-
-
-ekdb
 
 
 
