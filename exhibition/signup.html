@@ -112,7 +112,22 @@
 				</div>
 			</div>
 			<!-- Mobile-menu end -->
-	
+			<!-- HEADING-BANNER START -->
+			<div class="heading-banner-area overlay-bg">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="heading-banner">
+								<div class="heading-banner-title">
+									<h2>sign up</h2>
+								</div>
+								<div class="breadcumbs pb-15"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- HEADING-BANNER END -->
 			<!-- 404-AREA START -->
 			<div class="area-join pt-80 pb-80">
 				<div class="container">	
@@ -123,41 +138,56 @@
 								<form>
 									<div class="error-form mt-30 mb-30 text-left">
 										<!-- 아이디 -->
-										<h5 class="text-light-black">아이디</h5>
-										<p class="sign_subdescription2" id="idch"></p>
-										<input type="text" id="memid" placeholder="* 5~20자의 영문 소문자, 숫자만 사용 가능합니다." >										
-										<button type="button"  class="btn btn-default" id="idcheckbtn">중복체크</button><br><br>
-									
-									
-										<!-- 비밀번호 -->
-										<h5 class="text-light-black" >비밀번호</h5>
-										<input type="password" id="pw" placeholder="* 8~16자 영문 대/소문자, 숫자, 특수문자를 사용하세요.">
-										<p class="sign_subdescription2" id="pwch"  align="left"></p>
+										<div class="box">
+											<h5 class="text-light-black"><b>아이디</b></h5>
+											<p class="sign_subdescription2" id="idch"></p>
+											<input type="text" id="memid" placeholder="* 5~20자의 영문 소문자, 숫자만 사용 가능합니다." >										
+											<button type="button"  class="btn btn-default" id="idcheckbtn">중복체크</button>
+										</div>
 										
-										<h5 class="text-light-black" passcheck>비밀번호 확인</h5>
-										<input type="password" id="pwcheck">
-										<p class="sign_subdescription2" id="passch"  align="left"></p>
+										
+										<!-- 비밀번호 -->
+										<div class="box">
+											<h5 class="text-light-black" ><b>비밀번호</b></h5>
+											<input type="password" id="pw" placeholder="* 8~16자 영문 대/소문자, 숫자, 특수문자를 사용하세요.">
+											<p class="sign_subdescription2" id="pwch"  align="left"></p>
+										</div>
+										
+										<div class="box">
+											<h5 class="text-light-black" passcheck><b>비밀번호 확인</b></h5>
+											<input type="password" id="pwcheck">
+											<p class="sign_subdescription2" id="passch"  align="left"></p>
+										</div>
 
 										<!--이름, 번호-->
-										<h5 class="text-light-black">이름</h5>
-										<input type="text" id="name"><br><br>
+										<div class="box">
+											<h5 class="text-light-black"><b>이름</b></h5>
+											<input type="text" id="name">
+										</div>
+										
+										<div class="box">
+											<h5 class="text-light-black" ><b>휴대전화</b></h5>
+											<input type="text" id="phone" placeholder="* - 없이 숫자만 입력하세요.">
+										</div>
 
-										<h5 class="text-light-black" >휴대전화</h5>
-										<input type="text" id="phone" placeholder="* - 없이 숫자만 입력하세요."><br><br>
-										
 										<!-- 주소 -->
-										<h5 class="text-light-black">주소</h5>
-										<input name="address1" class="input--text password" type="text" id="sample4_roadAddress" placeholder="도로명주소">
-										<input name="address2" class="input--text password" type="text" id="sample4_detailAddress" placeholder="상세주소">
-										<input  class="btn btn-default " type="button" onclick="sample4_execDaumPostcode()" value="주소검색"><br><br>
-										
+										<div class="box">
+											<h5 class="text-light-black"><b>주소</b></h5>
+											<input name="address1" class="input--text password" type="text" id="sample4_roadAddress" placeholder="도로명주소">
+											<input name="address2" class="input--text password" type="text" id="sample4_detailAddress" placeholder="상세주소">
+											<input  class="btn btn-default " type="button" onclick="sample4_execDaumPostcode()" value="주소검색">
+										</div>
+
 										<!-- 생년월일, 이메일 -->
-										<h5 class="text-light-black">생년월일</h5>
-										<input type="date" id="bday"><br><br>
+										<div class="box">
+											<h5 class="text-light-black"><b>생년월일</b></h5>
+											<input type="date" id="bday">
+										</div>
 										
-										<h5 class="text-light-black">이메일</h5>
-										<input type="text" id="email"><br><br>
-										
+										<div class="box">
+											<h5 class="text-light-black"><b>이메일</b></h5>
+											<input type="text" id="email">
+										</div>	
 									</div>
 
 									<a class="button-one submit-btn-4 go-to-home bg-white text-uppercase text-light-black" id="signup" data-text="가입하기" >가입하기</a>
@@ -252,7 +282,7 @@
 			// 아이디 중복확인 
 			$('#idcheckbtn').click(function() {
 				$.ajax({
-				url:"http://localhost:8888/member/idcheck",
+				url:"http://localhost:3300/member/idcheck",
 				type:"post",
 				data:{ "id":$("#memid").val() },
 				success:function( data ){
@@ -260,7 +290,7 @@
 						$("#idch").html('사용할 수 있는 ID입니다').css("color", "blue");
 					}else{
 
-						$("#idch").html('사용 중인 ID입니다').css("color", "red");
+						$("#idch").html('사용 중인 ID입니다').css("color", "#E83712");
 					}			
 				},
 				error:function(){
@@ -345,7 +375,7 @@
 				//    .css("color", "green");
 			}else {
 
-				$("#idch").html("조건에 맞지 않습니다. 다시입력해주세요").css("color", "red");
+				$("#idch").html("조건에 맞지 않습니다. 다시입력해주세요").css("color", "#E83712");
 				//alert("5~20자의 영문 소문자, 숫자만 사용 가능합니다.😊");
 			}
 		}
@@ -365,7 +395,7 @@
 				}else {
 					//alert("영문 대소문자 숫자포함 8-12자리 입력해주세요");
 					$("#pwch").html("입력하신 비밀번호는 조건에 맞지 않습니다. 다시입력해주세요")
-								.css("color", "red");
+								.css("color", "#E83712");
 				}
 			}
 		});
@@ -378,7 +408,7 @@
 				}else {
 					$("#passch").focus();
 					$("#passch").html("입력하신 비밀번호와 일치하지 않습니다. 다시 입력해주세요")
-					.css("color", "red");
+					.css("color", "#E83712");
 				}
 			}
 		});

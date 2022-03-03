@@ -1101,7 +1101,7 @@ body {
 	11. Shop-page
 ----------------------------------- */
 .heading-banner-area {
-  background: rgba(0, 0, 0, 0) url("img/bg/1.jpg") no-repeat scroll center center / cover ;
+  background: rgba(0, 0, 0, 0) url("../img/bg/1.jpg") no-repeat scroll center center / cover ;
 }
 .heading-banner-title h2 {
   color: #fff;
@@ -2034,6 +2034,11 @@ input.cart-plus-minus-box {
   border: none;
   padding: 10px;
   width: 100%;
+}
+
+.error-form .box{
+  margin-bottom: 35px;
+ 
 }
 
 .error-form button:hover { color: #C8A165;}
