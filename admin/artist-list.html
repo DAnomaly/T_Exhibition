@@ -207,7 +207,8 @@
                 // -- Table 작성
                 var deleteYn = paramDeleteN && paramDeleteY ? null : (paramDeleteY ? 'Y' : 'N');
                 $.post(
-                    backURL + '/artist/selectList.do', {
+                        backURL + '/artist/selectList.do'
+                    ,{
                         nameKor: paramName,
                         nameEng: paramName,
                         deleteYn: deleteYn
