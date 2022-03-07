@@ -7,6 +7,7 @@
 		<meta name="description" content="">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
+		<script type="text/javascript" src="/js/twbs-pagination/jquery.twbsPagination.js"></script>
 		<link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
 		<!-- Place favicon.ico in the root directory -->
 		
@@ -40,6 +41,7 @@
         <link rel="stylesheet" href="css/shortcode.css">
 		<!-- responsive css -->
 		<link rel="stylesheet" href="css/responsive.css">
+	
 		<!-- modernizr css -->
 		<script src="js/vendor/modernizr-2.8.3.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -138,8 +140,8 @@
 							<!-- Widget-Search start -->
 								<aside class="widget widget-search mb-30">
 									<form action="#">
-										<input type="text" placeholder="Search here..." />
-											<button type="submit">
+										<input type="text" id="search" placeholder="Search here..." >
+											<button type="submit" id="seabtn">
 												<i class="zmdi zmdi-search"></i>
 											</button>
 									</form>
@@ -149,154 +151,21 @@
 						<div class="col-md-9 col-sm-12 col-xs-12">
 							<!-- Shop-Content End -->
 							<div class="shop-content mt-tab-30 mt-xs-30">
-								<!-- Tab panes -->
+							
 								<div class="tab-content">
 									<div class="tab-pane active" id="grid-view">							
-										<div class="row">
-											<!-- Single-product start -->
-											<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-												<div class="single-product">
-													<div class="product-img">
-														<a href="artist-detail.html"><img src="img/product/6.jpg" alt="" /></a>
-													</div>
-													<div class="product-info clearfix text-center">
-														<div class="fix">
-															<h4 class="post-title"><a href="artist-detail.html">dummy Product name</a></h4>
-														</div>
-													</div>
-												</div>
-											</div>
-											<!-- Single-product end -->
-											<!-- Single-product start -->
-											<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-												<div class="single-product">
-													<div class="product-img">
-														<a href="single-product.html"><img src="img/product/3.jpg" alt="" /></a>
-													</div>
-													<div class="product-info clearfix text-center">
-														<div class="fix">
-															<h4 class="post-title"><a href="#">dummy Product name</a></h4>
-														</div>												
-													</div>
-												</div>
-											</div>
-											<!-- Single-product end -->
-											<!-- Single-product start -->
-											<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-												<div class="single-product">
-													<div class="product-img">
-														<a href="single-product.html"><img src="img/product/3.jpg" alt="" /></a>
-													</div>
-													<div class="product-info clearfix text-center">
-														<div class="fix">
-															<h4 class="post-title"><a href="#">dummy Product name</a></h4>
-														</div>														
-													</div>
-												</div>
-											</div>
-											<!-- Single-product end -->
-											<!-- Single-product start -->
-											<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-												<div class="single-product">
-													<div class="product-img">														
-														<a href="single-product.html"><img src="img/product/10.jpg" alt="" /></a>
-													</div>
-													<div class="product-info clearfix text-center">
-														<div class="fix">
-															<h4 class="post-title"><a href="#">dummy Product name</a></h4>
-														</div>														
-													</div>
-												</div>
-											</div>
-											<!-- Single-product end -->
-											<!-- Single-product start -->
-											<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-												<div class="single-product">
-													<div class="product-img">													
-														<a href="single-product.html"><img src="img/product/8.jpg" alt="" /></a>
-													</div>
-													<div class="product-info clearfix text-center">
-														<div class="fix">
-															<h4 class="post-title"><a href="#">dummy Product name</a></h4>
-														</div>														
-													</div>
-												</div>
-											</div>
-											<!-- Single-product end -->
-											<!-- Single-product start -->
-											<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-												<div class="single-product">
-													<div class="product-img">													
-														<a href="single-product.html"><img src="img/product/11.jpg" alt="" /></a>
-													</div>
-													<div class="product-info clearfix text-center">
-														<div class="fix">
-															<h4 class="post-title"><a href="#">dummy Product name</a></h4>
-														</div>														
-													</div>
-												</div>
-											</div>
-											<!-- Single-product end -->
-											<!-- Single-product start -->
-											<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-												<div class="single-product">
-													<div class="product-img">													
-														<a href="single-product.html"><img src="img/product/2.jpg" alt="" /></a>
-													</div>
-													<div class="product-info clearfix text-center">
-														<div class="fix">
-															<h4 class="post-title"><a href="#">dummy Product name</a></h4>
-														</div>													
-													</div>
-												</div>
-											</div>
-											<!-- Single-product end -->
-											<!-- Single-product start -->
-											<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-												<div class="single-product">
-													<div class="product-img">													
-														<a href="single-product.html"><img src="img/product/1.jpg" alt="" /></a>
-													</div>
-													<div class="product-info clearfix text-center">
-														<div class="fix">
-															<h4 class="post-title"><a href="#">dummy Product name</a></h4>
-														</div>														
-													</div>
-												</div>
-											</div>
-											<!-- Single-product end -->
-											<!-- Single-product start -->
-											<div class="col-lg-4 col-md-4 hidden-sm col-xs-12">
-												<div class="single-product">
-													<div class="product-img">
-														<a href="single-product.html"><img src="img/product/12.jpg" alt="" /></a>
-													</div>
-													<div class="product-info clearfix text-center">
-														<div class="fix">
-															<h4 class="post-title"><a href="#">dummy Product name</a></h4>
-														</div>
-													</div>
-												</div>
-											</div>
-											<!-- Single-product end -->
+										<div class="row" id="artbox">
+											
 										</div>
 									</div>
 								</div>
 
 								<!-- Pagination start -->
-								<div class="shop-pagination  text-center">
-									<div class="pagination">
-										<ul>
-											<li><a href="#"><i class="zmdi zmdi-long-arrow-left"></i></a></li>
-											<li class="active"><a href="#">01</a></li>
-											<li ><a href="#">02</a></li>
-											<li><a href="#">03</a></li>
-											<li><a href="#">04</a></li>
-											<li><a href="#">05</a></li>
-											<li><a href="#"><i class="zmdi zmdi-long-arrow-right"></i></a></li>
-										</ul>
-									</div>
-								</div>
+								<nav aria-label="Page navigation" style="text-align: center">
+                                    <ul class="pagination" id="pagination" style="justify-content:center" >
+                                       
+                                    </ul>
+                                </nav>
 								<!-- Pagination end -->
 
 							</div>
@@ -375,15 +244,108 @@
 		<!-- WRAPPER END -->
 
 		<script type="text/javascript">
+			artistList();
+			pagination();
+
 			$(document).ready( function() {	
 				$("#header").load("header.html")
 				$("#menu").load("menu.html")
 				$("#footer").load("footer.html")
 			});
+			
+			// 검색		
+			$('#seabtn').click(function () {
+				artistList(0);
+				pagination();
+			}); 
+
+			
+			function artistList(pagenum){
+				$.ajax({
+					url:'http://localhost:3300/artist/artistList',
+					type:'get',
+					data:{ search:$("#search").val(), page:pagenum },
+					success:function(list){
+						//	alert('success');
+
+						$(".artremove").remove();
+					
+						$.each(list, function(i, val) {
+							let artist = 	'<div class="artremove">'
+										+ 	'<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">'
+										+	'<div class="single-product">'
+										+	'<div class="product-img">'
+										+	'<a href="artist-detail.html?artistNo=' + val.artistNo + '"><img src="' + val.profile + '" alt="" /></a>'
+										+	'</div>'
+										+ 	'<div class="product-info clearfix text-center">'
+										+	'<div class="fix">'
+										+	'<h4 class="post-title"><a href="artist-detail.html?artistNo=' + val.artistNo + '"><b>' + val.nameKor + '</b></a></h4>'
+										+	'</div>'
+										+	'</div>'
+										+	'</div>'
+										+	'</div>'
+										+	'</div>';
+							$("#artbox").append(artist);				
+						})	
+					}, 
+					error:function(){
+						alert('error');
+					}
+				});
+			}
+
+			// 페이지
+			function pagination(){
+				$.ajax({
+					url:"http://localhost:3300/artist/artistCount",
+					type:"get",
+					data:{ page:0, search:$("#search").val() },
+					success:function( pagenum ){
+						//alert("페이지 확인:" + pagenum);
+						if(pagenum != 0 ){
+							
+							var page = "<div class='pagination' style='margin-top: 50px;'>";
+							page += "<ul>"
+							page += "<li ><a href='#' ><i class='zmdi zmdi-long-arrow-left'></i></a></li>";
+							
+							//페이징 생성
+							for( pageN = 0; pageN < pagenum; pageN++ ){
+								if(pagenum == pageN){
+								page += "<li><a>" + (pageN + 1) +"</a> </li>";
+								}else if(pagenum != pageN){
+								page += "<li><a href='#'  onclick=cslist("+ pageN +")> "+ (pageN + 1) + "</a></li>";
+								}
+							}
+							
+							page += "<li><a href='#'><i class='zmdi zmdi-long-arrow-right'  onclick=cslist("+ (pageN -1) +")></i></a></li>";
+							page += "</ul>";
+							page += "</div>";
+							
+							$("#pagination").html(page);
+						}
+					},
+					error:function(){
+						alert('error');
+					}      
+				});
+			}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 		</script>
-
-
-
 
 
 
