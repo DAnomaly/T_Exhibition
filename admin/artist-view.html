@@ -6,8 +6,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>TripleExhibition Management</title>
-        <link href="css/styles.css" rel="stylesheet" />
+        <title>Static Navigation - SB Admin</title>
+        <link href="css/styles.css" rel="stylesheet"/>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
     </head>
     <body class="sb-nav-fixed">
@@ -17,14 +17,7 @@
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
-            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-                <!-- 
-                <div class="input-group">
-                    <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                    <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
-                </div>
-                -->
-            </form>
+            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0"></form>
             <!-- Navbar-->
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
                 <li class="nav-item dropdown">
@@ -94,55 +87,49 @@
             <div id="layoutSidenav_content">
                 <main>
                     <form id="mainForm" method="post" enctype="multipart/form-data">
-                        <input type="hidden"/>
+                        <input type="hidden" name="artistNo" id="artistNo"/>
                         <div class="container-fluid px-4">
-                            <h1 class="mt-4 mb-4">작가 등록</h1>
-                            <div id="warning-box"></div>
+                            <div class="d-flex mt-4 mb-4 justify-content-start align-items-end">
+                                <h1 class="d-inline">작가 상세</h1>
+                                <a class="btn btn-link ms-2" href="artist-list.html">
+                                    <i class="fa-solid fa-angle-left"></i> 목록으로
+                                </a>
+                            </div>
                             <div class="card mb-4">
                                 <div class="card-header">
                                     <i class="fas fa-search"></i>
-                                    기본 정보 입력
+                                    기본정보
                                 </div>
-                                <div class="card-body">
-                                    <div class="d-md-flex justify-content-md-between m-md-1">
-                                        <div class="col-md-9">
-                                            <div class="form-group row mb-3">
-                                                <label for="nameKOR" class="col-sm-3 col-form-label">이름(한)</label>
-                                                <div class="col-sm-6">
-                                                    <input type="text" class="form-control" name="nameKor" id="nameKOR" placeholder="Name(KOR)">
-                                                    <div class="invalid-feedback">
-                                                        이름(한)을 입력하세요
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row mb-3">
-                                                <label for="nameENG" class="col-sm-3 col-form-label">이름(영)</label>
-                                                <div class="col-sm-6">
-                                                    <input type="text" class="form-control" name="nameEng" id="nameENG" placeholder="Name(Eng)">
-                                                    <div class="invalid-feedback">
-                                                        이름(영)을 입력하세요
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row mb-3">
-                                                <label for="birthday"  class="col-sm-3 col-form-label">생년월일</label>
-                                                <div class="col-sm-6">
-                                                    <input type="date" class="form-control" name="birthday" id="birthday">
-                                                </div>
-                                            </div> 
-                                            <div class="form-group row mb-3">
-                                                <label for="profile" class="col-sm-3 col-form-label">프로필사진</label>
-                                                <div class="col-sm-6">
-                                                    <input type="file" class="form-control" name="profile" id="profile" accept="image/jpeg,image/png">
-                                                    <div id="profileErrorMsg" class="text-danger" hidden></div>
-                                                </div>
-                                            </div> 
-                                        </div>
-                                        <div class="col-md-3 m-md-1">
-                                            <div>
-                                                <img id="profileImage" src="./assets/img/no_image.PNG" class="w-100 img-thumbnail">
+                                <div class="card-body row">
+                                    <div class="col-sm-6">
+                                        <div class="row mb-2">
+                                            <label class="col-sm-4 col-form-label" for="nameKOR">이름(한)</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="nameKOR" name="nameKor" placeholder="이름(한)"/>
+                                                <span id="nameKorAlert" class="alert text-danger small" hidden>이름(한)을 입력해주세요</span>
                                             </div>
                                         </div>
+                                        <div class="row mb-2">
+                                            <label class="col-sm-4 col-form-label" for="nameENG">이름(영)</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="nameENG" name="nameEng" placeholder="이름(영)"/>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <label class="col-sm-4 col-form-label" for="birthday">생년월일</label>
+                                            <div class="col-sm-8">
+                                                <input type="date" class="form-control" id="birthday" name="birthday"/>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <label class="col-sm-4 col-form-label" for="profile">프로필사진</label>
+                                            <div class="col-sm-8">
+                                                <input type="file" class="form-control" name="profile" id="profile" accept="image/jpeg,image/png"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex col-sm-3 align-items-sm-end justify-content-sm-start justify-content-center">
+                                        <img id="profileImage" src="./assets/img/no_image.PNG" class="img-thumbnail mb-2">
                                     </div>
                                 </div>
                             </div>
@@ -151,40 +138,40 @@
                                     <i class="fas fa-search"></i>
                                     연락처 및 주소
                                 </div>
-                                <div class="card-body">
+                                <div class="card-body row">
                                     <ul class="list-group list-group-flush">
-                                        <li class="list-group-item">
-                                            <div class="form-group row mb-3" id="phoneRow1">
-                                                <label for="phone1" class="col-sm-2 col-form-label">대표 연락처</label>
+                                        <li class="list-group-item" id="phoneList">
+                                            <div class="row mb-2" id="phoneRow1">
+                                                <label for="phone1" class="col-form-label col-sm-2">연락처1</label>
                                                 <div class="col-sm-6">
                                                     <input type="text" class="form-control" name="phone" id="phone1">
                                                 </div>
                                             </div>
-                                            <div class="form-group row mb-3" id="phoneRow2" hidden >
-                                                <label for="phone2" class="col-sm-2 col-form-label">연락처2</label>
+                                            <div class="row mb-2" id="phoneRow2" hidden>
+                                                <label for="phone2" class="col-form-label col-sm-2">연락처2</label>
                                                 <div class="col-sm-6">
-                                                    <input type="text" class="form-control" name="phone" id="phone2" disabled>
+                                                    <input type="text" class="form-control" name="phone" id="phone2">
                                                 </div>
-                                            </div> 
-                                            <div class="form-group row mb-3" id="phoneRow3" hidden>
-                                                <label for="phone3" class="col-sm-2 col-form-label">연락처3</label>
+                                            </div>
+                                            <div class="row mb-2" id="phoneRow3" hidden>
+                                                <label for="phone3" class="col-form-label col-sm-2">연락처3</label>
                                                 <div class="col-sm-6">
-                                                    <input type="text" class="form-control" name="phone" id="phone3" disabled>
+                                                    <input type="text" class="form-control" name="phone" id="phone3">
                                                 </div>
-                                            </div> 
-                                            <div class="form-group row mb-3" id="phoneRow4" hidden>
-                                                <label for="phone4" class="col-sm-2 col-form-label">연락처4</label>
+                                            </div>
+                                            <div class="row mb-2" id="phoneRow4" hidden>
+                                                <label for="phone4" class="col-form-label col-sm-2">연락처4</label>
                                                 <div class="col-sm-6">
-                                                    <input type="text" class="form-control" name="phone" id="phone4" disabled>
+                                                    <input type="text" class="form-control" name="phone" id="phone4">
                                                 </div>
-                                            </div> 
-                                            <div class="form-group row mb-3" id="phoneRow5" hidden>
-                                                <label for="phone5" class="col-sm-2 col-form-label">연락처5</label>
+                                            </div>
+                                            <div class="row mb-2" id="phoneRow5" hidden>
+                                                <label for="phone5" class="col-form-label col-sm-2">연락처5</label>
                                                 <div class="col-sm-6">
-                                                    <input type="text" class="form-control" name="phone" id="phone5" disabled>
+                                                    <input type="text" class="form-control" name="phone" id="phone5">
                                                 </div>
-                                            </div> 
-                                            <div class="form-group row mb-3">
+                                            </div>
+                                            <div class="form-group row mb-2">
                                                 <div class="col-sm-2 col-form-label">연락처 추가</div>
                                                 <div class="col-sm-10">
                                                     <button class="btn btn-secondary" id="btnAddPhone" type="button"><i class="fas fa-plus"></i></button>
@@ -192,13 +179,15 @@
                                                 </div>
                                             </div>
                                         </li>
-                                        <li class="list-group-item">
+                                        <li class="list-group-item" id="addressList">
                                             <div class="form-group row mt-3" id="addressRow1">
-                                                <div class="col-sm-2 col-form-label">주소</div>
+                                                <div class="col-sm-2 col-form-label">주소1</div>
                                                 <div class="col-sm-10 row">
                                                     <div class="col-sm-12 mb-2 row">
-                                                        <div class="col-sm-6">
-                                                            <input type="text" class="form-control" name="addr_1" id="addressName1" placeholder="주소지 이름">
+                                                        <div class="d-flex align-items-center col-sm-6">
+                                                            <input type="text" class="form-control" name="addr_1" id="addressName1" placeholder="주소지 이름"/>
+                                                            &nbsp;&nbsp;
+                                                            <input type="button" class="btn btn-close btn-erase" data-no="1" title="주소지 삭제"/>
                                                         </div>
                                                     </div>
                                                     <div class="col-4 mb-2">
@@ -215,95 +204,103 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="form-group row mt-3" id="addressRow2" hidden>
-                                                <div class="col-sm-2 col-form-label">주소</div>
+                                            <div class="form-group row" id="addressRow2" hidden>
+                                                <div class="col-sm-2 col-form-label">주소2</div>
                                                 <div class="col-sm-10 row">
                                                     <div class="col-sm-12 mb-2 row">
-                                                        <div class="col-sm-6">
-                                                            <input type="text" class="form-control" name="addr_2" id="addressName2" placeholder="주소지 이름" disabled>
+                                                        <div class="d-flex align-items-center col-sm-6">
+                                                            <input type="text" class="form-control" name="addr_2" id="addressName2" placeholder="주소지 이름">
+                                                            &nbsp;&nbsp;
+                                                            <input type="button" class="btn btn-close btn-erase" data-no="2" title="주소지 삭제"/>
                                                         </div>
                                                     </div>
                                                     <div class="col-4 mb-2">
-                                                        <input type="text" class="form-control" name="addr_2" id="addressN2" disabled readonly>
+                                                        <input type="text" class="form-control" name="addr_2" id="addressN2" readonly>
                                                     </div>
                                                     <div class="col-6 mb-2">
                                                         <button type="button" class="btn btn-secondary btn-search-address" data-nthrow="2">주소지 검색</button>
                                                     </div>
                                                     <div class="col-sm-10 mb-2">
-                                                        <input type="text" class="form-control" name="addr_2" id="address2-1" disabled readonly>
+                                                        <input type="text" class="form-control" name="addr_2" id="address2-1" readonly>
                                                     </div>
                                                     <div class="col-sm-10 mb-3">
-                                                        <input type="text" class="form-control" name="addr_2" id="address2-2" disabled>
+                                                        <input type="text" class="form-control" name="addr_2" id="address2-2">
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="form-group row mt-3" id="addressRow3" hidden>
-                                                <div class="col-sm-2 col-form-label">주소</div>
+                                            <div class="form-group row" id="addressRow3" hidden>
+                                                <div class="col-sm-2 col-form-label">주소3</div>
                                                 <div class="col-sm-10 row">
                                                     <div class="col-sm-12 mb-2 row">
-                                                        <div class="col-sm-6">
-                                                            <input type="text" class="form-control" name="addr_3" id="addressName3" placeholder="주소지 이름" disabled>
+                                                        <div class="d-flex align-items-center col-sm-6">
+                                                            <input type="text" class="form-control" name="addr_3" id="addressName3" placeholder="주소지 이름">
+                                                            &nbsp;&nbsp;
+                                                            <input type="button" class="btn btn-close btn-erase" data-no="3" title="주소지 삭제"/>
                                                         </div>
                                                     </div>
                                                     <div class="col-4 mb-2">
-                                                        <input type="text" class="form-control" name="addr_3" id="addressN3" disabled readonly>
+                                                        <input type="text" class="form-control" name="addr_3" id="addressN3" readonly>
                                                     </div>
                                                     <div class="col-6 mb-2">
                                                         <button type="button" class="btn btn-secondary btn-search-address" data-nthrow="3">주소지 검색</button>
                                                     </div>
                                                     <div class="col-sm-10 mb-2">
-                                                        <input type="text" class="form-control" name="addr_3" id="address3-1" disabled readonly>
+                                                        <input type="text" class="form-control" name="addr_3" id="address3-1" readonly>
                                                     </div>
                                                     <div class="col-sm-10 mb-3">
-                                                        <input type="text" class="form-control" name="addr_3" id="address3-2" disabled>
+                                                        <input type="text" class="form-control" name="addr_3" id="address3-2">
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="form-group row mt-3" id="addressRow4" hidden>
-                                                <div class="col-sm-2 col-form-label">주소</div>
+                                            <div class="form-group row" id="addressRow4" hidden>
+                                                <div class="col-sm-2 col-form-label">주소4</div>
                                                 <div class="col-sm-10 row">
                                                     <div class="col-sm-12 mb-2 row">
-                                                        <div class="col-sm-6">
-                                                            <input type="text" class="form-control" name="addr_4" id="addressName4" placeholder="주소지 이름" disabled>
+                                                        <div class="d-flex align-items-center col-sm-6">
+                                                            <input type="text" class="form-control" name="addr_4 id="addressName3" placeholder="주소지 이름">
+                                                            &nbsp;&nbsp;
+                                                            <input type="button" class="btn btn-close btn-erase" data-no="4" title="주소지 삭제"/>
                                                         </div>
                                                     </div>
                                                     <div class="col-4 mb-2">
-                                                        <input type="text" class="form-control" name="addr_4" id="addressN4" disabled readonly>
+                                                        <input type="text" class="form-control" name="addr_4" id="addressN4" readonly>
                                                     </div>
                                                     <div class="col-6 mb-2">
                                                         <button type="button" class="btn btn-secondary btn-search-address" data-nthrow="4">주소지 검색</button>
                                                     </div>
                                                     <div class="col-sm-10 mb-2">
-                                                        <input type="text" class="form-control" name="addr_4" id="address4-1" disabled readonly>
+                                                        <input type="text" class="form-control" name="addr_4" id="address4-1" readonly>
                                                     </div>
                                                     <div class="col-sm-10 mb-3">
-                                                        <input type="text" class="form-control" name="addr_4" id="address4-2" disabled>
+                                                        <input type="text" class="form-control" name="addr_4" id="address4-2">
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="form-group row mt-3" id="addressRow5" hidden>
-                                                <div class="col-sm-2 col-form-label">주소</div>
+                                            <div class="form-group row" id="addressRow5" hidden>
+                                                <div class="col-sm-2 col-form-label">주소5</div>
                                                 <div class="col-sm-10 row">
                                                     <div class="col-sm-12 mb-2 row">
-                                                        <div class="col-sm-6">
-                                                            <input type="text" class="form-control" name="addr_5" id="addressName5" placeholder="주소지 이름" disabled>
+                                                        <div class="d-flex align-items-center col-sm-6">
+                                                            <input type="text" class="form-control" name="addr_5" id="addressName5" placeholder="주소지 이름">
+                                                            &nbsp;&nbsp;
+                                                            <input type="button" class="btn btn-close btn-erase" data-no="5" title="주소지 삭제"/>
                                                         </div>
                                                     </div>
                                                     <div class="col-4 mb-2">
-                                                        <input type="text" class="form-control" name="addr_5" id="addressN5" disabled readonly>
+                                                        <input type="text" class="form-control" name="addr_5" id="addressN5" readonly>
                                                     </div>
                                                     <div class="col-6 mb-2">
                                                         <button type="button" class="btn btn-secondary btn-search-address" data-nthrow="5">주소지 검색</button>
                                                     </div>
                                                     <div class="col-sm-10 mb-2">
-                                                        <input type="text" class="form-control" name="addr_5" id="address5-1" disabled readonly>
+                                                        <input type="text" class="form-control" name="addr_5" id="address5-1" readonly>
                                                     </div>
                                                     <div class="col-sm-10 mb-3">
-                                                        <input type="text" class="form-control" name="addr_5" id="address5-2" disabled>
+                                                        <input type="text" class="form-control" name="addr_5" id="address5-2">
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="form-group row mb-3">
+                                            <div class="form-group row mb-2">
                                                 <div class="col-sm-2 col-form-label">주소 추가</div>
                                                 <div class="col-sm-10">
                                                     <button type="button" class="btn btn-secondary" id="btnAddAddress"><i class="fas fa-plus"></i></button>
@@ -311,38 +308,38 @@
                                                 </div>
                                             </div>
                                         </li>
-                                        <li class="list-group-item">
-                                            <div class="form-group row mb-3 mt-3" id="emailRow1">
-                                                <label class="col-sm-2 col-form-label">이메일</label>
+                                        <li class="list-group-item" id="emailList">
+                                            <div class="form-group row mb-2 mt-3" id="emailRow1">
+                                                <label for="email1" class="col-sm-2 col-form-label">이메일1</label>
                                                 <div class="col-sm-6">
-                                                    <input type="text" class="form-control" name="email" id="email1">
+                                                    <input type="email" class="form-control" name="email" id="email1">
                                                 </div>
                                             </div>
-                                            <div class="form-group row mb-3" id="emailRow2" hidden>
-                                                <div class="col-sm-2 col-form-label"></div>
+                                            <div class="form-group row mb-2" id="emailRow2" hidden>
+                                                <label for="email2" class="col-sm-2 col-form-label">이메일2</label>
                                                 <div class="col-sm-6">
-                                                    <input type="text" class="form-control" name="email" id="email2" disabled>
+                                                    <input type="email" class="form-control" name="email" id="email2">
                                                 </div>
                                             </div>
-                                            <div class="form-group row mb-3" id="emailRow3" hidden>
-                                                <div class="col-sm-2 col-form-label"></div>
+                                            <div class="form-group row mb-2" id="emailRow3" hidden>
+                                                <label for="email3" class="col-sm-2 col-form-label">이메일3</label>
                                                 <div class="col-sm-6">
-                                                    <input type="text" class="form-control" name="email" id="email3" disabled>
+                                                    <input type="email" class="form-control" name="email" id="email3">
                                                 </div>
                                             </div>
-                                            <div class="form-group row mb-3" id="emailRow4" hidden>
-                                                <div class="col-sm-2 col-form-label"></div>
+                                            <div class="form-group row mb-2" id="emailRow4" hidden>
+                                                <label for="email4" class="col-sm-2 col-form-label">이메일4</label>
                                                 <div class="col-sm-6">
-                                                    <input type="text" class="form-control" name="email" id="email4" disabled>
+                                                    <input type="email" class="form-control" name="email" id="email4">
                                                 </div>
                                             </div>
-                                            <div class="form-group row mb-3" id="emailRow5" hidden>
-                                                <div class="col-sm-2 col-form-label"></div>
+                                            <div class="form-group row mb-2" id="emailRow5" hidden>
+                                                <label for="email5" class="col-sm-2 col-form-label">이메일5</label>
                                                 <div class="col-sm-6">
-                                                    <input type="text" class="form-control" name="email" id="email5" disabled>
+                                                    <input type="email" class="form-control" name="email" id="email5">
                                                 </div>
                                             </div>
-                                            <div class="form-group row mb-3">
+                                            <div class="form-group row mb-2">
                                                 <div class="col-sm-2 col-form-label">이메일 추가</div>
                                                 <div class="col-sm-10">
                                                     <button type="button" class="btn btn-secondary" id="btnAddEmail"><i class="fas fa-plus"></i></button>
@@ -360,12 +357,12 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="form-group">
-                                      <label class="mb-1" for="introduceText">작가 소개</label>
-                                      <textarea class="form-control mb-2" name="introduce" id="introduceText" rows="5" placeholder="작가 소개"></textarea>
+                                    <label class="mb-1" for="introduceText">작가 소개</label>
+                                    <textarea class="form-control mb-2" name="introduce" id="introduceText" rows="5" placeholder="작가 소개"></textarea>
                                     </div>
                                     <div class="form-group mb-2">
-                                      <label class="mb-1" for="historyText">작가 연혁</label>
-                                      <textarea class="form-control" name="history" id="historyText" rows="5" placeholder="작가 연혁"></textarea>
+                                    <label class="mb-1" for="historyText">작가 연혁</label>
+                                    <textarea class="form-control" name="history" id="historyText" rows="5" placeholder="작가 연혁"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -375,7 +372,7 @@
                                         <label for="openY">열람가능</label>
                                         <input type="checkbox" id="openY" name="openY" class="form-check-inline"/>
                                     </div>
-                                    <button class="btn btn-primary" type="submit">등록하기</button>
+                                    <button class="btn btn-primary" type="submit">수정하기</button>
                                 </div>
                             </div>
                         </div>
@@ -396,10 +393,10 @@
             </div>
         </div>
         <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-        <script src="js/scripts.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+        <script src="js/scripts.js"></script>
         <script>
             let cnt_phone = 1;
             let cnt_address = 1;
@@ -408,7 +405,58 @@
             // DOM
             $(function() {
 
-                $('#mainForm').attr('action', backURL + '/artist/insert.do');
+                $.post(
+                    backURL + '/artist/selectOne.do'
+                  , {artistNo: getParameterByName('artistNo')}
+                  , function (data, textStatus, jqXHR) {
+                        console.log(data);
+                        if(data.result == false) {
+                            alert('해당 작가를 찾지 못하였습니다.');
+                            location.href='/admin/artist-list.html';
+                        } else {
+                            $('#artistNo').val(data.artistData.artistNo);
+                            $('#nameKOR').val(data.artistData.nameKor);
+                            $('#nameENG').val(data.artistData.nameEng);
+                            $('#birthday').val(data.artistData.birthday);
+                            var phones = JSON.parse(data.artistData.phones);
+                            if(phones != null) {
+                                cnt_phone = phones.length;
+                                for(var i = 0; i < phones.length; i++) {
+                                    $('#phoneRow' + (i + 1)).attr('hidden',false);
+                                    $('#phone' + (i + 1)).val(phones[i]);
+                                }
+                            }
+                            if(data.addressData != null) {
+                                cnt_address = data.addressData.length;
+                                if(cnt_address == 0) cnt_address = 1;
+                                for(var i = 0; i < data.addressData.length; i++){
+                                    $('#addressRow' + (i + 1)).attr('hidden',false);
+                                    $('#addressName' + (i + 1)).val(data.addressData[i].addressName);
+                                    $('#addressN' + (i + 1)).val(data.addressData[i].addressn);
+                                    $('#address' + (i + 1) + "-1").val(data.addressData[i].address1);
+                                    $('#address' + (i + 1) + "-2").val(data.addressData[i].address2);
+                                }                            
+                            }
+                            var emails = JSON.parse(data.artistData.emails);
+                            if(emails != null) {
+                                cnt_email = emails.length;
+                                for(var i = 0; i < emails.length; i++) {
+                                    $('#emailRow' + (i + 1)).attr('hidden',false);
+                                    $('#email' + (i + 1)).val(emails[i]);
+                                }
+                            }
+                            $('#introduceText').val(data.artistData.introduce);
+                            $('#historyText').val(data.artistData.history);
+                            if(data.artistData.profile != null && data.artistData.profile != ''){
+                                $('#profileImage').attr('src',data.artistData.profile);
+                            }
+                            $('#openY').attr('checked',data.artistData.openYn == 'Y');
+                        }
+                    },
+                    "JSON"
+                );
+
+                $('#mainForm').attr('action', backURL + '/artist/update.do')
 
                 // 이미지 등록
                 $('#profile').change(function() {
@@ -524,14 +572,16 @@
 
                     if(nameKor == null || nameKor == '') {
                         e.preventDefault();
-                        message = '이름(한)을 입력해 주세요.';
-                        
+
                         $('#nameKOR').focus();
+                        $('#nameKorAlert').attr('hidden',false);
                     }
+                })
 
-                    var div = '<div class="alert alert-warning d-flex align-items-center alert-dismissible fade show" role="alert"><div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:"><path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/></svg>' + message + '</div><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>'
-                    $('#warning-box').html(div);
-
+                // 주소지 삭제
+                $('.btn-erase').click(function(e){
+                    var rowNum = $(this).data('no');
+                    $('#addressRow' + rowNum + " input").val('');
                 })
             });
 
@@ -544,7 +594,6 @@
                 for (let i = cnt + 1; i <= 5; i++) {
                     $('#phoneRow' + i).attr('hidden', true);
                     $('#phoneRow' + i + " input").attr('disabled', true);
-                    $('#phoneRow' + i + " input").val('');
                 }
             }
 
@@ -557,7 +606,6 @@
                 for (let i = cnt + 1; i <= 5; i++) {
                     $('#addressRow' + i).attr('hidden', true);
                     $('#addressRow' + i + " input").attr('disabled', true);
-                    $('#addressRow' + i + " input").val('');
                 }
             }
 
@@ -570,7 +618,6 @@
                 for (let i = cnt + 1; i <= 5; i++) {
                     $('#emailRow' + i).attr('hidden', true);
                     $('#emailRow' + i + " input").attr('disabled', true);
-                    $('#emailRow' + i + " input").val('');
                 }
             }
 
@@ -580,7 +627,6 @@
                     event.preventDefault();
                 };
             }, true);
-
         </script>
     </body>
 </html>

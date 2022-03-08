@@ -207,7 +207,8 @@
                 // -- Table 작성
                 var deleteYn = paramDeleteN && paramDeleteY ? null : (paramDeleteY ? 'Y' : 'N');
                 $.post(
-                    backURL + '/artist/selectList.do', {
+                        backURL + '/artist/selectList.do'
+                    ,{
                         nameKor: paramName,
                         nameEng: paramName,
                         deleteYn: deleteYn
@@ -229,7 +230,14 @@
                             perPage: 10
                         });
                     }, "JSON" 
-                );
+                ).fail(function () {
+                    // Simple-DataTables
+                    // https://github.com/fiduswriter/Simple-DataTables/wiki
+                    new simpleDatatables.DataTable($('#datatablesSimple')[0], {
+                        searchable: false,
+                        perPage: 10
+                    });
+                });
                 // -- Table 작성 : END
             })
         </script>

@@ -102,51 +102,40 @@
                                 작품 검색
                             </div>
                             <div class="card-body">
-                                <form class="form-group" id="searchForm">
-                                    <div class="row mb-2">
-                                        <label for="artworkName" class="col-sm-1 mb-2 col-form-label">
-                                            작품명
-                                        </label>
-                                        <div class="col-sm-9 from-check">
-                                            <input type="text" class="form-control" id="artworkName" placeholder="작품명">
-                                        </div>
-                                    </div>
-                                    <div class="row mb-2">
-                                        <label for="artistName" class="col-sm-1 mb-2 col-form-label">
-                                            작가
-                                        </label>
-                                        <div class="col-sm-9 from-check">
-                                            <input type="text" class="form-control" id="artistName" placeholder="작가">
-                                        </div>
-                                    </div>
-                                    <div class="row mb-2">
-                                        <label for="exhibitionTitle" class="col-sm-1 col-form-label">
-                                            전시회
-                                        </label>
-                                        <div class="col-sm-9 from-check">
-                                            <input type="text" class="form-control" id="exhibitionTitle" placeholder="전시회">
-                                        </div>
-                                        <div class="col-sm-2 from-check">
-                                            <div class="d-flex flex-row-reverse">
-                                                <button class="btn btn-primary">
-                                                    검색
-                                                </button>
+                                <form class="row form-group" id="searchForm">
+                                    <div class="col-sm-9">
+                                        <div class="row mb-2">
+                                            <label for="artworkName" class="col-sm-3 mb-2 col-form-label">
+                                                작품명
+                                            </label>
+                                            <div class="col-sm-9 from-check">
+                                                <input type="text" class="form-control" name="artworkName" id="artworkName" placeholder="작품명">
                                             </div>
                                         </div>
+                                        <div class="row mb-2">
+                                            <label for="artistName" class="col-sm-3 mb-2 col-form-label">
+                                                작가
+                                            </label>
+                                            <div class="col-sm-9 from-check">
+                                                <input type="text" class="form-control" name="artistName" id="artistName" placeholder="작가">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 d-flex justify-content-end align-items-end mb-2">
+                                        <button class="btn btn-secondary">검색</button>
                                     </div>
                                 </form>
                             </div>
                         </div>
                         <div class="mb-4">
-                            <table id="datatablesSimple">
+                            <table id="artworkTable">
                                 <thead>
                                     <tr>
                                         <th>작품명</th>
                                         <th>작가명</th>
                                         <th>카테고리</th>
-                                        <th>설명유무</th>
-                                        <th>이미지유무</th>
-                                        <th>감정유무</th>
+                                        <th>공개유무</th>
+                                        <th>등록일</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
@@ -154,109 +143,11 @@
                                         <th>작품명</th>
                                         <th>작가명</th>
                                         <th>카테고리</th>
-                                        <th>설명유무</th>
-                                        <th>이미지유무</th>
-                                        <th>감정유무</th>
+                                        <th>공개유무</th>
+                                        <th>등록일</th>
                                     </tr>
                                 </tfoot>
-                                <tbody>
-                                    <tr>
-                                        <td>해바라기의 꿈</td>
-                                        <td>이상진</td>
-                                        <td>수체화</td>
-                                        <td>Y</td>
-                                        <td>Y</td>
-                                        <td>Y</td>
-                                    </tr>
-                                    <tr>
-                                        <td>FICTION-3</td>
-                                        <td>김정희</td>
-                                        <td>OTHER</td>
-                                        <td>Y</td>
-                                        <td>Y</td>
-                                        <td>Y</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Dream</td>
-                                        <td>이상희</td>
-                                        <td>유화</td>
-                                        <td>Y</td>
-                                        <td>Y</td>
-                                        <td>N</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Future</td>
-                                        <td>이상희</td>
-                                        <td>유화</td>
-                                        <td>Y</td>
-                                        <td>N</td>
-                                        <td>N</td>
-                                    </tr>
-                                    <tr>
-                                        <td>피니스테레 일출</td>
-                                        <td>백성흠</td>
-                                        <td>유화</td>
-                                        <td>Y</td>
-                                        <td>Y</td>
-                                        <td>N</td>
-                                    </tr>
-                                    <tr>
-                                        <td>피니스테레 일몰</td>
-                                        <td>백성흠</td>
-                                        <td>유화</td>
-                                        <td>Y</td>
-                                        <td>N</td>
-                                        <td>N</td>
-                                    </tr>
-                                    <tr>
-                                        <td>별이야기1</td>
-                                        <td>양태숙</td>
-                                        <td>유화</td>
-                                        <td>Y</td>
-                                        <td>Y</td>
-                                        <td>N</td>
-                                    </tr>
-                                    <tr>
-                                        <td>별이야기2</td>
-                                        <td>양태숙</td>
-                                        <td>유화</td>
-                                        <td>Y</td>
-                                        <td>Y</td>
-                                        <td>N</td>
-                                    </tr>
-                                    <tr>
-                                        <td>별이야기3</td>
-                                        <td>양태숙</td>
-                                        <td>유화</td>
-                                        <td>Y</td>
-                                        <td>Y</td>
-                                        <td>N</td>
-                                    </tr>
-                                    <tr>
-                                        <td>별이야기4</td>
-                                        <td>양태숙</td>
-                                        <td>유화</td>
-                                        <td>N</td>
-                                        <td>Y</td>
-                                        <td>N</td>
-                                    </tr>
-                                    <tr>
-                                        <td>별이야기5</td>
-                                        <td>양태숙</td>
-                                        <td>유화</td>
-                                        <td>N</td>
-                                        <td>Y</td>
-                                        <td>N</td>
-                                    </tr>
-                                    <tr>
-                                        <td>별이야기6</td>
-                                        <td>양태숙</td>
-                                        <td>유화</td>
-                                        <td>N</td>
-                                        <td>Y</td>
-                                        <td>Y</td>
-                                    </tr>
-                                </tbody>
+                                <tbody id="artworkTbody"></tbody>
                             </table>
                         </div>
                         <div class="d-flex justify-content-end">
@@ -282,9 +173,54 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-        <!-- <script src="assets/demo/chart-area-demo.js"></script> -->
-        <!-- <script src="assets/demo/chart-bar-demo.js"></script> -->
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
-        <script src="js/datatables-simple-demo.js"></script>
+        <script>
+            $(function() {
+                documentReady();
+            });
+
+            function documentReady() {
+                $.get(
+                      backURL + '/artwork/selectArtwork.do'
+                    , {
+                        artworkName: getParameterByName('artworkName'),
+                        artistName: getParameterByName('artistName')
+                      }
+                    , function (data, textStatus, jqXHR) {
+                        console.log(data);
+                        $.each(data.result, function (index, element) { 
+                            var tr = $('<tr>').appendTo('#artworkTbody');
+                            tr.append('<td>' + element.title + "</td>");
+                            var artistName = element.artistNameKor;
+                            if(element.artistNameEng)
+                                artistName = artistName + "(" + element.artistNameEng + ")";
+                            tr.append('<td>' + artistName + "</td>");
+                            tr.append('<td>' + element.categoryName + "</td>");
+                            tr.append('<td>' + element.showYn + "</td>");
+                            tr.append('<td>' + element.regDate + "</td>");
+                            tr.attr('onclick','javascript:location.href=\'artwork-view.html?artworkNo=' + element.artworkNo + '\'');
+                        });
+
+                        // Simple-DataTables
+                        // https://github.com/fiduswriter/Simple-DataTables/wiki
+                        new simpleDatatables.DataTable($('#artworkTable')[0], {
+                            searchable: false,
+                            perPage: 10
+                        });
+                      }
+                    , "JSON"
+                ).fail(
+                    function() {
+                        // Simple-DataTables
+                        // https://github.com/fiduswriter/Simple-DataTables/wiki
+                        new simpleDatatables.DataTable($('#artworkTable')[0], {
+                            searchable: false,
+                            perPage: 10
+                        });
+                    }
+                )
+                
+            }
+        </script>
     </body>
 </html>
