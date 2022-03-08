@@ -110,6 +110,9 @@
                                         </label>
                                         <div class="col-sm-4 from-check mb-2">
                                             <input type="text" class="form-control" name="title" id="artworkName" placeholder="작품명"/>
+                                            <div class="text-danger small" id="artworkNameAlert" style="display: none;">
+                                                작품명을 입력하세요.
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -128,6 +131,9 @@
                                             <select class="form-select" name="categoryNo" id="selectCategory">
                                                 <option value="" selected>[카테고리 선택]</option>
                                             </select>
+                                            <div class="text-danger small" id="selectCategoryAlert" style="display: none;">
+                                                카테고리를 선택해주세요.
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -184,10 +190,15 @@
                                         <div class="col-sm-2 col-2 mb-2">
                                             <label for="artistName" class="col-form-label">작가</label>
                                         </div>
-                                        <div class="d-flex align-items-center justify-content-start col-sm-5 col-10 mb-2">
-                                            <input type="text"class="form-control" id="artistName" aria-describedby="helpId" readonly/>
-                                            <input type="hidden" name="artistNo" id="artistNo"/>
-                                            <button type="button" class="btn btn-secondary ms-2" onclick="resetArtist()" style="width: 90px;">취소</button>
+                                        <div class="form-group col-sm-5 col-10 mb-2">
+                                            <div class="d-flex align-items-center justify-content-start">
+                                                <input type="text"class="form-control" id="artistName" aria-describedby="helpId" readonly/>
+                                                <input type="hidden" name="artistNo" id="artistNo"/>
+                                                <button type="button" class="btn btn-secondary ms-2" onclick="resetArtist()" style="width: 90px;">취소</button>
+                                            </div>
+                                            <div class="text-danger small" id="artistAlert" style="display: none;">
+                                                작가를 선택해 주세요
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -227,21 +238,33 @@
                 
                 docuemntReady();
                 
+                // mainForm Setting
                 $('#mainForm').attr('action', backURL + '/artwork/insertArtwork.do');
                 $('#mainForm').submit(
                     function(e) {
                         if($('#artworkName').val() == ''){
                             e.preventDefault();
                             $('#artworkName').focus();
+                            $('#artworkNameAlert').show();
                             return false;
                         }
                         if($('#selectCategory').val() == ''){
                             e.preventDefault();
                             $('#selectCategory').focus();
+                            $('#selectCategoryAlert').show();
+                            return false;
+                        }
+                        if($('#artistNo').val() == '') {
+                            e.preventDefault();
+                            $('#artistTable').focus();
+                            $('#artistAlert').show();
                             return false;
                         }
                     }
                 );
+
+                $('#artworkName').change(function(e){$('#artworkNameAlert').hide();});
+                $('#selectCategory').change(function(e){$('#selectCategoryAlert').hide();});
 
                 // 엔터키 입력 방지
                 document.addEventListener('keydown', function(event) {
@@ -282,16 +305,25 @@
                             $tr.appendTo('#artistTableBody')
                             $tr.attr('onclick', 'artistTableClickEvent("' + element.nameKor + '","' + element.nameEng + '","' + element.artistNo + '");');
                         });
+                        
                         // Simple-DataTables
                         // https://github.com/fiduswriter/Simple-DataTables/wiki
                         new simpleDatatables.DataTable($('#artistTable')[0], {
                             searchable: true,
                             perPage: 5
                         });
-                    }
-                );
+                      }
+                ).fail(function () {
+                    // Simple-DataTables
+                    // https://github.com/fiduswriter/Simple-DataTables/wiki
+                    new simpleDatatables.DataTable($('#artistTable')[0], {
+                        searchable: true,
+                        perPage: 5
+                    });
+                });
+                
 
-            }
+            } 
 
             function showArtist(artistNo){
                 var url = '/admin/artist-popup.html';
@@ -300,6 +332,7 @@
 
             function artistTableClickEvent(nameKor, nameEng, artistNo) {    
                 console.log("선택:",nameKor, nameEng, artistNo);
+                $('#artistAlert').hide();
                 if(nameEng != null && nameEng != '') {
                     $('#artistName').val(nameKor + '(' + nameEng + ')');
                 } else {
