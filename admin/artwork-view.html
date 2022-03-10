@@ -96,7 +96,8 @@
                 <main>
                     <div class="container-fluid px-4">
                         <h1 class="mt-4 mb-4">작품 확인/수정</h1>
-                        <form id="mainForm" >
+                        <form id="mainForm" method="post">
+                            <input type="hidden" name="artworkNo" id="artworkNo"/>
                             <div class="card mb-4">
                                 <div class="card-header">
                                     <i class="fas fa-pen"></i>
@@ -128,7 +129,7 @@
                                             제작일
                                         </label>
                                         <div class="col-sm-3 from-check mb-2">
-                                            <input type="date" class="form-control" name="madenDate"/>
+                                            <input type="date" class="form-control" name="madenDate" id="madenDate"/>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -137,7 +138,7 @@
                                         </label>
                                         <div class="col-sm-3 from-check mb-2">
                                             <select class="form-select" name="categoryNo" id="selectCategory">
-                                                <option value="" selected>[카테고리 선택]</option>
+                                                <option value="">[카테고리 선택]</option>
                                             </select>
                                             <div class="text-danger small" id="selectCategoryAlert" style="display: none;">
                                                 카테고리를 선택해주세요.
@@ -153,37 +154,43 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <label for="artworkContent" class="col-sm-2 mb-2 col-form-label">설명</label>
-                                        <div class="col-sm-8 mb-2">
-                                            <textarea class="form-control" name="explain" id="artworkContent" rows="12" placeholder="설명"></textarea>
+                                        <label for="explain" class="col-sm-2 mb-2 col-form-label">설명</label>
+                                        <div class="col-sm-8 mb-4">
+                                            <textarea class="form-control" name="explain" id="explain" rows="12" placeholder="설명"></textarea>
                                         </div>
+                                    </div>
+                                    <div class="d-flex justify-content-end mb-2">     
+                                        <button type="button" class="btn btn-primary" id="btnEditConfig">
+                                            작품 기본정보 수정
+                                        </button>
                                     </div>
                                 </div>
                             </div>
-                            <div class="card mb-4" id="cardImage" style="display: none;">
+                            <div class="card mb-4" id="cardImage">
                                 <div class="card-header">
                                     이미지
                                 </div>
                                 <div class="card-body">
-                                    <div class="mx-4 row justify-content-between">
-                                        <div class="col-sm-6">
-                                            <img class="img-thumbnail" src="./assets/img/no_image_px270.PNG">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <img class="img-thumbnail" id="image" src="./assets/img/no_image_px270.PNG">
                                         </div>
-                                        <div class="col-sm-6">
-                                            <div class="list-group">
+                                        <div class="col-sm-5">
+                                            <div class="ps-1">
+                                                이미지 목록
+                                            </div>
+                                            <div class="list-group mb-3" id="imageList">
                                                 <a class="list-group-item">No Image</a>
                                             </div>
+                                            <div>
+                                                <span class="small">이미지 선택:</span> <span id="selectedImage"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3 d-flex justify-content-end align-items-end">
+                                            <button type="button" class="btn btn-primary">이미지 추가</button>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="d-flex justify-content-end">
-                                <button type="button" class="btn btn-secondary me-2" id="btnShowImage">
-                                    이미지 보기
-                                </button>      
-                                <button type="button" class="btn btn-primary" id="btnEditConfig">
-                                    작품 기본정보 수정
-                                </button>
                             </div>
                         </form>
                     </div>
@@ -205,8 +212,78 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
-        <script src="js/datatables-simple-demo.js"></script>
+        <script>
+            $(function() {
+                $.post(
+                    backURL + '/artwork/selectOneArtwork.do'
+                  , {artworkNo: getParameterByName('artworkNo')}
+                  , function (data, textStatus, jqXHR) {
+                        console.log(data);
+
+                        // Generate Categroy
+                        $.each(data.category, function (index, element) { 
+                            var $option = $('<option>').text(element.name).val(element.categoryNo);
+                            if(data.artwork.categoryNo == element.categoryNo) {
+                                $option.attr('selected',true);
+                            }
+                            $('#selectCategory').append($option);
+                        });
+
+                        // Setting Values
+                        $('#artworkNo').val(data.artwork.artworkNo);
+                        $('#artworkName').val(data.artwork.title);
+                        var artistName = data.artwork.artistNameKor;
+                        if(data.artwork.artistNameEng) {
+                            artistName = artistName + "(" + data.artwork.artistNameEng + ")";
+                        }
+                        $('#artistName').val(artistName);
+                        $('#madenDate').val(data.artwork.artworkDate);
+                        $('#metarial').val(data.artwork.media);
+                        $('#explain').val(data.artwork.explain);
+
+                        // Setting Image
+                        if(data.artworkImages){
+                            $('#image').data('link',data.artworkImages[0].fileName);
+                            $('#image').attr('src',data.artworkImages[0].thum1Name);
+
+                            $('#imageList').empty();
+                            $.each(data.artworkImages, function (index, element) { 
+                                var $a = $('<a>').text("IMAGE" + (index + 1)).data('link',element.filenName).data('thum',element.thum1Name).addClass('list-group-item').addClass('list-group-item-action');
+                                $('#imageList').append($a);
+                            });
+                            $('#selectedImage').text('IMAGE1')
+                        }
+                    },
+                    "JSON"
+                );
+
+                $('#btnEditConfig').click(function(){
+
+                    if($('#artworkName').val() == '') {
+                        $('#artworkName').focus();
+                        $('#artworkNameAlert').show();
+                        return;
+                    }
+
+                    if($('#selectCategory').val() == ''){
+                        $('#selectCategory').focus();
+                        $('#selectCategoryAlert').show();
+                        return;
+                    }
+
+                    if($('#artistNo').val() == '') {
+                        $('#artistTable').focus();
+                        $('#artistAlert').show();
+                        return;
+                    }
+
+                    
+                    $('#mainForm').attr('action', backURL + '/artwork/updateArtwork.do');
+                    $('#mainForm').submit();
+                });
+
+            });
+        </script>
     </body>
 </html>
