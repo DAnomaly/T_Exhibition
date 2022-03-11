@@ -126,9 +126,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group d-flex justify-content-end">
-                                        <button class="btn btn-primary">확인</button>
-                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -138,55 +135,31 @@
                                 작가 선택
                             </div>
                             <div class="card-body">
-                                <table id="datatablesSimple1">
+                                <table class="simpleTable" id="artistTable">
                                     <thead>
                                         <tr>
-                                            <th>작가명(한)</th>
-                                            <th>작가명(영)</th>
-                                            <th>생년월일</th>
-                                            <th>전화번호(PHONE)</th>
-                                            <th>주소(ADDRESS)</th>
+                                            <th>이름(한)</th>
+                                            <th>이름(영)</th>
+                                            <th>등록일</th>
+                                            <th>자세히</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>작가명(한)</th>
-                                            <th>작가명(영)</th>
-                                            <th>생년월일</th>
-                                            <th>전화번호(PHONE)</th>
-                                            <th>주소(ADDRESS)</th>
+                                            <th>이름(한)</th>
+                                            <th>이름(영)</th>
+                                            <th>등록일</th>
+                                            <th>자세히</th>
                                         </tr>
                                     </tfoot>
-                                    <tbody>
-                                        <tr>
-                                            <td>서동탄</td>
-                                            <td>DongTan Seo</td>
-                                            <td>1989-02-23</td>
-                                            <td>010-2344-2344</td>
-                                            <td>서울시 영등포구</td>
-                                        </tr>
-                                        <tr>
-                                            <td>영등포</td>
-                                            <td></td>
-                                            <td>1982-03-13</td>
-                                            <td>010-2344-2344</td>
-                                            <td>서울시 영등포구</td>
-                                        </tr>
-                                        <tr>
-                                            <td>신길</td>
-                                            <td></td>
-                                            <td>1999-02-23</td>
-                                            <td>010-2344-2344</td>
-                                            <td>서울시 영등포구</td>
-                                        </tr>
-                                    </tbody>
+                                    <tbody id="artistTbody"></tbody>
                                 </table>
                             </div>
                             <div class="card-footer">
                                 <div class="form-group row mb-1">
-                                    <label for="exhibitionTitle" class="col-sm-2 col-form-label">작가</label>
+                                    <label for="selectedArtist" class="col-sm-2 col-form-label">작가</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="exhibitionTitle" readonly>
+                                        <input type="text" class="form-control" id="selectedArtist" readonly>
                                         <div class="invalid-feedback">
                                             작가를 선택하세요
                                         </div>
@@ -202,39 +175,24 @@
                                         작품 선택
                                     </div>
                                     <div class="card-body">
-                                        <table id="datatablesSimple2">
+                                        <table class="simpleTable" id="artworkTable">
                                             <thead>
                                                 <tr>
-                                                    <th>작가명(한)</th>
-                                                    <th>작가명(영)</th>
-                                                    <th>생년월일</th>
-                                                    <th>전화번호(PHONE)</th>
-                                                    <th>주소(ADDRESS)</th>
+                                                    <th>작품명</th>
+                                                    <th>카테고리</th>
+                                                    <th>등록일</th>
+                                                    <th>자세히</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
+                                            <tfoot>
                                                 <tr>
-                                                    <td>서동탄</td>
-                                                    <td>DongTan Seo</td>
-                                                    <td>1989-02-23</td>
-                                                    <td>010-2344-2344</td>
-                                                    <td>서울시 영등포구</td>
+                                                    <th>작품명</th>
+                                                    <th>카테고리</th>
+                                                    <th>등록일</th>
+                                                    <th>자세히</th>
                                                 </tr>
-                                                <tr>
-                                                    <td>영등포</td>
-                                                    <td></td>
-                                                    <td>1982-03-13</td>
-                                                    <td>010-2344-2344</td>
-                                                    <td>서울시 영등포구</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>신길</td>
-                                                    <td></td>
-                                                    <td>1999-02-23</td>
-                                                    <td>010-2344-2344</td>
-                                                    <td>서울시 영등포구</td>
-                                                </tr>
-                                            </tbody>
+                                            </tfoot>
+                                            <tbody id="artworkTbody"></tbody>
                                         </table>
                                     </div>
                                 </div>
@@ -246,39 +204,24 @@
                                         선택된 작품
                                     </div>
                                     <div class="card-body">
-                                        <table id="datatablesSimple3">
+                                        <table class="simpleTable" id="selectedArtworkTable">
                                             <thead>
                                                 <tr>
-                                                    <th>작가명(한)</th>
-                                                    <th>작가명(영)</th>
-                                                    <th>생년월일</th>
-                                                    <th>전화번호(PHONE)</th>
-                                                    <th>주소(ADDRESS)</th>
+                                                    <th>작품명</th>
+                                                    <th>카테고리</th>
+                                                    <th>등록일</th>
+                                                    <th>자세히</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
+                                            <tfoot>
                                                 <tr>
-                                                    <td>서동탄</td>
-                                                    <td>DongTan Seo</td>
-                                                    <td>1989-02-23</td>
-                                                    <td>010-2344-2344</td>
-                                                    <td>서울시 영등포구</td>
+                                                    <th>작품명</th>
+                                                    <th>카테고리</th>
+                                                    <th>등록일</th>
+                                                    <th>자세히</th>
                                                 </tr>
-                                                <tr>
-                                                    <td>영등포</td>
-                                                    <td></td>
-                                                    <td>1982-03-13</td>
-                                                    <td>010-2344-2344</td>
-                                                    <td>서울시 영등포구</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>신길</td>
-                                                    <td></td>
-                                                    <td>1999-02-23</td>
-                                                    <td>010-2344-2344</td>
-                                                    <td>서울시 영등포구</td>
-                                                </tr>
-                                            </tbody>
+                                            </tfoot>
+                                            <tbody id="selectedArtworkTbody"></tbody> 
                                         </table>
                                     </div>
                                 </div>
@@ -310,26 +253,163 @@
         <script src="js/scripts.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script>
-            window.addEventListener('DOMContentLoaded', event => {
-                // Simple-DataTables
-                // https://github.com/fiduswriter/Simple-DataTables/wiki
+            $(function() {
+                // table에 simple-datatables CDN 적용
+                generateTables();
+                // artistTable 생성
+                generateArtistTable();
 
-                const datatablesSimple1 = document.getElementById('datatablesSimple1');
-                if (datatablesSimple1) {
-                    new simpleDatatables.DataTable(datatablesSimple1);
-                }
-
-                const datatablesSimple2 = document.getElementById('datatablesSimple2');
-                if (datatablesSimple2) {
-                    new simpleDatatables.DataTable(datatablesSimple2);
-                }
-
-                const datatablesSimple3 = document.getElementById('datatablesSimple3');
-                if (datatablesSimple3) {
-                    new simpleDatatables.DataTable(datatablesSimple3);
-                }
 
             });
+
+            let tables = new Array();
+            let artworkArray = new Array();
+
+            function generateTables() {
+                var map = $('table.simpleTable');
+                // simple-datatables
+                $.each(map, function (index, table) { 
+                    tables[index] = new simpleDatatables.DataTable(table, {
+                        searchable: true,
+                        perPage: 5
+                    });  
+                });
+            }
+
+            function generateTable(mapping) {
+                return new simpleDatatables.DataTable(mapping, {
+                    searchable: true,
+                    perPage: 5
+                });  
+            }
+
+
+            function generateArtistTable() {
+                $.get(
+                      backURL + '/artist/selectList.do'
+                    , function (data, textStatus, jqXHR) {
+                        if(data.result[0] == null) {
+                            return;
+                        }
+                        tables[0].destroy();
+                        console.log(data);
+                        $('#artistTbody').empty();
+                        $.each(data.result, function (index, element) { 
+                            let $tr = $('<tr>')
+                                .append($('<td>').text(element.nameKor))
+                                .append($('<td>').text(element.nameEng))
+                                .append($('<td>').text(element.regDate))
+                                .append($('<td>').append($('<a>').addClass('btn-link artistInfo').text("자세히").attr('href','javascript:showArtistInfo(' + element.artistNo + ');')))
+                                .attr('onclick','selectArtist(' + element.artistNo + ',"' + element.nameKor + '(' + element.nameEng + ')")');
+                            $('#artistTbody').append($tr);
+                        });
+                        tables[0] = generateTable($('#artistTable')[0]);
+                      }
+                    , "JSON"
+                );
+            }
+
+
+            function selectArtist(artistNo, artistName) {
+                // artistName 
+                $('#selectedArtist').val(artistName);
+
+                $.get(
+                    backURL + '/artwork/selectArtwork.do'
+                  , {artistNo: artistNo}
+                  , function(data) {
+                        console.log(artistNo, data);
+
+                        tables[1].destroy();
+                        tables[2].destroy();
+
+                        $('#artworkTbody').empty();
+                        if(data.result.length != 0) {
+                            $.each(data.result, function (index, element) { 
+                                let $tr = $('<tr>')
+                                    .append($('<td>').text(element.title))
+                                    .append($('<td>').text(element.categoryName))
+                                    .append($('<td>').text(element.regDate))
+                                    .append($('<td>').append($('<a>').addClass('btn-link artistInfo').text("자세히").attr('href','javascript:showArtworkInfo(' + element.artworkNo + ');')))
+                                    .attr('onclick', 'selectArtwork(this)')
+                                    .attr('data-artworkNo', element.artworkNo);
+                                $('#artworkTbody').append($tr);
+                            });
+                        }
+
+                        $('#selectedArtworkTbody').empty();
+                        artworkArray = new Array();
+                                    
+                        tables[1] = generateTable($('#artworkTable')[0]);
+                        tables[2] = generateTable($('#selectedArtworkTable')[0]);
+                    }
+                  , "JSON"
+                )
+            }
+
+
+            function showArtistInfo(artistNo) {
+                window.open('/admin/artist-view.html?artistNo=' + artistNo);
+            }
+
+            function showArtworkInfo(artworkNo) {
+                window.open('/admin/artwork-view.html?artworkNo=' + artworkNo);
+            }
+
+            function selectArtwork(e) {
+                let artworkNo = $(e).attr('data-artworkNo'); 
+                
+                let isRetrun = false;
+                $.each(artworkArray, function (index, value) { 
+                    if(value == artworkNo) {
+                        isRetrun = true;
+                        return;
+                    }
+                });
+
+                if(isRetrun) {
+                    return;
+                } else {
+                    artworkArray[artworkArray.length] = artworkNo;
+                }
+
+                updateSelectedArtwork();
+            }
+
+            function removeArtwork(e) {
+
+            }
+
+            function updateSelectedArtwork() {
+                $.post(
+                    backURL + '/artwork/selectArtworkFromArr.do'
+                  , {arr: artworkArray.toString()}
+                  , function(data) {
+                        console.log(data);
+
+                        tables[2].destroy();
+
+                        $('#selectedArtworkTbody').empty();
+                        if(data.result.length != 0) {
+                            $.each(data.result, function (index, element) { 
+                                let $tr = $('<tr>')
+                                    .append($('<td>').text(element.title))
+                                    .append($('<td>').text(element.categoryName))
+                                    .append($('<td>').text(element.regDate))
+                                    .append($('<td>').append($('<a>').addClass('btn-link artistInfo').text("자세히").attr('href','javascript:showArtworkInfo(' + element.artworkNo + ');')))
+                                    .attr('onclick', 'removeArtwork(this)')
+                                    .attr('data-artworkNo', element.artworkNo);
+                                $('#selectedArtworkTbody').append($tr);
+                            });
+                        }
+
+                        tables[2] = generateTable($('#selectedArtworkTable')[0]);
+                        
+                    }
+                  , "JSON"
+                );
+            }
+
         </script>
     </body>
 </html>
