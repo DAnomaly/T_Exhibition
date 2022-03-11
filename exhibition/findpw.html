@@ -7,7 +7,6 @@
 		<meta name="description" content="">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<script type="text/javascript" src="/js/twbs-pagination/jquery.twbsPagination.js"></script>
 		<link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
 		<!-- Place favicon.ico in the root directory -->
 		
@@ -41,10 +40,10 @@
         <link rel="stylesheet" href="css/shortcode.css">
 		<!-- responsive css -->
 		<link rel="stylesheet" href="css/responsive.css">
-	
 		<!-- modernizr css -->
 		<script src="js/vendor/modernizr-2.8.3.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	</head>
 	<body>	
 		<!-- WRAPPER START -->
@@ -64,33 +63,34 @@
 			</header>
 			<!-- HEADER-AREA END -->
 
-		<!-- Mobile-menu start -->
-		<div class="mobile-menu-area">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-xs-12 hidden-lg hidden-md hidden-sm">
-						<div class="mobile-menu">
-							<nav id="dropdown">
-								<ul>
-									<li><a href="index.htm">home</a></li>
-									<li><a href="index.html">EXHIBITION</a>
-										<ul>
-											<li><a href="current-exhibitions.html">Current Exhibitions</a></li>
-											<li><a href="past-exhibitions.html">Past Exhibitions</a></li>
-										</ul>
-									</li>
-									<li><a href="artist.html">artist</a></li>
-									<li><a href="collection.html">collection</a></li>
-									<li><a href="privacy-policy.html">privacy-policy</a></li>
-									<li><a href="faqs.html">faqs</a></li>
-								</ul>
-							</nav>
+			<!-- Mobile-menu start -->
+			<div class="mobile-menu-area">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-xs-12 hidden-lg hidden-md hidden-sm">
+							<div class="mobile-menu">
+								<nav id="dropdown">
+									<ul>
+										<li><a href="index.htm">home</a></li>
+										<li><a href="index.html">EXHIBITION</a>
+											<ul>
+												<li><a href="current-exhibitions.html">Current Exhibitions</a></li>
+												<li><a href="past-exhibitions.html">Past Exhibitions</a></li>
+											</ul>
+										</li>
+										<li><a href="artist.html">artist</a></li>
+										<li><a href="collection.html">collection</a></li>
+										<li><a href="privacy-policy.html">privacy-policy</a></li>
+										<li><a href="faqs.html">faqs</a></li>
+									</ul>
+								</nav>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		<!-- Mobile-menu end -->
+			<!-- Mobile-menu end -->
+
 			<!-- HEADING-BANNER START -->
 			<div class="heading-banner-area overlay-bg">
 				<div class="container">
@@ -98,7 +98,7 @@
 						<div class="col-md-12">
 							<div class="heading-banner">
 								<div class="heading-banner-title">
-									<h2>ARTIST</h2>
+									<h2>비밀번호 찾기</h2>
 								</div>
 								<div class="breadcumbs pb-15"></div>
 							</div>
@@ -107,81 +107,33 @@
 				</div>
 			</div>
 			<!-- HEADING-BANNER END -->
-			<!-- PRODUCT-AREA START -->
-			<div class="product-area pt-80 pb-80 product-style-2">
-				<div class="container">
+			<!-- 404-AREA START -->
+			<div class="area-join pt-80 pb-80">
+				<div class="container">	
 					<div class="row">
-						<div class="col-md-3 col-sm-12 col-xs-12">
-							<!-- Widget-Categories start -->
-							<!-- <aside class="widget widget-categories mb-30">
-								<div class="widget-title">
-									<h4>Categories</h4>
-								</div>
-								<div class="widget-info size-filter clearfix">
-									<ul>
-										<li><a href="#">ㄱ</a></li>
-										<li><a href="#">ㄴ</a></li>
-										<li><a href="#">ㄷ</a></li>
-										<li><a href="#">ㄹ</a></li>
-										<li><a href="#">ㅁ</a></li>
-										<li><a href="#">ㅂ</a></li>
-										<li><a href="#">ㅅ</a></li>
-										<li><a href="#">ㅇ</a></li>
-										<li><a href="#">ㅈ</a></li>
-										<li><a href="#">ㅊ</a></li>
-										<li><a href="#">ㅋ</a></li>
-										<li><a href="#">ㅌ</a></li>
-										<li><a href="#">ㅍ</a></li>
-										<li><a href="#">ㅎ</a></li>
-									</ul>
-								</div>
-							</aside> -->
-							<!-- Widget-categories end -->
-							<!-- Widget-Search start -->
-								<aside class="widget widget-search mb-30">
-								
-									<form action="#">
-										<input type="text" id="search" placeholder="Search here..." >
-											<button type="submit" id="seabtn">
-												<i class="zmdi zmdi-search"></i>
-											</button>
-									</form>
-									
-								</aside>
-
-
-
-
-								
-							<!-- Widget-search end -->
-						</div>
-						<div class="col-md-9 col-sm-12 col-xs-12">
-							<!-- Shop-Content End -->
-							<div class="shop-content mt-tab-30 mt-xs-30">
-							
-								<div class="tab-content">
-									<div class="tab-pane active" id="grid-view">							
-										<div class="row" id="artbox">
-											
+						<div class="col-lg-12">
+							<div class="error-content text-center">
+								<!-- <h3 class="text-light-black mt-60"></h3> -->
+								<form>
+									<div class="error-form mt-30 mb-30 text-left">
+										<div class="box">
+											<h5 class="text-light-black"><b>아이디</b></h5>
+											<input type="text" id="memid" placeholder="" >										
 										</div>
+										<div class="box">
+											<h5 class="text-light-black"><b>이메일</b></h5>
+											<input type="text" id="email">
+										</div>	
 									</div>
-								</div>
-
-								<!-- Pagination start -->
-								<nav aria-label="Page navigation" style="text-align: center">
-                                    <ul class="pagination" id="pagination" style="justify-content:center" >
-                                       
-                                    </ul>
-                                </nav>
-								<!-- Pagination end -->
+									<a class="button-one submit-btn-4 go-to-home bg-white text-uppercase text-light-black" id="findpw" data-text="이메일인증" >이메일인증</a>
+								</form>
 
 							</div>
-							<!-- Shop-Content End -->
 						</div>
 					</div>
 				</div>
 			</div>
-			<!-- PRODUCT-AREA END -->
+			<!-- 404-AREA END -->		
 
 			<!-- FOOTER START -->
 			<div id="footer"></div>
@@ -250,104 +202,47 @@
 		</div>
 		<!-- WRAPPER END -->
 
-		<script type="text/javascript">
-			artistList(0);
-			pagination();
+	<script type="text/javascript">
+		$(document).ready( function() {	
+			$("#header").load("header.html")
+			$("#menu").load("menu.html")
+			$("#footer").load("footer.html")
+		});
+	</script>	
 
-			$(document).ready( function() {	
-				$("#header").load("header.html")
-				$("#menu").load("menu.html")
-				$("#footer").load("footer.html")
-			});
-			
-			// 검색		
-			$('#seabtn').click(function () {
-				artistList(0);
-				pagination();
-			}); 
-
-			// 검색 엔터키
-			$('#search').on('keypress', function(e){
-				if(e.keyCode == '13'){
-					$('#seabtn').click();
-				}
-			});
-
-			
-			function artistList(pagenum){
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#findpw').click(function() {
 				$.ajax({
-					url:'http://localhost:3300/artist/artistList',
-					type:'get',
-					data:{ search:$("#search").val(), page:pagenum },
-					success:function(list){
-						//	alert('success');
+				url:"http://localhost:3300/member/findpw",
+				type:"post",
+				data:{ "id":$("#memid").val(), "email":$("#email").val() },
+				success:function( data ){
+					if(data.trim()=="Y"){
+						
+					}else{
 
-						$(".artremove").remove();
-					
-						$.each(list, function(i, item) {
-							let artist = 	'<div class="artremove">'
-										+ 	'<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">'
-										+	'<div class="single-product">'
-										+	'<div class="product-img">'
-										+	'<a href="artist-detail.html?artistNo=' + item.artistNo + '"><img src="' + item.profile + '" alt="" /></a>'
-										+	'</div>'
-										+ 	'<div class="product-info clearfix text-center">'
-										+	'<div class="fix">'
-										+	'<h4 class="post-title"><a href="artist-detail.html?artistNo=' + item.artistNo + '"><b>' + item.nameKor + '</b></a></h4>'
-										+	'</div>'
-										+	'</div>'
-										+	'</div>'
-										+	'</div>'
-										+	'</div>';
-							$("#artbox").append(artist);	
-							
-						})	
-					}, 
-					error:function(){
-						alert('error');
+					}			
+				},
+				error:function(){
+					alert("error");
 					}
 				});
-			}
+			});
 
-			// 페이지
-			function pagination(){
-				$.ajax({
-					url:"http://localhost:3300/artist/artistCount",
-					type:"get",
-					data:{ page:0, search:$("#search").val() },
-					success:function( pagenum ){
-					//	alert("페이지 확인:" + pagenum);
-						if(pagenum != 0 ){
-							
-							var page = "<div class='pagination' style='margin-top: 50px;'>";
-							page += "<ul>"
-							page += "<li ><a href='#' ><i class='zmdi zmdi-chevron-left'></i></a></li>";
-							
-							//페이징 생성
-							for( pageN = 0; pageN < pagenum; pageN++ ){
-								if(pagenum == pageN){
-								page += "<li><b><a>" + (pageN + 1) +"</a></b></li>";
-								}else if(pagenum != pageN){
-								page += "<li><b><a href='#'  onclick=artistList("+ pageN +")> "+ (pageN + 1) + "</a></b></li>";
-								}
-							}
-							
-							page += "<li><a href='#'><i class='zmdi zmdi-chevron-right'  onclick=artistList("+ (pageN -1) +")></i></a></li>";
-							page += "</ul>";
-							page += "</div>";
-							
-							$("#pagination").html(page);
-						}else{
 
-							$("#pagination").remove(page);
 
-						}
-					},
-					error:function(){
-						alert('error');
-					}      
-				});
-			}
+		});
+
+
+
+
+
+
+
+
+	</script>
+	
 
 
 
@@ -360,11 +255,6 @@
 
 
 
-
-
-
-
-		</script>
 
 
 
