@@ -96,225 +96,100 @@
                 <main>
                     <div class="container-fluid px-4">
                         <h1 class="mt-4 mb-4">작품 확인/수정</h1>
-                        <form class="form-group" id="editForm">
-                            <!-- Layer 1 -->
-                            <div class="d-sm-flex flex-row-reverse mb-4">
-                                <div class="col-sm-3 px-2 mb-2">
-                                    <img src="./assets/img/Sample_IMG.jpg" class="img-thumbnail">
-                                </div>
-                                <!-- Card : 작품 기본정보 -->
-                                <div class="card col-sm-9 mb-2">
-                                    <div class="card-header">
-                                        <i class="fas fa-image"></i>
-                                        작품 기본정보
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="row mb-2">
-                                            <label for="artworkNo" class="col-sm-3 mb-2 col-form-label">
-                                                작품번호
-                                            </label>
-                                            <div class="col-sm-9 form-check">
-                                                <input type="text" class="form-control" id="artworkNo" readonly required/>
-                                            </div>
-                                        </div>
-                                        <div class="row mb-2">
-                                            <label for="artworkName" class="col-sm-3 mb-2 col-form-label">
-                                                작품명
-                                            </label>
-                                            <div class="col-sm-9 form-check">
-                                                <input type="text" class="form-control" id="artworkName" required/>
-                                            </div>
-                                        </div>
-                                        <div class="row mb-2">
-                                            <div class="col-sm-3 mb-2 col-form-label">
-                                                작가
-                                            </div>
-                                            <div class="col-sm-9 form-check">
-                                                <span class="form-control" readonly>
-                                                    작가명
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="row mb-2">
-                                            <label for="artworkCategory" class="col-sm-3 mb-2 col-form-label">
-                                                카테고리
-                                            </label>
-                                            <div class="col-sm-9 form-check" id="artworkCategory">
-                                                <select class="form-select">
-                                                    <option value="">1</option>
-                                                    <option value="">2</option>
-                                                    <option value="">3</option>
-                                                    <option value="">4</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="row mb-2">
-                                            <label for="artworkMaterial" class="col-sm-3 mb-2 col-form-label">
-                                                재질
-                                            </label>
-                                            <div class="col-sm-9 form-check">
-                                                <input type="text" class="form-control" id="artworkMaterial"/>
-                                            </div>
-                                        </div>
-                                        <div class="row mb-2">
-                                            <div class="col-sm-3 mb-2 col-form-label">
-                                                전시회
-                                            </div>
-                                            <div class="col-sm-9 form-check">
-                                                <span class="form-control" readonly>
-                                                    사용처
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="row mb-2">
-                                            <div class="col-sm-3 mb-2 col-form-label">
-                                                등록일
-                                            </div>
-                                            <div class="col-sm-9 form-check">
-                                                <span class="form-control" readonly>
-                                                    2022-01-12
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Layer 3 -->
-                            <!-- Card : 작품 설명 -->
+                        <form id="mainForm" method="post">
+                            <input type="hidden" name="artworkNo" id="artworkNo"/>
                             <div class="card mb-4">
                                 <div class="card-header">
-                                    <i class="fas fa-stream"></i>
-                                    설명
+                                    <i class="fas fa-pen"></i>
+                                    기본정보 입력
                                 </div>
                                 <div class="card-body">
-                                    <textarea class="form-control" rows="8" required></textarea>
+                                    <div class="row">                                        
+                                        <label class="col-sm-2 mb-2 col-form-label">
+                                            작품명
+                                        </label>
+                                        <div class="col-sm-4 from-check mb-2">
+                                            <input type="text" class="form-control" name="title" id="artworkName" placeholder="작품명"/>
+                                            <div class="text-danger small" id="artworkNameAlert" style="display: none;">
+                                                작품명을 입력하세요.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <label class="col-sm-2 mb-2 col-form-label">
+                                            작가
+                                        </label>
+                                        <div class="col-sm-4 from-check mb-2">
+                                            <input type="hidden" name="artistNo" id="artistNo"/>
+                                            <input type="text" class="form-control" id="artistName" placeholder="작가" readonly/>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <label class="col-sm-2 mb-2 col-form-label">
+                                            제작일
+                                        </label>
+                                        <div class="col-sm-3 from-check mb-2">
+                                            <input type="date" class="form-control" name="madenDate" id="madenDate"/>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <label class="col-sm-2 mb-2 col-form-label">
+                                            카테고리
+                                        </label>
+                                        <div class="col-sm-3 from-check mb-2">
+                                            <select class="form-select" name="categoryNo" id="selectCategory">
+                                                <option value="">[카테고리 선택]</option>
+                                            </select>
+                                            <div class="text-danger small" id="selectCategoryAlert" style="display: none;">
+                                                카테고리를 선택해주세요.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <label for="metarial" class="col-sm-2 mb-2 col-form-label">
+                                            제질
+                                        </label>
+                                        <div class="col-sm-8 from-check mb-2">
+                                            <input type="text" class="form-control" name="media" id="metarial" placeholder="제질"/>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <label for="explain" class="col-sm-2 mb-2 col-form-label">설명</label>
+                                        <div class="col-sm-8 mb-4">
+                                            <textarea class="form-control" name="explain" id="explain" rows="12" placeholder="설명"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-end mb-2">     
+                                        <button type="button" class="btn btn-primary" id="btnEditConfig">
+                                            기본정보 수정
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                            <!-- Layer 3 -->
-                            <!-- Card : 이미지 관리 -->
-                            <div class="card mb-4">
+                            <div class="card mb-4" id="cardImage">
                                 <div class="card-header">
-                                    <i class="fas fa-images"></i>
-                                    이미지 관리
+                                    이미지
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
-                                        <!-- 이미지 조회 -->
-                                        <div class="col-sm-7">
-                                            <img src="./assets/img/Sample_IMG.jpg" class="img-thumbnail mb-2">
+                                        <div class="col-sm-4">
+                                            <img class="img-thumbnail" id="image" src="./assets/img/no_image_px270.PNG">
                                         </div>
-                                        <!-- 이미지 리스트 -->
                                         <div class="col-sm-5">
-                                            <div class="list-group mb-2">
-                                                <a href="#" class="list-group-item list-group-item-action active">
-                                                    Image1
-                                                </a>
-                                                <a href="#" class="list-group-item list-group-item-action">
-                                                    Image2
-                                                </a>
-                                                <a href="#" class="list-group-item list-group-item-action">
-                                                    Image3
-                                                </a>
+                                            <div class="ps-1">
+                                                이미지 목록
+                                            </div>
+                                            <div class="list-group mb-3" id="imageList">
+                                                <a class="list-group-item">No Image</a>
                                             </div>
                                             <div>
-                                                <label for="newImage" class="form-label mb-0">이미지 추가</label>
-                                                <div class="d-flex">
-                                                    <input type="file" class="form-control col-md-10 w-auto" id="newImage">
-                                                    <button class="btn btn-secondary col-md-2 mx-2" type="button">추가</button>
-                                                </div>
+                                                <span class="small">이미지 선택:</span> <span id="selectedImage"></span>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Layer 4 -->
-                            <!-- Card : 감정 정보 -->
-                            <div class="card mb-4">
-                                <div class="card-header">
-                                    <i class="fas fa-stream"></i>
-                                    감정정보
-                                </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-sm-2 mb-2">
-                                            <label for="appriseCompany" class="col-form-label">감정사 소속</label>
-                                        </div>
-                                        <div class="col-sm-4 mb-2">
-                                            <select class="form-select" id="appriseCompany">
-                                                <option value="" selected>[감정사 소속]</option>
-                                                <option value=""></option>
-                                            </select>
+                                        <div class="col-sm-3 d-flex justify-content-end align-items-end">
+                                            <button type="button" class="btn btn-primary">이미지 추가</button>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-sm-2 mb-2">
-                                            <label for="appriseName" class="col-form-label">감정사 이름</label>
-                                        </div>
-                                        <div class="col-sm-4 mb-2">
-                                            <select class="form-select" id="appriseName">
-                                                <option value="" selected>[이름]</option>
-                                                <option value=""></option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-2 mb-2">
-                                            <label for="appriseContent" class="col-form-label">감정평</label>
-                                        </div>
-                                        <div class="col-sm-9 mb-2">
-                                            <textarea class="form-control" id="appriseContent" rows="5" placeholder="감정평"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-2 mb-2">
-                                            <label for="appriseContent" class="col-form-label">감정가</label>
-                                        </div>
-                                        <div class="col-sm-3 mb-2">
-                                            <input type="number" class="form-control" placeholder="감정가">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Layer 5 -->
-                            <!-- Card : 주문 정보 -->
-                            <div class="card mb-4">
-                                <div class="card-header">
-                                    <i class="fas fa-shopping-cart"></i>
-                                    주문정보
-                                </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-sm-2 col-form-label d-flex">
-                                            <input type="checkbox" class="form-check mx-2"/>
-                                            <label for="appriseCompany">구매가능</label>
-                                        </div>
-                                        <div class="col-sm-2 mb-2">
-                                            <input class="form-control" placeholder="구매금액"/>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-2 col-form-label d-flex">
-                                            <input type="checkbox" class="form-check mx-2"/>
-                                            <label for="appriseCompany">대여가능</label>
-                                        </div>
-                                        <div class="col-sm-2 mb-2">
-                                            <input class="form-control" placeholder="대여금액"/>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-2 col-form-label d-flex">
-                                            <input type="checkbox" class="form-check mx-2"/>
-                                            <label for="appriseCompany">열람가능</label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-end mb-4">
-                                <div>
-                                    <button class="btn btn-secondary mx-2">보관위치 확인</button>
-                                </div>
-                                <div>
-                                    <button class="btn btn-primary mx-2">수정</button> 
                                 </div>
                             </div>
                         </form>
@@ -337,8 +212,107 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
-        <script src="js/datatables-simple-demo.js"></script>
+        <script>
+            $(function() {
+                $.post(
+                    backURL + '/artwork/selectOneArtwork.do'
+                  , {artworkNo: getParameterByName('artworkNo')}
+                  , function (data, textStatus, jqXHR) {
+                        console.log(data);
+
+                        // Generate Categroy
+                        $.each(data.category, function (index, element) { 
+                            var $option = $('<option>').text(element.name).val(element.categoryNo);
+                            if(data.artwork.categoryNo == element.categoryNo) {
+                                $option.attr('selected',true);
+                            }
+                            $('#selectCategory').append($option);
+                        });
+
+                        // Setting Values
+                        $('#artworkNo').val(data.artwork.artworkNo);
+                        $('#artworkName').val(data.artwork.title);
+                        var artistName = data.artwork.artistNameKor;
+                        if(data.artwork.artistNameEng) {
+                            artistName = artistName + "(" + data.artwork.artistNameEng + ")";
+                        }
+                        $('#artistNo').val(data.artwork.artistNo);
+                        $('#artistName').val(artistName);
+                        $('#madenDate').val(data.artwork.artworkDate);
+                        $('#metarial').val(data.artwork.media);
+                        $('#explain').val(data.artwork.explain);
+
+                        // Setting Image
+                        if(data.artworkImages[0]){
+                            $('#image').data('link',data.artworkImages[0].fileName);
+                            $('#image').attr('src',data.artworkImages[0].thum1Name);
+                            $('#image').click(imageClick);
+
+                            $('#imageList').empty();
+                            $.each(data.artworkImages, function (index, element) { 
+                                var $a = $('<a>')
+                                    .text("IMAGE" + (index + 1))
+                                    .data('link',element.fileName)
+                                    .data('thum',element.thum1Name)
+                                    .addClass('list-group-item')
+                                    .addClass('list-group-item-action')
+                                    .click(changeImage);
+                                $('#imageList').append($a);
+                            });
+                            $('#selectedImage').text('IMAGE1')
+                        }
+                    },
+                    "JSON"
+                );
+
+                $('#btnEditConfig').click(function(){
+
+                    console.log("click");
+
+                    if($('#artworkName').val() == '') {
+                        $('#artworkName').focus();
+                        $('#artworkNameAlert').show();
+                        console.log("return");
+                        return;
+                    }
+
+                    if($('#selectCategory').val() == ''){
+                        $('#selectCategory').focus();
+                        $('#selectCategoryAlert').show();
+                        console.log("return");
+                        return;
+                    }
+
+                    if($('#artistNo').val() == '') {
+                        $('#artistTable').focus();
+                        $('#artistAlert').show();
+                        console.log("return");
+                        return;
+                    }
+
+                    
+                    $('#mainForm').attr('action', backURL + '/artwork/updateArtworkConfig.do');
+                    $('#mainForm').submit();
+                });
+
+            });
+
+            function changeImage() {
+                var link = $(this).data('link');
+                var thum = $(this).data('thum');
+                console.log(link, thum);
+
+                $('#selectedImage').text($(this).text());
+                $('#image').attr('src',thum);
+                $('#image').data('link',link);
+            }
+
+            function imageClick() {
+                var link = $(this).data('link');
+                window.open(link);
+            }
+
+        </script>
     </body>
 </html>
