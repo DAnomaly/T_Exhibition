@@ -310,13 +310,13 @@
 					success:function(list){
 
 						$.each(list, function(i, item) {
-							let artwork = '<div class="single-product col-lg-4 col-md-4 col-sm-4 col-xs-12 mr-20">'
+							let artwork = '<div class="single-product col-lg-4 col-md-4 col-sm-4 col-xs-12 mr-10">'
 									+ '<div class="product-img">'
-									+ '<a href="single-product.html"><img src="'+ item.mainThum1Name +'"></a>'
+									+ '<a href="artwork-detail.html?artworkNo='+ item.artworkNo +'"><img src="'+ item.mainThum1Name +'"></a>'
 									+ '</div>'
 									+ '<div class="product-info clearfix">'
 									+ '<div class="fix">'
-									+ '<h4 class="post-title floatleft"><a href="#">'+ item.title +'</a></h4>'
+									+ '<h4 class="post-title floatleft"><a href="artwork-detail.html?artworkNo='+ item.artworkNo +'">'+ item.title +'</a></h4>'
 									+ '</div>'
 									+ '<div class="fix">'
 									+ '<span class="pro-price floatleft">'+ item.sellValue +'</span>'
@@ -332,11 +332,6 @@
 						alert('error');
 					}	
 				})
-
-
-
-
-
 			}
 
 
