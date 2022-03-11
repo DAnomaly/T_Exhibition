@@ -161,7 +161,7 @@
                                     </div>
                                     <div class="d-flex justify-content-end mb-2">     
                                         <button type="button" class="btn btn-primary" id="btnEditConfig">
-                                            작품 기본정보 수정
+                                            기본정보 수정
                                         </button>
                                     </div>
                                 </div>
@@ -237,19 +237,27 @@
                         if(data.artwork.artistNameEng) {
                             artistName = artistName + "(" + data.artwork.artistNameEng + ")";
                         }
+                        $('#artistNo').val(data.artwork.artistNo);
                         $('#artistName').val(artistName);
                         $('#madenDate').val(data.artwork.artworkDate);
                         $('#metarial').val(data.artwork.media);
                         $('#explain').val(data.artwork.explain);
 
                         // Setting Image
-                        if(data.artworkImages){
+                        if(data.artworkImages[0]){
                             $('#image').data('link',data.artworkImages[0].fileName);
                             $('#image').attr('src',data.artworkImages[0].thum1Name);
+                            $('#image').click(imageClick);
 
                             $('#imageList').empty();
                             $.each(data.artworkImages, function (index, element) { 
-                                var $a = $('<a>').text("IMAGE" + (index + 1)).data('link',element.filenName).data('thum',element.thum1Name).addClass('list-group-item').addClass('list-group-item-action');
+                                var $a = $('<a>')
+                                    .text("IMAGE" + (index + 1))
+                                    .data('link',element.fileName)
+                                    .data('thum',element.thum1Name)
+                                    .addClass('list-group-item')
+                                    .addClass('list-group-item-action')
+                                    .click(changeImage);
                                 $('#imageList').append($a);
                             });
                             $('#selectedImage').text('IMAGE1')
@@ -260,30 +268,51 @@
 
                 $('#btnEditConfig').click(function(){
 
+                    console.log("click");
+
                     if($('#artworkName').val() == '') {
                         $('#artworkName').focus();
                         $('#artworkNameAlert').show();
+                        console.log("return");
                         return;
                     }
 
                     if($('#selectCategory').val() == ''){
                         $('#selectCategory').focus();
                         $('#selectCategoryAlert').show();
+                        console.log("return");
                         return;
                     }
 
                     if($('#artistNo').val() == '') {
                         $('#artistTable').focus();
                         $('#artistAlert').show();
+                        console.log("return");
                         return;
                     }
 
                     
-                    $('#mainForm').attr('action', backURL + '/artwork/updateArtwork.do');
+                    $('#mainForm').attr('action', backURL + '/artwork/updateArtworkConfig.do');
                     $('#mainForm').submit();
                 });
 
             });
+
+            function changeImage() {
+                var link = $(this).data('link');
+                var thum = $(this).data('thum');
+                console.log(link, thum);
+
+                $('#selectedImage').text($(this).text());
+                $('#image').attr('src',thum);
+                $('#image').data('link',link);
+            }
+
+            function imageClick() {
+                var link = $(this).data('link');
+                window.open(link);
+            }
+
         </script>
     </body>
 </html>
