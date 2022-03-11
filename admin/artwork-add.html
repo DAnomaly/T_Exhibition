@@ -96,7 +96,7 @@
                 <main>
                     <div class="container-fluid px-4">
                         <h1 class="mt-4 mb-4">작품 등록</h1>
-                        <form class="form-group">
+                        <form class="form-group" id="mainForm"  method="post" enctype="multipart/form-data">
                             <!-- Card : 기본정보 입력 -->
                             <div class="card mb-4">
                                 <div class="card-header">
@@ -104,55 +104,56 @@
                                     기본정보 입력
                                 </div>
                                 <div class="card-body">
-                                    <div class="row mb-2">                                        
+                                    <div class="row">                                        
                                         <label class="col-sm-2 mb-2 col-form-label">
                                             작품명
                                         </label>
-                                        <div class="col-sm-9 from-check mb-2">
-                                            <input type="text" class="form-control" id="artworkName" placeholder="작품명" required/>
-                                            <div class="invalid-feedback">
-                                                작품명을 입력하세요
+                                        <div class="col-sm-4 from-check mb-2">
+                                            <input type="text" class="form-control" name="title" id="artworkName" placeholder="작품명"/>
+                                            <div class="text-danger small" id="artworkNameAlert" style="display: none;">
+                                                작품명을 입력하세요.
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row mb-2">
+                                    <div class="row">
                                         <label class="col-sm-2 mb-2 col-form-label">
                                             제작일
                                         </label>
-                                        <div class="col-sm-4 from-check mb-2">
-                                            <input type="date" class="form-control" id="artworkName" placeholder="작품명" required/>
-                                            <div class="invalid-feedback">
-                                                제작일을 입력하세요
-                                            </div>
+                                        <div class="col-sm-3 from-check mb-2">
+                                            <input type="date" class="form-control" name="madenDate"/>
                                         </div>
                                     </div>
-                                    <div class="row mb-2">
+                                    <div class="row">
                                         <label class="col-sm-2 mb-2 col-form-label">
                                             카테고리
                                         </label>
-                                        <div class="col-sm-4 from-check mb-2">
-                                            <select class="form-control" name="" id="" required>
+                                        <div class="col-sm-3 from-check mb-2">
+                                            <select class="form-select" name="categoryNo" id="selectCategory">
                                                 <option value="" selected>[카테고리 선택]</option>
-                                                <option value=""></option>
-                                                <option></option>
                                             </select>
-                                            <div class="invalid-feedback">
-                                                작품명을 입력하세요
+                                            <div class="text-danger small" id="selectCategoryAlert" style="display: none;">
+                                                카테고리를 선택해주세요.
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row mb-2">
+                                    <div class="row">
                                         <label for="metarial" class="col-sm-2 mb-2 col-form-label">
                                             제질
                                         </label>
-                                        <div class="col-sm-9 from-check mb-2">
-                                            <input type="text" class="form-control" id="metarial" placeholder="제질"/>
+                                        <div class="col-sm-8 from-check mb-2">
+                                            <input type="text" class="form-control" name="media" id="metarial" placeholder="제질"/>
                                         </div>
                                     </div>
-                                    <div class="row mb-3">
+                                    <div class="row">
                                         <label for="artworkContent" class="col-sm-2 mb-2 col-form-label">설명</label>
-                                        <div class="col-sm-10">
-                                            <textarea class="form-control" name="" id="artworkContent" rows="5"></textarea>
+                                        <div class="col-sm-8 mb-2">
+                                            <textarea class="form-control" name="explain" id="artworkContent" rows="12" placeholder="설명"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <label for="artworkContent" class="col-sm-2 mb-2 col-form-label">이미지</label>
+                                        <div class="col-sm-5 mb-2">
+                                            <input type="file" class="form-control" name="images" accept="image/jpeg,image/png" multiple/>
                                         </div>
                                     </div>
                                 </div>
@@ -164,82 +165,49 @@
                                     작가 선택
                                 </div>
                                 <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-sm-2 mb-2">
-                                            <label for="artistName" class="col-form-label">작가</label>
-                                        </div>
-                                        <div class="col-sm-9 mb-2">
-                                            <input type="text"class="form-control" id="artistName" aria-describedby="helpId" readonly>
-                                        </div>
-                                    </div>
                                     <div>
-                                        <table id="datatablesSimple">
+                                        <table id="artistTable">
                                             <thead>
                                                 <tr>
                                                     <th>이름(한)</th>
                                                     <th>이름(영)</th>
-                                                    <th>회사</th>
+                                                    <th>등록일</th>
+                                                    <th>자세히</th>
                                                 </tr>
                                             </thead>
                                             <tfoot>
                                                 <tr>
                                                     <th>이름(한)</th>
                                                     <th>이름(영)</th>
-                                                    <th>회사</th>
+                                                    <th>등록일</th>
+                                                    <th>자세히</th>
                                                 </tr>
                                             </tfoot>
+                                            <tbody id="artistTableBody"></tbody>
                                         </table>
                                     </div>
-                                </div>
-                            </div>
-                            <!-- card : 감정 입력 -->
-                            <div class="card mb-4">
-                                <div class="card-header">
-                                    <i class="fas fa-pen"></i>
-                                    감정정보 입력
-                                </div>
-                                <div class="card-body">
                                     <div class="row">
-                                        <div class="col-sm-2 mb-2">
-                                            <label for="appriseCompany" class="col-form-label">감정사 소속</label>
+                                        <div class="col-sm-2 col-2 mb-2">
+                                            <label for="artistName" class="col-form-label">작가</label>
                                         </div>
-                                        <div class="col-sm-4 mb-2">
-                                            <select class="form-control" id="appriseCompany">
-                                                <option value="" selected>[감정사 소속]</option>
-                                                <option value=""></option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-2 mb-2">
-                                            <label for="appriseName" class="col-form-label">감정사 이름</label>
-                                        </div>
-                                        <div class="col-sm-4 mb-2">
-                                            <select class="form-control" id="appriseName">
-                                                <option value="" selected>[이름]</option>
-                                                <option value=""></option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-2 mb-2">
-                                            <label for="appriseContent" class="col-form-label">감정평</label>
-                                        </div>
-                                        <div class="col-sm-9 mb-2">
-                                            <textarea class="form-control" id="appriseContent" rows="5" placeholder="감정평"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-2 mb-2">
-                                            <label for="appriseContent" class="col-form-label">감정가</label>
-                                        </div>
-                                        <div class="col-sm-3 mb-2">
-                                            <input type="number" class="form-control" placeholder="감정가"/>
+                                        <div class="form-group col-sm-5 col-10 mb-2">
+                                            <div class="d-flex align-items-center justify-content-start">
+                                                <input type="text"class="form-control" id="artistName" aria-describedby="helpId" readonly/>
+                                                <input type="hidden" name="artistNo" id="artistNo"/>
+                                                <button type="button" class="btn btn-secondary ms-2" onclick="resetArtist()" style="width: 90px;">취소</button>
+                                            </div>
+                                            <div class="text-danger small" id="artistAlert" style="display: none;">
+                                                작가를 선택해 주세요
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="d-flex flex-row-reverse mb-4">
+                            <div class="d-flex justify-content-end mb-4">
+                                <div class="me-3">
+                                    <input type="checkbox" class="form-check-inline" name="openY" id="openY"/>
+                                    <label for="openY" class="col-form-label">열람가능</label>
+                                </div>
                                 <div>
                                     <button class="btn btn-primary">등록하기</button>
                                 </div>
@@ -264,10 +232,121 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-        <script src="assets/demo/chart-area-demo.js"></script>
-        <script src="assets/demo/chart-bar-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
-        <script src="js/datatables-simple-demo.js"></script>
+        <script>
+            $(function() {
+                
+                docuemntReady();
+                
+                // mainForm Setting
+                $('#mainForm').attr('action', backURL + '/artwork/insertArtwork.do');
+                $('#mainForm').submit(
+                    function(e) {
+                        if($('#artworkName').val() == ''){
+                            e.preventDefault();
+                            $('#artworkName').focus();
+                            $('#artworkNameAlert').show();
+                            return false;
+                        }
+                        if($('#selectCategory').val() == ''){
+                            e.preventDefault();
+                            $('#selectCategory').focus();
+                            $('#selectCategoryAlert').show();
+                            return false;
+                        }
+                        if($('#artistNo').val() == '') {
+                            e.preventDefault();
+                            $('#artistTable').focus();
+                            $('#artistAlert').show();
+                            return false;
+                        }
+                    }
+                );
+
+                $('#artworkName').change(function(e){$('#artworkNameAlert').hide();});
+                $('#selectCategory').change(function(e){$('#selectCategoryAlert').hide();});
+
+                // 엔터키 입력 방지
+                document.addEventListener('keydown', function(event) {
+                    if (event.keyCode === 13) {
+                        event.preventDefault();
+                    };
+                }, true);
+            });
+
+            function docuemntReady() {
+                // 카테고리 LOAD
+                $.get(
+                      backURL + '/artwork/getAllCategory.do'
+                    , null
+                    , function (data, textStatus, jqXHR) {
+                        console.log(data);
+                        $('#selectCategory').empty();
+                        $('<option>').val('').text('[카테고리 선택]').appendTo('#selectCategory');
+                        $.each(data.result, function (index, element) { 
+                             $('<option>').val(element.categoryNo).text(element.name).appendTo('#selectCategory');
+                        });
+                    },
+                    "JSON"
+                );
+                
+                // 작가 LOAD
+                $.post(
+                      backURL + '/artist/selectList.do'
+                    , {deleteYn: 'N'}
+                    , function (data, textStatus, jqXHR) {
+                        console.log(data);
+                        $.each(data.result, function (index, element){
+                            var $tr = $('<tr>')
+                                .append($('<td>').text(element.nameKor))
+                                .append($('<td>').text(element.nameEng))
+                                .append($('<td>').text(element.regDate))
+                                .append($('<td>').append('<a class="btn-link" href="javascript:showArtist(' + element.artistNo + ');">자세히</a>'));
+                            $tr.appendTo('#artistTableBody')
+                            $tr.attr('onclick', 'artistTableClickEvent("' + element.nameKor + '","' + element.nameEng + '","' + element.artistNo + '");');
+                        });
+                        
+                        // Simple-DataTables
+                        // https://github.com/fiduswriter/Simple-DataTables/wiki
+                        new simpleDatatables.DataTable($('#artistTable')[0], {
+                            searchable: true,
+                            perPage: 5
+                        });
+                      }
+                ).fail(function () {
+                    // Simple-DataTables
+                    // https://github.com/fiduswriter/Simple-DataTables/wiki
+                    new simpleDatatables.DataTable($('#artistTable')[0], {
+                        searchable: true,
+                        perPage: 5
+                    });
+                });
+                
+
+            } 
+
+            function showArtist(artistNo){
+                var url = '/admin/artist-popup.html';
+                var popup = window.open(url, '작가확인', 'width=320px,height=420px,scrollbars=yes');
+            }
+
+            function artistTableClickEvent(nameKor, nameEng, artistNo) {    
+                console.log("선택:",nameKor, nameEng, artistNo);
+                $('#artistAlert').hide();
+                if(nameEng != null && nameEng != '') {
+                    $('#artistName').val(nameKor + '(' + nameEng + ')');
+                } else {
+                    $('#artistName').val(nameKor);
+                }
+                $('#artistNo').val(artistNo);
+            }
+
+            function resetArtist() {
+                $('#artistName').val('');
+                $('#artistNo').val('');
+            }
+
+        </script>
     </body>
 </html>
+
