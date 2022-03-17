@@ -93,146 +93,178 @@
             </div>
             <div id="layoutSidenav_content">
                 <main>
-                    <div class="container-fluid px-4">
-                        <h1 class="mt-4 mb-4">전시회 등록</h1>
-                        <div class="card mb-4">
-                            <div class="card-header">
-                                <i class="fas fa-search"></i>
-                                기본 정보 입력
-                            </div>
-                            <form class="needs-validation" novalidate>
+                    <form id="mainForm">
+                        <div class="container-fluid px-4">
+                            <h1 class="mt-4 mb-4">전시회 등록</h1>
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <i class="fas fa-search"></i>
+                                    기본 정보 입력
+                                </div>
                                 <div class="card-body">
                                     <div class="form-group row mb-3">
                                         <label for="exhibitionTitle" class="col-sm-2 col-form-label">전시회 제목</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="exhibitionTitle" placeholder="Exhibition Title" required>
-                                            <div class="invalid-feedback">
-                                                제목을 입력해 주세요
-                                            </div>
+                                            <input type="text" class="form-control" id="exhibitionTitle" name="title" placeholder="Exhibition Title" required>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-3">
                                         <label for="exhibitionContent" class="col-sm-2 col-form-label">전시회 내용</label>
                                         <div class="col-sm-10">
-                                            <textarea class="form-control" id="exhibitionContent" placeholder="Exhibition Content" rows="8"></textarea>
+                                            <textarea class="form-control" id="exhibitionContent" name="content" placeholder="Exhibition Content" rows="8"></textarea>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="inputPassword" class="col-sm-2 col-form-label">전시일</label>
-                                        <div class="col-sm-3">
-                                            <input type="datetime-local" class="form-control" id="toDatetime" required>
-                                            <div class="invalid-feedback">
-                                                전시일을 입력하세요
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="card mb-4">
-                            <div class="card-header">
-                                <i class="fas fa-search"></i>
-                                작가 선택
-                            </div>
-                            <div class="card-body">
-                                <table class="simpleTable" id="artistTable">
-                                    <thead>
-                                        <tr>
-                                            <th>이름(한)</th>
-                                            <th>이름(영)</th>
-                                            <th>등록일</th>
-                                            <th>자세히</th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>이름(한)</th>
-                                            <th>이름(영)</th>
-                                            <th>등록일</th>
-                                            <th>자세히</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody id="artistTbody"></tbody>
-                                </table>
-                            </div>
-                            <div class="card-footer">
-                                <div class="form-group row mb-1">
-                                    <label for="selectedArtist" class="col-sm-2 col-form-label">작가</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="selectedArtist" readonly>
-                                        <div class="invalid-feedback">
-                                            작가를 선택하세요
+                                        <div class="col-sm-8">
+                                            <input type="date" class="form-control d-inline-block w-auto" id="toDatetime" name="sDate" required>
+                                            <select name="sHours" id="sHours" class="form-select d-inline-block w-auto">
+                                                <option value="0">00</option>
+                                                <option value="1">01</option>
+                                                <option value="2">02</option>
+                                                <option value="3">03</option>
+                                                <option value="4">04</option>
+                                                <option value="5">05</option>
+                                                <option value="6">06</option>
+                                                <option value="7">07</option>
+                                                <option value="8">08</option>
+                                                <option value="9" selected>09</option>
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                                <option value="12">12</option>
+                                                <option value="13">13</option>
+                                                <option value="14">14</option>
+                                                <option value="15">15</option>
+                                                <option value="16">16</option>
+                                                <option value="17">17</option>
+                                                <option value="18">18</option>
+                                                <option value="19">19</option>
+                                                <option value="20">20</option>
+                                                <option value="21">21</option>
+                                                <option value="22">22</option>
+                                                <option value="23">23</option>
+                                            </select>
+                                            <label for="sHours" class="col-form-label d-inline-block">시</label>
+                                            <select name="sMins" id="sMins" class="form-select d-inline-block w-auto">
+                                                <option value="0">00</option>
+                                                <option value="10">10</option>
+                                                <option value="20">20</option>
+                                                <option value="30">30</option>
+                                                <option value="40">40</option>
+                                                <option value="50">50</option>
+                                            </select>
+                                            <label for="sMins" class="col-form-label d-inline-block">분</label>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-6 col-md-6">
-                                <div class="card mb-4">
-                                    <div class="card-header">
-                                        <i class="fas fa-search"></i>
-                                        작품 선택
-                                    </div>
-                                    <div class="card-body">
-                                        <table class="simpleTable" id="artworkTable">
-                                            <thead>
-                                                <tr>
-                                                    <th>작품명</th>
-                                                    <th>카테고리</th>
-                                                    <th>등록일</th>
-                                                    <th>자세히</th>
-                                                </tr>
-                                            </thead>
-                                            <tfoot>
-                                                <tr>
-                                                    <th>작품명</th>
-                                                    <th>카테고리</th>
-                                                    <th>등록일</th>
-                                                    <th>자세히</th>
-                                                </tr>
-                                            </tfoot>
-                                            <tbody id="artworkTbody"></tbody>
-                                        </table>
+                            <div class="card mb-4" id="selectArtistCard">
+                                <div class="card-header">
+                                    <i class="fas fa-search"></i>
+                                    작가 선택
+                                </div>
+                                <div class="card-body">
+                                    <table class="simpleTable" id="artistTable">
+                                        <thead>
+                                            <tr>
+                                                <th>이름(한)</th>
+                                                <th>이름(영)</th>
+                                                <th>등록일</th>
+                                                <th>자세히</th>
+                                            </tr>
+                                        </thead>
+                                        <tfoot>
+                                            <tr>
+                                                <th>이름(한)</th>
+                                                <th>이름(영)</th>
+                                                <th>등록일</th>
+                                                <th>자세히</th>
+                                            </tr>
+                                        </tfoot>
+                                        <tbody id="artistTbody"></tbody>
+                                    </table>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="form-group row mb-1">
+                                        <label for="selectedArtist" class="col-sm-2 col-form-label">작가</label>
+                                        <div class="col-sm-10">
+                                            <input type="hidden" id="selectedArtistNo" name="artistNo"/>
+                                            <input type="text" class="form-control" id="selectedArtist" readonly>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xl-6 col-md-6">
-                                <div class="card mb-4">
-                                    <div class="card-header">
-                                        <i class="fas fa-search"></i>
-                                        선택된 작품
+                            <div class="row">
+                                <div class="col-xl-6 col-md-6">
+                                    <div class="card mb-4">
+                                        <div class="card-header">
+                                            <i class="fas fa-search"></i>
+                                            작품 선택
+                                        </div>
+                                        <div class="card-body">
+                                            <table class="simpleTable" id="artworkTable">
+                                                <thead>
+                                                    <tr>
+                                                        <th>작품명</th>
+                                                        <th>카테고리</th>
+                                                        <th>등록일</th>
+                                                        <th>자세히</th>
+                                                    </tr>
+                                                </thead>
+                                                <tfoot>
+                                                    <tr>
+                                                        <th>작품명</th>
+                                                        <th>카테고리</th>
+                                                        <th>등록일</th>
+                                                        <th>자세히</th>
+                                                    </tr>
+                                                </tfoot>
+                                                <tbody id="artworkTbody"></tbody>
+                                            </table>
+                                        </div>
                                     </div>
-                                    <div class="card-body">
-                                        <table class="simpleTable" id="selectedArtworkTable">
-                                            <thead>
-                                                <tr>
-                                                    <th>작품명</th>
-                                                    <th>카테고리</th>
-                                                    <th>등록일</th>
-                                                    <th>자세히</th>
-                                                </tr>
-                                            </thead>
-                                            <tfoot>
-                                                <tr>
-                                                    <th>작품명</th>
-                                                    <th>카테고리</th>
-                                                    <th>등록일</th>
-                                                    <th>자세히</th>
-                                                </tr>
-                                            </tfoot>
-                                            <tbody id="selectedArtworkTbody"></tbody> 
-                                        </table>
+                                </div>
+                                <div class="col-xl-6 col-md-6">
+                                    <div class="card mb-4">
+                                        <div class="card-header">
+                                            <i class="fas fa-search"></i>
+                                            선택된 작품
+                                        </div>
+                                        <div class="card-body">
+                                            <table class="simpleTable" id="selectedArtworkTable">
+                                                <thead>
+                                                    <tr>
+                                                        <th>작품명</th>
+                                                        <th>카테고리</th>
+                                                        <th>등록일</th>
+                                                        <th>자세히</th>
+                                                    </tr>
+                                                </thead>
+                                                <tfoot>
+                                                    <tr>
+                                                        <th>작품명</th>
+                                                        <th>카테고리</th>
+                                                        <th>등록일</th>
+                                                        <th>자세히</th>
+                                                    </tr>
+                                                </tfoot>
+                                                <tbody id="selectedArtworkTbody"></tbody> 
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="d-flex justify-content-md-end">
-                            <div class="mb-5">
-                                <button class="btn btn-primary" type="button">등록하기</button>
+                            <div class="d-flex justify-content-md-end align-items-center">
+                                <div class="mb-5">
+                                    <span class="text-danger" id="alertMessage" style="display: none;"></span> &nbsp;
+                                    <button type="button" class="btn btn-primary" id="mainFormBtn">등록하기</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
+
+                        <input type="hidden" name="artworks" id="artworks"/>
+
+                    </form>
                 </main>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
@@ -256,15 +288,17 @@
             $(function() {
                 // table에 simple-datatables CDN 적용
                 generateTables();
-                // artistTable 생성
+                // artistTable Generating
                 generateArtistTable();
-
+                // submit-btn setting
+                $('#mainFormBtn').click(mainFormBtnClickEvent);
 
             });
 
             let tables = new Array();
             let artworkArray = new Array();
 
+            // generateTables()
             function generateTables() {
                 var map = $('table.simpleTable');
                 // simple-datatables
@@ -276,6 +310,7 @@
                 });
             }
 
+            // generateArtistTable()
             function generateTable(mapping) {
                 return new simpleDatatables.DataTable(mapping, {
                     searchable: true,
@@ -283,7 +318,7 @@
                 });  
             }
 
-
+            // generateArtistTable()
             function generateArtistTable() {
                 $.get(
                       backURL + '/artist/selectList.do'
@@ -309,8 +344,10 @@
                 );
             }
 
-
+            // generateArtistTable()
             function selectArtist(artistNo, artistName) {
+                // artistNo
+                $('#selectedArtistNo').val(artistNo);
                 // artistName 
                 $('#selectedArtist').val(artistName);
 
@@ -347,15 +384,17 @@
                 )
             }
 
-
+            // generateArtistTable()
             function showArtistInfo(artistNo) {
                 window.open('/admin/artist-view.html?artistNo=' + artistNo);
             }
 
+            // generateArtistTable()
             function showArtworkInfo(artworkNo) {
                 window.open('/admin/artwork-view.html?artworkNo=' + artworkNo);
             }
 
+            // generateArtistTable()
             function selectArtwork(e) {
                 let artworkNo = $(e).attr('data-artworkNo'); 
                 
@@ -363,7 +402,6 @@
                 $.each(artworkArray, function (index, value) { 
                     if(value == artworkNo) {
                         isRetrun = true;
-                        return;
                     }
                 });
 
@@ -376,10 +414,21 @@
                 updateSelectedArtwork();
             }
 
+            // generateArtistTable()
             function removeArtwork(e) {
+                let artworkNo = $(e).data('artworkno');
+                for(let i = 0; i < artworkArray.length; i++) {
+                    let value = artworkArray[i];
+                    if(value == artworkNo) {
+                        artworkArray.splice(i,1);
+                        break;
+                    }    
+                }
 
+                updateSelectedArtwork();
             }
 
+            // generateArtistTable()
             function updateSelectedArtwork() {
                 $.post(
                     backURL + '/artwork/selectArtworkFromArr.do'
@@ -390,7 +439,7 @@
                         tables[2].destroy();
 
                         $('#selectedArtworkTbody').empty();
-                        if(data.result.length != 0) {
+                        if(data.result != null && data.result.length != 0) {
                             $.each(data.result, function (index, element) { 
                                 let $tr = $('<tr>')
                                     .append($('<td>').text(element.title))
@@ -410,6 +459,49 @@
                 );
             }
 
+            // #mainFormBtn click
+            function mainFormBtnClickEvent(e) {
+                // exhibitionTitle check
+                if($('#exhibitionTitle').val() == '') {
+                    $('#exhibitionTitle').focus();
+                    $('#alertMessage').text('전시회 제목을 입력해 주세요.');
+                    $('#alertMessage').show();
+                    return;
+                }
+                // exhibitionContent check
+                if($('#exhibitionContent').val() == '') {
+                    $('#exhibitionContent').focus();
+                    $('#alertMessage').text('전시회 내용을 입력해 주세요.');
+                    $('#alertMessage').show();
+                    return;
+                }
+                // toDatetime check
+                if($('#toDatetime').val() == '') {
+                    $('#toDatetime').focus();
+                    $('#alertMessage').text('전시일을 선택해 주세요.');
+                    $('#alertMessage').show();
+                    return;
+                }
+                // artist check
+                if($('#selectedArtistNo').val() == '') {
+                    $('#selectArtistCard').focus();
+                    $('#alertMessage').text('작가를 선택해 주세요.');
+                    $('#alertMessage').show();
+                    return;
+                }
+                // artwork check
+                if(artworkArray.length == 0) {
+                    $('#alertMessage').text('작품을 선택해 주세요.');
+                    $('#alertMessage').show();
+                    return;
+                }
+                
+                $('#artworks').val(artworkArray.toString());
+                $('#mainForm').attr('action', backURL + "/exhibition/addExhibition.do");
+                $('#mainForm').attr('method', 'GET');
+                $('#mainForm').submit();
+
+            }
         </script>
     </body>
 </html>

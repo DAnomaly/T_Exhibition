@@ -98,6 +98,7 @@
                 <main>
                     <div class="container-fluid px-4">
                         <h1 class="mt-4 mb-4">전시회 조회</h1>
+                        <!-- 
                         <div class="row">
                             <div class="col-md-3">
                                 <button class="btn btn-primary mb-4 w-100">
@@ -121,6 +122,7 @@
                                 </button>
                             </div>
                         </div>
+                        -->
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-search"></i>
@@ -132,8 +134,8 @@
                                         <label for="exhibitionTitle" class="col-sm-2 mb-2 col-form-label">
                                             제목
                                         </label>
-                                        <div class="col-sm-9 from-check">
-                                            <input type="text" class="form-control" id="exhibitionTitle" placeholder="제목 입력">
+                                        <div class="col-sm-5 from-check">
+                                            <input type="text" class="form-control" name="title" id="exhibitionTitle" placeholder="제목 입력">
                                         </div>
                                     </div>
                                     <div class="row">
@@ -141,19 +143,22 @@
                                             전시일
                                         </div>
                                         <div class="col-sm-9 row">
-                                            <div class="from-check col-sm-4 mb-2">
+                                            <div class="from-check col-sm-3 col-6 mb-2">
                                                 <label class="form-label" for="toDate"><small>TO</small></label>
-                                                <input type="date" class=" form-control" id="toDate">
+                                                <input type="date" name="toDate" class="form-control" id=toDate">
                                             </div>
-                                            <div class="from-check col-sm-4 mb-2">
+                                            <div class="from-check col-sm-3 col-6 mb-2">
                                                 <label class="form-label" for="endDate"><small>FROM</small></label>
-                                                <input type="date" class="col-sm-2 form-control" id="endDate">
+                                                <input type="date" name="endDate" class="form-control" id="endDate">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="d-flex justify-content-end">
                                         <div>
-                                            <button class="btn btn-primary">
+                                            <button type="button" id="resetBtn" class="btn btn-secondary">
+                                                초기화
+                                            </button>
+                                            <button type="button" id="searchBtn" class="btn btn-primary">
                                                 검색
                                             </button>
                                         </div>
@@ -162,14 +167,13 @@
                             </div>
                         </div>
                         <div>
-                            <table id="datatablesSimple">
+                            <table id="searchTable">
                                 <thead>
                                     <tr>
                                         <th>제목</th>
                                         <th>작가</th>
                                         <th>대표작품</th>
                                         <th>전시일</th>
-                                        <th>조회수</th>
                                         <th>상태</th>
                                     </tr>
                                 </thead>
@@ -179,11 +183,10 @@
                                         <th>작가</th>
                                         <th>대표작품</th>
                                         <th>전시일</th>
-                                        <th>조회수</th>
                                         <th>상태</th>
                                     </tr>
                                 </tfoot>
-                                <tbody id="tableTbody">
+                                <tbody id="searchTbody">
                                 </tbody>
                             </table>
                         </div>
@@ -211,5 +214,91 @@
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="js/datatables-simple-demo.js"></script>
         <script src="js/scripts.js"></script>
+        <script>
+            $(function() {
+                // Setting Parameters To Input
+                setParameter();
+
+                // Generate Exhibition Table
+                generateTable();
+
+
+                // #searchBtn Click Event
+                $('#searchBtn').click(function() {
+                    $('#searchForm').submit();
+                });
+
+                // #resetBtn Click Event
+                $('#resetBtn').click(function() {
+                    location.href = '/admin/exhibition-list.html';
+                });
+            });
+
+            let title, toDate, endDate;
+
+            function setParameter() {
+                title = getParameterByName('title');
+                toDate = getParameterByName('toDate');
+                endDate = getParameterByName('endDate');
+
+                $('#exhibitionTitle').val(title);
+                $('#toDate').val(toDate);
+                $('#endDate').val(endDate);
+            }
+
+            function generateTable() {
+                $.get(
+                    backURL + "/exhibition/selectExhibition.do"
+                  , {
+                        title : title
+                      , toDate : toDate
+                      , endDate : endDate
+                    }
+                  , function (data, textStatus, jqXHR) {
+                        console.log(data);
+
+                        if(data.result == null) {
+                            new simpleDatatables.DataTable($('#searchTable')[0], {
+                                searchable: false,
+                                perPage: 10
+                            });
+                            return false;
+                        }
+
+                        for(let i = 0; i < data.result.length; i++) {
+                            let dto = data.result[i];
+                            console.log(dto);
+                            let tr = $('<tr>').appendTo('#searchTbody');
+
+                            tr.append('<td>' + dto.title + '</td>');
+                            tr.append('<td>' + dto.artistNameKor + '(' + dto.artistNameEng + ')</td>');
+                            tr.append('<td>' + dto.artworkTitle + '</td>');
+                            tr.append('<td>' + dto.startDate.substring(0,10) + '</td>');
+                            let status;
+                            if (dto.openYn == 'Y') status = '전시중';
+                            else if(dto.showYn == 'Y') status = '대기중';
+                            else status = '준비중'; 
+                            tr.append('<td>' + status + '</td>');
+
+                            tr.attr('onclick','location.href="exhibition-view.html?exhibitionNo=' + dto.exhibitionNo + '"');
+                        }
+
+                        new simpleDatatables.DataTable($('#searchTable')[0], {
+                            searchable: false,
+                            perPage: 10
+                        });
+
+                    }
+                  , "JSON"
+                ).fail(
+                    function() {
+                        new simpleDatatables.DataTable($('#searchTable')[0], {
+                            searchable: false,
+                            perPage: 10
+                        });
+                    }
+                );
+            }
+        </script>
     </body>
 </html>
