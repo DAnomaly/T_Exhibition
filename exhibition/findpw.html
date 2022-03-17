@@ -41,25 +41,14 @@
 		<!-- responsive css -->
 		<link rel="stylesheet" href="css/responsive.css">
 		<!-- modernizr css -->
-	
 		<script src="js/vendor/modernizr-2.8.3.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	</head>
-
-	<script type="text/javascript">
-		let urlParams = location.search.split(/[?&]/).slice(1).map(function(paramPair) {
-			return paramPair.split(/=(.+)?/).slice(0, 2);
-		}).reduce(function(obj, pairArray) {
-			obj[pairArray[0]] = pairArray[1];
-			return obj;
-		}, {});
-	</script>       
-		
 	<body>	
 		<!-- WRAPPER START -->
 		<div class="wrapper bg-dark-white">
 
-		
 			<!-- HEADER-AREA START -->
 			<header id="sticky-menu" class="header">
 				<div  id="header"></div>
@@ -101,6 +90,7 @@
 				</div>
 			</div>
 			<!-- Mobile-menu end -->
+
 			<!-- HEADING-BANNER START -->
 			<div class="heading-banner-area overlay-bg">
 				<div class="container">
@@ -108,7 +98,7 @@
 						<div class="col-md-12">
 							<div class="heading-banner">
 								<div class="heading-banner-title">
-									<h2>Artist</h2>
+									<h2>비밀번호 찾기</h2>
 								</div>
 								<div class="breadcumbs pb-15"></div>
 							</div>
@@ -117,54 +107,33 @@
 				</div>
 			</div>
 			<!-- HEADING-BANNER END -->
-			<!-- PRODUCT-AREA START -->
-			<div class="product-area single-pro-area pt-80 pb-80 product-style-2">
+			<!-- 404-AREA START -->
+			<div class="area-join pt-80 pb-80">
 				<div class="container">	
-					<!-- single-product-tab start -->
-					<div class="single-pro-tab">
-						<div class="row">
-							<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-								<div class="single-pro-tab-menu">
-									<!-- Nav tabs -->
-									<ul class="">
-										<li class="active"><a href="#profile" data-toggle="tab">PROFILE</a></li>
-										<li><a href="#exhibition" data-toggle="tab">EXHIBITION</a></li>
-										<li><a href="#artwork" data-toggle="tab">ARTWORK</a></li>
-									</ul>
-								</div>
-							</div>
-							<div class="col-lg-9 col-md- col-sm-9 col-xs-12">
-								<!-- Tab panes -->
-								<div class="tab-content ">
-									<div class="tab-pane active" id="profile">
-									
-											
-
-
-
-
-
-
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="error-content text-center">
+								<!-- <h3 class="text-light-black mt-60"></h3> -->
+								<form>
+									<div class="error-form mt-30 mb-30 text-left">
+										<div class="box">
+											<h5 class="text-light-black"><b>아이디</b></h5>
+											<input type="text" id="memid" placeholder="" >										
+										</div>
+										<div class="box">
+											<h5 class="text-light-black"><b>이메일</b></h5>
+											<input type="text" id="email">
+										</div>	
 									</div>
-									<div class="tab-pane" id="exhibition">
-										<div class="pro-tab-info pro-information">
+									<a class="button-one submit-btn-4 go-to-home bg-white text-uppercase text-light-black" id="findpw" data-text="이메일인증" >이메일인증</a>
+								</form>
 
-										</div>											
-									</div>
-									<div class="tab-pane" id="artwork">
-									
-											
-					
-																			
-									</div>
-								</div>									
 							</div>
 						</div>
 					</div>
-					<!-- single-product-tab end -->
 				</div>
 			</div>
-			<!-- PRODUCT-AREA END -->
+			<!-- 404-AREA END -->		
 
 			<!-- FOOTER START -->
 			<div id="footer"></div>
@@ -232,107 +201,48 @@
 			
 		</div>
 		<!-- WRAPPER END -->
-		<script type="text/javascript">
-			
-			$(document).ready( function() {	
-				$("#header").load("header.html")
-				$("#menu").load("menu.html")
-				$("#footer").load("footer.html")
-				
+
+	<script type="text/javascript">
+		$(document).ready( function() {	
+			$("#header").load("header.html")
+			$("#menu").load("menu.html")
+			$("#footer").load("footer.html")
+		});
+	</script>	
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#findpw').click(function() {
+				$.ajax({
+				url:"http://localhost:3300/member/findpw",
+				type:"post",
+				data:{ "id":$("#memid").val(), "email":$("#email").val() },
+				success:function( data ){
+					if(data.trim()=="Y"){
+						
+					}else{
+
+					}			
+				},
+				error:function(){
+					alert("error");
+					}
+				});
 			});
-		</script>
-
-		<script>
-			artistDetail();
-			artistArtwork();
-			
-			function artistDetail() {
-				let artistNo = urlParams.artistNo;
-				// alert(artistNo);
-
-				$.ajax({
-					url:'http://localhost:3300/artist/artistDetail?artistNo=' + artistNo,
-					type:'get',      
-					success:function(dto){
-
-						if(dto.history!= '' && dto.history!== null){
-
-								let profile = 	'<div class="pro-tab-info pro-description">'
-											+ 	'<div>'
-											+	'<img src="'+ dto.profile +'" style="width: 370px; height: 450px;">'									
-											+	'</div>'
-											+	'<div class="fix mb-30"></div>'
-											+	'<div class="fix">'
-											+	'<h3 class="post-title" ><b style="letter-spacing: 5px;"">'+ dto.nameKor +'</b>&nbsp;<span style="color:#C8A165">[ '+ dto.nameEng +' ]</span></h3>'
-											+	'</div>'
-											+	'<div class="product-description">'
-											+	'<p>'+ dto.introduce +'</p>'
-											+	'</div>'
-											+	'<div class="fix mb-30"></div>'
-											+	'<div class="product-description">'
-											+	'<h4 style="color:#C8A165"><b>HISTORY</h4>'
-											+	'<p>'+ dto.history +'</p>'
-											+	'</div>'
-											+	'</div>';	
-									$("#profile").append(profile);  
-									
-						}else{
-								let profile = 	'<div class="pro-tab-info pro-description">'
-											+ 	'<div>'
-											+	'<img src="'+ dto.profile +'" style="width: 370px; height: 450px;">'									
-											+	'</div>'
-											+	'<div class="fix mb-30"></div>'
-											+	'<div class="fix">'
-											+	'<h3 class="post-title" ><b style="letter-spacing: 5px;"">'+ dto.nameKor +'</b>&nbsp;<span style="color:#C8A165">[ '+ dto.nameEng +' ]</span></h3>'
-											+	'</div>'
-											+	'<div class="product-description">'
-											+	'<p>'+ dto.introduce +'</p>'
-											+	'</div>'
-											+	'<div class="fix mb-30"></div>'
-											+	'</div>';
-
-									$("#profile").append(profile);  
-						}
-					},
-					error:function(){
-						alert('error');
-					}	
-				})
-			}
 
 
-			function artistArtwork() {
-				let artistNo = urlParams.artistNo;
-			
-				$.ajax({
-					url:'http://localhost:3300/artwork/artistArtwork?artistNo=' + artistNo,
-					type:'get',      
-					success:function(list){
 
-						$.each(list, function(i, item) {
-							let artwork = '<div class="single-product col-lg-4 col-md-4 col-sm-4 col-xs-12 mr-10">'
-									+ '<div class="product-img">'
-									+ '<a href="artwork-detail.html?artworkNo='+ item.artworkNo +'"><img src="'+ item.mainThum1Name +'"></a>'
-									+ '</div>'
-									+ '<div class="product-info clearfix">'
-									+ '<div class="fix">'
-									+ '<h4 class="post-title floatleft"><a href="artwork-detail.html?artworkNo='+ item.artworkNo +'">'+ item.title +'</a></h4>'
-									+ '</div>'
-									+ '<div class="fix">'
-									+ '<span class="pro-price floatleft">'+ item.sellValue +'</span>'
-									+ '</div>'
-									+ '</div>'
-									+ '</div>';
+		});
 
-							$("#artwork").append(artwork);
-							
-						})	
-					},
-					error:function(){
-						alert('error');
-					}	
-				})
-			}
+
+
+
+
+
+
+
+	</script>
+	
 
 
 
@@ -342,7 +252,8 @@
 
 
 
-		</script>
+
+
 
 
 
