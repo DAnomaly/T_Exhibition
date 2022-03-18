@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>TripleExhibition Management</title>
+        <link href="css/styles.css" rel="stylesheet" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+    </head>
+    <body class="sb-nav-fixed">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+            <!-- Navbar Brand-->
+            <a class="navbar-brand ps-3" href="index.html">사이버전시회 - 관리</a>
+            <!-- Sidebar Toggle-->
+            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+            <!-- Navbar Search-->
+            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+                <!-- 
+                <div class="input-group">
+                    <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+                    <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+                </div>
+                -->
+            </form>
+            <!-- Navbar-->
+            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" id="logoutBtn" href="#">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+                        <div class="nav">
+                            <div class="sb-sidenav-menu-heading">Exhibition</div>
+                            <a class="nav-link" href="exhibition-list.html">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                전시회
+                            </a>
+                            <a class="nav-link" href="artist-list.html">
+                                <div class="sb-nav-link-icon"><i class="fas fa-paint-brush"></i></div>
+                                작가
+                            </a>
+                            <a class="nav-link" href="artwork-list.html">
+                                <div class="sb-nav-link-icon"><i class="fas fa-images"></i></div>
+                                작품
+                            </a>
+                            <div class="sb-sidenav-menu-heading">Shopping</div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fas fa-receipt"></i></div>
+                                주문
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="order-list-now.html">현재 주문 관리</a>
+                                    <a class="nav-link" href="order-list-prev.html">이전 주문 관리</a>
+                                </nav>
+                            </div>
+                            <a class="nav-link" href="storage-list.html">
+                                <div class="sb-nav-link-icon"><i class="fas fa-warehouse"></i></div>
+                                보관
+                            </a>
+                            <div class="sb-sidenav-menu-heading">Member</div>
+                            <a class="nav-link" href="member-list.html">
+                                <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+                                회원
+                            </a>
+                            <a class="nav-link" href="appraise-list.html">
+                                <div class="sb-nav-link-icon"><i class="fas fa-question-circle"></i></div>
+                                감정평가사
+                            </a>
+                            <div class="sb-sidenav-menu-heading">Other</div>
+                            <a class="nav-link" href="faq-list.html">
+                                <div class="sb-nav-link-icon"><i class="fas fa-question-circle"></i></div>
+                                FAQ
+                            </a>
+                        </div>
+                    </div>
+                    <div class="sb-sidenav-footer">
+                        <div class="small">Logged in as:</div>
+                        Start Bootstrap
+                    </div>
+                </nav>
+            </div>
+            <div id="layoutSidenav_content">
+                <main>
+                    <form id="mainForm">
+                        <div class="container-fluid px-4">
+                            <h1 class="mt-4 mb-4">전시회 등록</h1>
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <i class="fas fa-search"></i>
+                                    기본 정보 입력
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-group row mb-3">
+                                        <label for="exhibitionTitle" class="col-sm-2 col-form-label">전시회 제목</label>
+                                        <div class="col-sm-10 row">
+                                            <div class="col-10">
+                                                <input type="text" class="form-control" id="exhibitionTitle" name="title" placeholder="Exhibition Title"/>
+                                            </div>
+                                            <button type="button" class="btn btn-secondary col-2" id="mainFormBtn">전시회 확인</button>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row mb-3">
+                                        <label for="exhibitionContent" class="col-sm-2 col-form-label">전시회 내용</label>
+                                        <div class="col-sm-10">
+                                            <textarea class="form-control" id="exhibitionContent" name="content" placeholder="Exhibition Content" rows="8"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row mb-3">
+                                        <label for="inputPassword" class="col-sm-2 col-form-label">전시일</label>
+                                        <div class="col-sm-8">
+                                            <input type="date" class="form-control d-inline-block w-auto" id="toDatetime" name="sDate" required>
+                                            <select name="sHours" id="sHours" class="form-select d-inline-block w-auto">
+                                                <option value="0">00</option>
+                                                <option value="1">01</option>
+                                                <option value="2">02</option>
+                                                <option value="3">03</option>
+                                                <option value="4">04</option>
+                                                <option value="5">05</option>
+                                                <option value="6">06</option>
+                                                <option value="7">07</option>
+                                                <option value="8">08</option>
+                                                <option value="9" selected>09</option>
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                                <option value="12">12</option>
+                                                <option value="13">13</option>
+                                                <option value="14">14</option>
+                                                <option value="15">15</option>
+                                                <option value="16">16</option>
+                                                <option value="17">17</option>
+                                                <option value="18">18</option>
+                                                <option value="19">19</option>
+                                                <option value="20">20</option>
+                                                <option value="21">21</option>
+                                                <option value="22">22</option>
+                                                <option value="23">23</option>
+                                            </select>
+                                            <label for="sHours" class="col-form-label d-inline-block">시</label>
+                                            <select name="sMins" id="sMins" class="form-select d-inline-block w-auto">
+                                                <option value="0">00</option>
+                                                <option value="10">10</option>
+                                                <option value="20">20</option>
+                                                <option value="30">30</option>
+                                                <option value="40">40</option>
+                                                <option value="50">50</option>
+                                            </select>
+                                            <label for="sMins" class="col-form-label d-inline-block">분</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row mb-3">
+                                        <label for="inputPassword" class="col-sm-2 col-form-label">작가</label>
+                                        <div class="col-sm-5">
+                                            <input type="text" class="form-control" id="artistName" readonly/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="inputPassword" class="col-sm-2 col-form-label">상태</label>
+                                        <div class="col-sm-2">
+                                            <select class="form-select" id="statusSelect">
+                                                <option>준비중</option>
+                                                <option>대기중</option>
+                                                <option>전시중</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-md-end align-items-center">
+                                <div class="mb-5">
+                                    <button type="button" class="btn btn-danger" id="mainFormBtn">전시회 삭제</button>
+                                    <button type="button" class="btn btn-secondary" id="mainFormBtn">작품목록 관리</button>
+                                    <button type="button" class="btn btn-primary" id="mainFormBtn">기본정보 수정</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </main>
+                <footer class="py-4 bg-light mt-auto">
+                    <div class="container-fluid px-4">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-muted">Copyright &copy; TripleAims 2022</div>
+                            <div>
+                                <a href="#">Privacy Policy</a>
+                                &middot;
+                                <a href="#">Terms &amp; Conditions</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="js/scripts.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+        <script>
+            // Field
+            let exhibitionNo;
+
+            
+            $(function() {
+                exhibitionNo = getParameterByName('exhibitionNo');
+
+                if(exhibitionNo == null || exhibitionNo == '') {
+                    alert('해당 전시회를 찾지 못하였습니다.');
+                    location.replace(fontURL + '/admin/exhibition-list.html');
+                }
+
+                
+
+            });
+
+        </script>
+    </body>
+</html>

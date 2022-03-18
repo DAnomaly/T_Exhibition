@@ -36,8 +36,6 @@ window.addEventListener('DOMContentLoaded', event => {
         location.href='login.html';
     });
 
-
-
 });
 
 function getParameterByName(name) {
