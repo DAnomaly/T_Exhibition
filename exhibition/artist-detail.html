@@ -301,16 +301,18 @@
 			}
 
 
-			function artistArtwork() {
+
+
+			function artExhibition() {
 				let artistNo = urlParams.artistNo;
 			
 				$.ajax({
-					url:'http://localhost:3300/artwork/artistArtwork?artistNo=' + artistNo,
+					url:'http://localhost:3300/artwork/artExhibition?artistNo=' + artistNo,
 					type:'get',      
 					success:function(list){
 
 						$.each(list, function(i, item) {
-							let artwork = '<div class="single-product col-lg-4 col-md-4 col-sm-4 col-xs-12 mr-10">'
+							let artwork = '<div class="single-product col-lg-3 col-md-4 col-sm-4 col-xs-12 mr-40">'
 									+ '<div class="product-img">'
 									+ '<a href="artwork-detail.html?artworkNo='+ item.artworkNo +'"><img src="'+ item.mainThum1Name +'"></a>'
 									+ '</div>'
@@ -319,7 +321,7 @@
 									+ '<h4 class="post-title floatleft"><a href="artwork-detail.html?artworkNo='+ item.artworkNo +'">'+ item.title +'</a></h4>'
 									+ '</div>'
 									+ '<div class="fix">'
-									+ '<span class="pro-price floatleft">'+ item.sellValue +'</span>'
+									+ '<span class="pro-price floatleft">&#8361; '+ numberWithCommas(item.sellValue) +'</span>'
 									+ '</div>'
 									+ '</div>'
 									+ '</div>';
@@ -336,6 +338,49 @@
 
 
 
+
+
+
+
+
+			function artistArtwork() {
+				let artistNo = urlParams.artistNo;
+			
+				$.ajax({
+					url:'http://localhost:3300/artwork/artistArtwork?artistNo=' + artistNo,
+					type:'get',      
+					success:function(list){
+
+						$.each(list, function(i, item) {
+							let artwork = '<div class="single-product col-lg-3 col-md-4 col-sm-4 col-xs-12 mr-40">'
+									+ '<div class="product-img">'
+									+ '<a href="artwork-detail.html?artworkNo='+ item.artworkNo +'"><img src="'+ item.mainThum1Name +'"></a>'
+									+ '</div>'
+									+ '<div class="product-info clearfix">'
+									+ '<div class="fix">'
+									+ '<h4 class="post-title floatleft"><a href="artwork-detail.html?artworkNo='+ item.artworkNo +'">'+ item.title +'</a></h4>'
+									+ '</div>'
+									+ '<div class="fix">'
+									+ '<span class="pro-price floatleft">&#8361; '+ numberWithCommas(item.sellValue) +'</span>'
+									+ '</div>'
+									+ '</div>'
+									+ '</div>';
+
+							$("#artwork").append(artwork);
+							
+						})	
+					},
+					error:function(){
+						alert('error');
+					}	
+				})
+			}
+
+			// 가격 천단위 콤마
+			function numberWithCommas(x) {
+			  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+			}
+		
 
 
 
