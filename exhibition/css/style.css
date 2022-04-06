@@ -1642,6 +1642,10 @@ input.cart-plus-minus-box {
   background: #fff none repeat scroll 0 0;
   padding: 40px 50px;
 }
+.pro-tab-infoex {
+  background: #fff none repeat scroll 0 0;
+  padding: 0px 50px;
+}
 .single-pro-tab-menu ul li {
   margin-bottom: 5px;
 }

@@ -45,6 +45,16 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </head>
     <body>  
+
+        <script type="text/javascript">
+            let urlParams = location.search.split(/[?&]/).slice(1).map(function(paramPair) {
+                return paramPair.split(/=(.+)?/).slice(0, 2);
+            }).reduce(function(obj, pairArray) {
+                obj[pairArray[0]] = pairArray[1];
+                return obj;
+            }, {});
+        </script>    
+
         <!-- WRAPPER START -->
         <div class="wrapper bg-white">
 
@@ -113,119 +123,9 @@
                         <!-- Tab panes -->
                         <div class="tab-content row">
                             <div class="tab-pane active" id="elements-preview-3">
-                                <div class="row">
-                                    <!-- Single-blog start -->
-                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                                        <div class="single-blog mt-30">
-                                            <div class="blog-photo">
-                                                <a href="exhibition-detail.html"><img src="img/blog/3.jpg" alt="" /></a>
-                                            </div>
-                                            <div class="blog-info"> 
-                                                <div class="post-meta fix">
-                                                    <div class="post-year floatleft">
-                                                        <p class="text-uppercase text-dark-red mb-0">June, 2017</p>
-                                                        <h4 class="post-title"><a href="#" tabindex="0">Farniture drawing 2017</a></h4>
-                                                    </div>
-                                                </div>
-                                                <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered If you are going to use a passage  Lorem Ipsum, you alteration in some form.</p>
-                                                <a href="exhibition-detail.html" class="button-2 text-dark-red">Read more...</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Single-blog end -->
-                                    <!-- Single-blog start -->
-                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                                        <div class="single-blog mt-30">
-                                            <div class="blog-photo">
-                                                <a href="#"><img src="img/blog/4.jpg" alt="" /></a>
-                                            </div>
-                                            <div class="blog-info"> 
-                                                <div class="post-meta fix">
-                                                    <div class="post-year floatleft">
-                                                        <p class="text-uppercase text-dark-red mb-0">June, 2017</p>
-                                                        <h4 class="post-title"><a href="#" tabindex="0">Farniture drawing 2017</a></h4>
-                                                    </div>
-                                                </div>
-                                                <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered If you are going to use a passage  Lorem Ipsum, you alteration in some form.</p>
-                                                <a href="#" class="button-2 text-dark-red">Read more...</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Single-blog end -->
-                                    <!-- Single-blog start -->
-                                    <div class="col-lg-4 col-md-4 hidden-sm col-xs-12">
-                                        <div class="single-blog mt-30">
-                                            <div class="blog-photo">
-                                                <a href="#"><img src="img/blog/5.jpg" alt="" /></a>
-                                            </div>
-                                            <div class="blog-info"> 
-                                                <div class="post-meta fix">
-                                                    <div class="post-year floatleft">
-                                                        <p class="text-uppercase text-dark-red mb-0">June, 2017</p>
-                                                        <h4 class="post-title"><a href="#" tabindex="0">Farniture drawing 2017</a></h4>
-                                                    </div>
-                                                </div>
-                                                <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered If you are going to use a passage  Lorem Ipsum, you alteration in some form.</p>
-                                                <a href="#" class="button-2 text-dark-red">Read more...</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Single-blog end -->
-                                      <!-- Single-blog start -->
-                                      <div class="col-lg-4 col-md-4 hidden-sm col-xs-12">
-                                        <div class="single-blog mt-30">
-                                            <div class="blog-photo">
-                                                <a href="#"><img src="img/blog/5.jpg" alt="" /></a>
-                                            </div>
-                                            <div class="blog-info"> 
-                                                <div class="post-meta fix">
-                                                    <div class="post-year floatleft">
-                                                        <p class="text-uppercase text-dark-red mb-0">June, 2017</p>
-                                                        <h4 class="post-title"><a href="#" tabindex="0">Farniture drawing 2017</a></h4>
-                                                    </div>
-                                                </div>
-                                                <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered If you are going to use a passage  Lorem Ipsum, you alteration in some form.</p>
-                                                <a href="#" class="button-2 text-dark-red">Read more...</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Single-blog end -->  <!-- Single-blog start -->
-                                    <div class="col-lg-4 col-md-4 hidden-sm col-xs-12">
-                                        <div class="single-blog mt-30">
-                                            <div class="blog-photo">
-                                                <a href="#"><img src="img/blog/5.jpg" alt="" /></a>
-                                            </div>
-                                            <div class="blog-info"> 
-                                                <div class="post-meta fix">
-                                                    <div class="post-year floatleft">
-                                                        <p class="text-uppercase text-dark-red mb-0">June, 2017</p>
-                                                        <h4 class="post-title"><a href="#" tabindex="0">Farniture drawing 2017</a></h4>
-                                                    </div>
-                                                </div>
-                                                <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered If you are going to use a passage  Lorem Ipsum, you alteration in some form.</p>
-                                                <a href="#" class="button-2 text-dark-red">Read more...</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Single-blog end -->  <!-- Single-blog start -->
-                                    <div class="col-lg-4 col-md-4 hidden-sm col-xs-12">
-                                        <div class="single-blog mt-30">
-                                            <div class="blog-photo">
-                                                <a href="#"><img src="img/blog/5.jpg" alt="" /></a>
-                                            </div>
-                                            <div class="blog-info"> 
-                                                <div class="post-meta fix">
-                                                    <div class="post-year floatleft">
-                                                        <p class="text-uppercase text-dark-red mb-0">June, 2017</p>
-                                                        <h4 class="post-title"><a href="#" tabindex="0">Farniture drawing 2017</a></h4>
-                                                    </div>
-                                                </div>
-                                                <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered If you are going to use a passage  Lorem Ipsum, you alteration in some form.</p>
-                                                <a href="#" class="button-2 text-dark-red">Read more...</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Single-blog end -->
+                                <div class="row" id="exhibitionList">
+                              
+                                 
                                 </div>
                             </div>                    
                         </div> 
@@ -248,7 +148,73 @@
 				$("#menu").load("menu.html")
 				$("#footer").load("footer.html")
 			});
+
 		</script>
+
+        <script type="text/javascript">
+		    exhibitionList();
+ 
+			// 전시회 목록
+			function exhibitionList() {
+                let exhibitionNo = urlParams.exhibitionNo;
+
+				$.ajax({
+					url:'http://localhost:3300/exhibition/exhibitionList?openYn=Y',
+					type:'get',
+					async:false,      
+					success:function(list){
+					//	alert(exhibitionNo);
+					//	alert(JSON.stringify(list));	
+						$.each(list, function(i, item) {
+
+                            let exhibitionList =  '<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">'  
+                                               + '<div class="single-blog mt-30">'
+                                               + '<div class="blog-photo">'
+                                               + '<a href="exhibition-detail.html?exhibitionNo='+ item.exhibitionNo +'?artistNo='+ item.artistNo +'"><img src="img/blog/3.jpg" alt="" /></a>'
+                                               + '</div>'
+                                               + ' <div class="blog-info"> '
+                                               + '<div class="post-meta fix">'
+                                               + '<div class="post-year ">'
+                                               + '<p class="text-uppercase text-dark-red mb-0">'+ dateSubstring(item.startDate) +' ~ '+  dateSubstring(item.editDate) +'</p>'
+                                               + '<h4 class="post-title "><a href="#" tabindex="0"><b>'+ item.title +'</b></a></h4>'
+                                               + '</div>'
+                                               + '</div>'
+                                               + '<p>'+ conSubstring(item.content) +'</p>'
+                                               + '<a href="exhibition-detail.html?exhibitionNo='+ item.exhibitionNo +'?artistNo='+ item.artistNo +'?artistNo='+ item.artistNo +'" class="button-2 text-dark-red">Read more...</a>'
+                                               +  '</div>'
+                                               +  '</div>'
+                                               +  '</div>';
+							$("#exhibitionList").append(exhibitionList);
+
+						})	
+					},
+					error:function(){
+						alert('error');
+					}	
+				})
+			}
+
+
+            // 날짜 자르기
+			function dateSubstring(date) {
+				return date.substring(0,10);
+			}
+
+			// 전시회 설명 자르기
+			function conSubstring(con){
+				let comma = '...'
+				return con.substring(0,80)+comma;
+			}
+
+
+
+
+		</script>
+
+
+
+
+
 
 
 

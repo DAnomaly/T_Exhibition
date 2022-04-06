@@ -45,6 +45,16 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	</head>
 	<body>	
+
+		<script type="text/javascript">
+			let urlParams = location.search.split(/[?&]/).slice(1).map(function(paramPair) {
+				return paramPair.split(/=(.+)?/).slice(0, 2);
+			}).reduce(function(obj, pairArray) {
+				obj[pairArray[0]] = pairArray[1];
+				return obj;
+			}, {});
+		</script>  
+
 		<!-- WRAPPER START -->
 		<div class="wrapper bg-dark-white">
 
@@ -96,8 +106,8 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div class="heading-banner">
-								<div class="heading-banner-title">
-									<h2>EXHIBITION NAME</h2>
+								<div class="heading-banner-title" id="name">
+								
 								</div>
 								<div class="breadcumbs pb-15"></div>
 							</div>
@@ -117,20 +127,18 @@
 									<div class="blog-photo">
 										<a href="#"><img src="img/blog/10.jpg" alt="" /></a>
 									</div>
-									<div class="blog-info blog-details-info">
-										<h4 class="post-title post-title-2"><a href="#">Farniture drawing 2017</a></h4>
-										<p>On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrink ing from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour. On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will</p>
-										<p>which is the same as saying through shrink ing from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour.On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrink ing from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour.</p>							
+									<div class="blog-info blog-details-info" id="exinfo">
+										
 									</div>
 									<!-- single-product-tab start -->
-									<div class="single-pro-tab mt-40">
+									<div class="single-pro-tab mt-80">
 										<div class="row">
 											<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
 												<div class="single-pro-tab-menu">
 													<!-- Nav tabs -->
 													<ul class="">
 														<li class="active"><a href="#profile" data-toggle="tab">ARTIST</a></li>
-														<li><a href="#tags" data-toggle="tab">ARTWORK</a></li>
+														<li><a href="#artwork" data-toggle="tab">ARTWORK</a></li>
 													</ul>
 												</div>
 											</div>
@@ -138,28 +146,11 @@
 												<!-- Tab panes -->
 												<div class="tab-content">
 													<div class="tab-pane active" id="profile">
-														<div class="pro-tab-info pro-description">
-															<div>
-																<img src="img/single-product/medium/1.jpg" alt="" />									
-																</a>
-															</div>
-															<div class="fix mb-20"></div>
-															<div class="fix">
-																<h4 class="post-title floatleft">artist name</h4>
-															</div>
-															<div class="fix mb-20"></div>
-															<div class="product-description">
-																<p>There are many variations of passages of Lorem Ipsum available, but the majority have be suffered alteration in some form, by injected humou or randomised words which donot look even slightly believable. If you are going to use a passage of Lorem Ipsum.There are many variations of passages of Lorem Ipsum available, but the majority have be suffered alteration in some form, by injected humou or randomised words which donot look even slightly believable. If you are going to use a passage of Lorem Ipsum. </p>
-															</div>
-														</div>
+														
 													</div>
-													<div class="tab-pane" id="information">
-														<div class="pro-tab-info pro-information">
-
-														</div>											
-													</div>
-													<div class="tab-pane" id="tags">
-														<div class="pro-tab-info pro-information">
+													
+													<div class="tab-pane" id="artwork">
+														<div class="pro-tab-infoex pro-information">
 														
 															
 
@@ -252,6 +243,153 @@
 				$("#menu").load("menu.html")
 				$("#footer").load("footer.html")
 			});
+
+		</script>
+		
+		
+		<script type="text/javascript">
+			exhibitionInfo();
+			artistDetail();
+			exArtwork();
+		
+			// 전시회 정보 
+			function exhibitionInfo(){
+				let exhibitionNo = urlParams.exhibitionNo;
+			
+				$.ajax({
+					url:'http://localhost:3300/exhibition/exhibitionInfo?exhibitionNo=' + exhibitionNo,
+					type:'get',
+					async:false,      
+					success:function(dto){
+						//	alert(exhibitionNo);
+						//	alert(JSON.stringify(dto));	
+
+						let exhibitionName = '<h2>'+ dto.title +'</h2>';
+						$("#name").append(exhibitionName);
+						
+						let exinfo = '<h4 class="post-title post-title-2"><b>'+ dto.title +'</b></h4>'
+									+ '<h4 class="text-uppercase text-dark-red mb-10"><b>'+ dateSubstring(dto.startDate) +' ~ '+  dateSubstring(dto.editDate) +'</b></h4>'
+									+ '<p>'+ dto.content +'</p>';
+						$("#exinfo").append(exinfo);
+
+					},
+					error:function(){
+						alert('error');
+					}	
+				})
+			}
+
+
+			// 작가 정보
+			function artistDetail() {
+				let artistNo = urlParams.artistNo;
+		
+				$.ajax({
+					url:'http://localhost:3300/artist/artistDetail?artistNo=' + artistNo,
+					type:'get', 
+					async:false,        
+					success:function(dto){
+
+						if(dto.history!= '' && dto.history!== null){
+
+								let profile = 	'<div class="pro-tab-infoex pro-description">'
+											+ 	'<div>'
+											+	'<img src="'+ dto.profile +'">'									
+											+	'</div>'
+											+	'<div class="fix mb-30"></div>'
+											+	'<div class="fix">'
+											+	'<h3 class="post-title" ><b style="letter-spacing: 5px;""><a href="artist-detail.html?artistNo='+ dto.artistNo +'">'+ dto.nameKor +'</a></b>&nbsp;<span style="color:#C8A165">[ '+ dto.nameEng +' ]</span></h3>'
+											+	'</div>'
+											+	'<div class="product-description">'
+											+	'<p>'+ dto.introduce +'</p>'
+											+	'</div>'
+											+	'<div class="fix mb-30"></div>'
+											+	'<div class="product-description">'
+											+	'<h4 style="color:#C8A165"><b>HISTORY</h4>'
+											+	'<p>'+ dto.history +'</p>'
+											+	'</div>'
+											+	'</div>';	
+									$("#profile").append(profile);  
+									
+						}else{
+								let profile = 	'<div class="pro-tab-infoex pro-description">'
+											+ 	'<div>'
+											+	'<img src="'+ dto.profile +'">'									
+											+	'</div>'
+											+	'<div class="fix mb-30"></div>'
+											+	'<div class="fix">'
+											+	'<h3 class="post-title" ><b style="letter-spacing: 5px;""><a href="artist-detail.html?artistNo='+ dto.artistNo +'">'+ dto.nameKor +'</a></b>&nbsp;<span style="color:#C8A165">[ '+ dto.nameEng +' ]</span></h3>'
+											+	'</div>'
+											+	'<div class="product-description">'
+											+	'<p>'+ dto.introduce +'</p>'
+											+	'</div>'
+											+	'<div class="fix mb-30"></div>'
+											+	'</div>';
+
+									$("#profile").append(profile);  
+						}
+					},
+					error:function(){
+						alert('error');
+					}	
+				})
+			}
+
+
+
+
+			// 전시회 작품 정보 
+			function exArtwork(){
+				let exhibitionNo = urlParams.exhibitionNo;
+				// + '<span class="pro-price floatleft">&#8361; '+ numberWithCommas(item.sellValue) +'</span>'
+				$.ajax({
+					url:'http://localhost:3300/exhibition/exArtwowrk?exhibitionNo=' + exhibitionNo,
+					type:'get', 
+					async:false,        
+					success:function(list){
+					//	alert(JSON.stringify(list));	
+						$.each(list, function(i, item) {
+							let artwork = '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 clearfix ">'
+									+ '<div class="product-img">'
+									+ '<a href="artwork-detail.html?artworkNo='+ item.artworkNo +'"><img src="'+ item.mainThum1Name +'"></a>'
+									+ '</div>'
+									+ '<div class="product-info clearfix">'
+									+ '<div class="fix">'
+									+ '<h4 class="post-title floatleft"><a href="artwork-detail.html?artworkNo='+ item.artworkNo +'">'+ item.title +'</a></h4>'
+									+ '</div>'
+									+ '<div class="fix">'
+						
+									+ '</div>'
+									+ '</div>'
+									+ '</div>';
+
+							$("#artwork").append(artwork);
+							
+						})	
+
+						
+					},
+					error:function(){
+						alert('error');
+					}	
+				})
+			}
+
+
+			// 가격 천단위 콤마
+			function numberWithCommas(x) {
+				return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+			}
+
+			// 날짜 자르기
+			function dateSubstring(date) {
+				return date.substring(0,10);
+			}
+
+
+
+
+
 		</script>
 
 
