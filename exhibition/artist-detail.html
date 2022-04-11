@@ -133,7 +133,7 @@
 									</ul>
 								</div>
 							</div>
-							<div class="col-lg-9 col-md- col-sm-9 col-xs-12">
+							<div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
 								<!-- Tab panes -->
 								<div class="tab-content ">
 									<div class="tab-pane active" id="profile">
@@ -147,9 +147,7 @@
 
 									</div>
 									<div class="tab-pane" id="exhibition">
-										<div class="pro-tab-info pro-information">
-
-										</div>											
+										 
 									</div>
 									<div class="tab-pane" id="artwork">
 									
@@ -244,22 +242,25 @@
 
 		<script>
 			artistDetail();
+			artExhibition();
 			artistArtwork();
-			
+		
+			// 작가정보
 			function artistDetail() {
 				let artistNo = urlParams.artistNo;
 				// alert(artistNo);
 
 				$.ajax({
 					url:'http://localhost:3300/artist/artistDetail?artistNo=' + artistNo,
-					type:'get',      
+					type:'get', 
+					async:false,        
 					success:function(dto){
 
 						if(dto.history!= '' && dto.history!== null){
 
 								let profile = 	'<div class="pro-tab-info pro-description">'
 											+ 	'<div>'
-											+	'<img src="'+ dto.profile +'" style="width: 370px; height: 450px;">'									
+											+	'<img src="'+ dto.profile +'" >'									
 											+	'</div>'
 											+	'<div class="fix mb-30"></div>'
 											+	'<div class="fix">'
@@ -279,7 +280,7 @@
 						}else{
 								let profile = 	'<div class="pro-tab-info pro-description">'
 											+ 	'<div>'
-											+	'<img src="'+ dto.profile +'" style="width: 370px; height: 450px;">'									
+											+	'<img src="'+ dto.profile +'">'									
 											+	'</div>'
 											+	'<div class="fix mb-30"></div>'
 											+	'<div class="fix">'
@@ -301,16 +302,60 @@
 			}
 
 
+			// 작가 전시회 목록
+			function artExhibition() {
+				let artistNo = urlParams.artistNo;
+			
+				$.ajax({
+					url:'http://localhost:3300/artist/artExhibition?artistNo=' + artistNo,
+					type:'get',
+					async:false,      
+					success:function(list){
+					//	alert(artistNo);
+					//	alert(JSON.stringify(list));	
+						$.each(list, function(i, item) {
+						
+							let exhibition = ' <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 ">'
+                                    +   '<div class="single-blog  mb-20">'
+                                   	+  		'<div class="blog-photo">'
+                                    +			'<a href="exhibition-detail.html?exhibitionNo='+ item.exhibitionNo +'?artistNo='+ item.artistNo +'"><img src="img/blog/3.jpg" alt="" /></a>'
+                                    +  		 '</div>'
+                                    +   		'<div class="blog-info">' 
+                                    +   			'<div class="post-meta fix">' 
+                                    +   				'<div class="post-year floatleft">' 
+                                    +  						 '<p class="text-uppercase text-dark-red mt-10 mb-10">'+ dateSubstring(item.startDate) +' ~ '+ dateSubstring(item.editDate) +'</p>' 
+                                    +  						 '<h4 class="post-title"><a href="exhibition-detail.html?exhibitionNo='+ item.exhibitionNo +'?artistNo='+ item.artistNo +'" tabindex="0">'+ item.title +'</a></h4>' 
+                                    +  					 '</div>' 
+                                    + 				'</div>'
+                                    +  	 			'<p>'+ conSubstring(item.content) +'</p>' 
+                                    +   			'<a href="exhibition-detail.html?exhibitionNo='+ item.exhibitionNo +'?artistNo='+ item.artistNo +'" class="button-2 text-dark-red">Read more...</a>' 
+                                    +			'</div>'          
+                                    +		' </div>'          
+                                    +	' </div>' ;
+
+									$("#exhibition").append(exhibition);
+
+						})	
+					},
+					error:function(){
+						alert('error');
+					}	
+				})
+			}
+
+
+			// 작가 작품 목록
 			function artistArtwork() {
 				let artistNo = urlParams.artistNo;
 			
 				$.ajax({
 					url:'http://localhost:3300/artwork/artistArtwork?artistNo=' + artistNo,
-					type:'get',      
+					type:'get',    
+					async:false,     
 					success:function(list){
 
 						$.each(list, function(i, item) {
-							let artwork = '<div class="single-product col-lg-4 col-md-4 col-sm-4 col-xs-12 mr-10">'
+							let artwork = '<div class=" col-lg-4 col-md-4 col-sm-6 col-xs-12 clearfix  mb-30">'
 									+ '<div class="product-img">'
 									+ '<a href="artwork-detail.html?artworkNo='+ item.artworkNo +'"><img src="'+ item.mainThum1Name +'"></a>'
 									+ '</div>'
@@ -319,7 +364,7 @@
 									+ '<h4 class="post-title floatleft"><a href="artwork-detail.html?artworkNo='+ item.artworkNo +'">'+ item.title +'</a></h4>'
 									+ '</div>'
 									+ '<div class="fix">'
-									+ '<span class="pro-price floatleft">'+ item.sellValue +'</span>'
+									+ '<span class="pro-price floatleft">&#8361; '+ numberWithCommas(item.sellValue) +'</span>'
 									+ '</div>'
 									+ '</div>'
 									+ '</div>';
@@ -334,10 +379,21 @@
 				})
 			}
 
+			// 가격 천단위 콤마
+			function numberWithCommas(x) {
+			  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+			}
+		
+			// 날짜 자르기
+			function dateSubstring(date) {
+				return date.substring(0,10);
+			}
 
-
-
-
+			// 전시회 설명 자르기
+			function conSubstring(con){
+				let comma = '...'
+				return con.substring(0,40)+comma;
+			}
 
 
 

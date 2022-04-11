@@ -278,6 +278,7 @@
 				$.ajax({
 					url:'http://localhost:3300/artist/artistList',
 					type:'get',
+					async:false,   
 					data:{ search:$("#search").val(), page:pagenum },
 					success:function(list){
 						//	alert('success');
@@ -288,12 +289,14 @@
 							let artist = 	'<div class="artremove">'
 										+ 	'<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">'
 										+	'<div class="single-product">'
-										+	'<div class="product-img">'
-										+	'<a href="artist-detail.html?artistNo=' + item.artistNo + '"><img src="' + item.profile + '" alt="" /></a>'
+										+	'<div class="product-img" style="padding:0;margin:0;width:100%;">'
+										+	'<div style="position: relative; width:232px;height:232px;">'
+										+	'<a href="artist-detail.html?artistNo=' + item.artistNo + '"><img src="' + item.profile + '" style="position: absolute; top: 0; left: 0; transform: translate(50, 50); width: 100%; height: 100%; object-fit: cover; margin: auto;"/></a>'
+										+	'</div>'
 										+	'</div>'
 										+ 	'<div class="product-info clearfix text-center">'
 										+	'<div class="fix">'
-										+	'<h4 class="post-title"><a href="artist-detail.html?artistNo=' + item.artistNo + '"><b>' + item.nameKor + '</b></a></h4>'
+										+	'<h4 class="post-title mt-10"><a href="artist-detail.html?artistNo=' + item.artistNo + '"><b>' + item.nameKor + '</b></a></h4>'
 										+	'</div>'
 										+	'</div>'
 										+	'</div>'
@@ -314,6 +317,7 @@
 				$.ajax({
 					url:"http://localhost:3300/artist/artistCount",
 					type:"get",
+					async:false,   
 					data:{ page:0, search:$("#search").val() },
 					success:function( pagenum ){
 					//	alert("페이지 확인:" + pagenum);
