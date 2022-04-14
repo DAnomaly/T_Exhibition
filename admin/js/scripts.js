@@ -9,8 +9,8 @@
 
 // let fontURL = 'http://192.168.0.65:5500';
 // let backURL = 'http://192.168.0.65:3300';
-let fontURL = 'http://172.0.0.1:5500';
-let backURL = 'http://172.0.0.1:3300';
+let fontURL = 'http://localhost:5500';
+let backURL = 'http://localhost:3300';
 
 window.addEventListener('DOMContentLoaded', event => {
 

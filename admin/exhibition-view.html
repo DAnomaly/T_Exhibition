@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="kor">
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -95,7 +95,7 @@
                 <main>
                     <form id="mainForm">
                         <div class="container-fluid px-4">
-                            <h1 class="mt-4 mb-4">전시회 등록</h1>
+                            <h1 class="mt-4 mb-4">전시회 조회</h1>
                             <div class="card mb-4">
                                 <div class="card-header">
                                     <i class="fas fa-search"></i>
@@ -118,6 +118,13 @@
                                         </div>
                                     </div>
                                     <div class="form-group row mb-3">
+                                        <label for="exhibitionContent" class="col-sm-2 col-form-label">대표이미지</label>
+                                        <div class="col-sm-10">
+                                            <input type="file" class="form-control d-inline-block w-auto" id="mainImageName" name="mainImageName"/>
+                                            <div id="nowImageName" class="d-inline w-auto small">등록된 이미지 없음</div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row mb-3">
                                         <label for="inputPassword" class="col-sm-2 col-form-label">전시일</label>
                                         <div class="col-sm-8">
                                             <input type="date" class="form-control d-inline-block w-auto" id="toDatetime" name="sDate" required>
@@ -131,7 +138,7 @@
                                                 <option value="6">06</option>
                                                 <option value="7">07</option>
                                                 <option value="8">08</option>
-                                                <option value="9" selected>09</option>
+                                                <option value="9">09</option>
                                                 <option value="10">10</option>
                                                 <option value="11">11</option>
                                                 <option value="12">12</option>
@@ -169,9 +176,9 @@
                                         <label for="inputPassword" class="col-sm-2 col-form-label">상태</label>
                                         <div class="col-sm-2">
                                             <select class="form-select" id="statusSelect">
-                                                <option>준비중</option>
-                                                <option>대기중</option>
-                                                <option>전시중</option>
+                                                <option value="status1" class="status1">준비중</option>
+                                                <option value="status2" class="status2">대기중</option>
+                                                <option value="status3" class="status3">전시중</option>
                                             </select>
                                         </div>
                                     </div>
@@ -206,21 +213,88 @@
         <script src="js/scripts.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script>
-            // Field
+            // start: Field
             let exhibitionNo;
+            // end: Field
 
-            
+            // start: Document Ready
             $(function() {
                 exhibitionNo = getParameterByName('exhibitionNo');
 
+                // Load Error
                 if(exhibitionNo == null || exhibitionNo == '') {
-                    alert('해당 전시회를 찾지 못하였습니다.');
-                    location.replace(fontURL + '/admin/exhibition-list.html');
+                    loadError();
                 }
+
+                // Get Exhibtion Data
+                setInputData(exhibitionNo);
+                
 
                 
 
             });
+            // end: Document Ready
+
+            // start: Load Error
+            function loadError() {
+                    alert('해당 전시회를 찾지 못하였습니다.');
+                    location.replace(fontURL + '/admin/exhibition-list.html');
+            }
+            // end: Load Error
+
+            // start: Get Exhibtion Data
+            function setInputData(exhibitionNo) {
+                $.get(backURL + "/exhibition/exhibitionInfo.do", {exhibitionNo: exhibitionNo},
+                    function (data, textStatus, jqXHR) {
+                        if(data == null) {
+                            loadError();
+                        }
+                        console.log(data);
+
+                        $('#exhibitionTitle').val(data.title); // 전시회 제목
+                        $('#mainFormBtn').click(function() {
+                            location.href= fontURL + "/exhibition/exhibition-detail.html?exhibitionNo=" + data.exhibitionNo + "?artistNo=" + data.artistNo; // 전시회 확인 버튼
+                        })
+                        $('#exhibitionContent').val(data.content);  // 전시회 내용
+                        if(data.mainImageName != null) {
+                            $('#nowImageName').text("대표이미지를 변경할려면 파일을 등록하세요."); // 대표 이미지
+                        }
+
+                        // 전시일
+                        $('#toDatetime').val(data.startDate.substring(0,10));
+                        // 추가수정 필요
+
+                        // 작가
+                        let artistName = data.artistNameKor;
+                        if(artistName == null) {
+                            artistName = data.artistNameEng;
+                        } else if(data.artistNameEng != null) {
+                            artistName = artistName + "(" + data.artistNameEng + ")";
+                        }
+                        $('#artistName').val(artistName);
+
+                        // 상태
+                        let openYn = data.openYn;
+                        let showYn = data.showYn;
+                        if(openYn == 'Y' && showYn == 'Y') {
+                            $('#statusSelect .status3').attr('selected',true);
+                        } else if(showYn == 'Y') {
+                            $('#statusSelect .status2').attr('selected',true);
+                        } else {
+                            $('#statusSelect .status1').attr('selected',true);
+                        }
+
+                    },
+                    "JSON"
+                ).fail(
+                    function() {
+                        loadError();
+                    }
+                );
+            }
+            // end: Get Exhibtion Data
+
+
 
         </script>
     </body>
