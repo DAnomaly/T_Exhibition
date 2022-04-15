@@ -186,9 +186,9 @@
                             </div>
                             <div class="d-flex justify-content-md-end align-items-center">
                                 <div class="mb-5">
-                                    <button type="button" class="btn btn-danger" id="mainFormBtn">전시회 삭제</button>
-                                    <button type="button" class="btn btn-secondary" id="mainFormBtn">작품목록 관리</button>
-                                    <button type="button" class="btn btn-primary" id="mainFormBtn">기본정보 수정</button>
+                                    <button type="button" class="btn btn-danger" id="deleteExBtn">전시회 삭제</button>
+                                    <button type="button" class="btn btn-secondary" id="artworkListBtn">작품목록 관리</button>
+                                    <button type="button" class="btn btn-primary" id="editExBtn">기본정보 수정</button>
                                 </div>
                             </div>
                         </div>
@@ -229,8 +229,8 @@
                 // Get Exhibtion Data
                 setInputData(exhibitionNo);
                 
-
-                
+                // Set Button's Works
+                setBtnAction();
 
             });
             // end: Document Ready
@@ -294,6 +294,57 @@
             }
             // end: Get Exhibtion Data
 
+            // start: Set Button's Works
+            function setBtnAction() {
+
+                // 전시회 삭제 버튼
+                $('#deleteExBtn').click(function() {
+                    if(confirm('정말로 해당 전시회를 삭제하시겠습니까?')){
+                        // 전시회 삭제
+                        deleteExhibition();
+                    }
+                });
+
+                // 전시회 작품 목록 확인/수정 버튼
+                $('#artworkListBtn').click(function() {
+                    window.open('exhibition-artwork-list.html?exhibitionNo=' + getParameterByName('exhibitionNo'),'작품목록',"width=400, height=300, top=10, left=10");
+                });
+
+                // 전시회 수정 버튼
+                $('#editExBtn').click(function() {
+                    // 전시회 수정
+                    editExhibition();
+                });
+
+            }
+            // end: Set Button's Works
+
+            // start: Delete Exhibition
+            function deleteExhibition() {
+                $.post(
+                      backURL + '/exhibition/deleteExhibtion.do'
+                    , {exhibitionNo:getParameterByName('exhibitionNo')}
+                    , function (data, textStatus, jqXHR) {
+                        // TODO    
+                    }
+                    , "JSON"
+                );
+            }
+            // end: Delete Exhibition
+
+            // start: Edit Exhibition
+            function editExhibition() {
+                // TODO
+                $.post(
+                      backURL + "/exhibition/editExhibition.do"
+                    , $('#mainForm').serialize()
+                    , function (data, status, jqXHR) {
+
+                    }
+                    , "JSON"
+                );
+            }
+            // end : Edit Exhibition
 
 
         </script>
