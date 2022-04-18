@@ -12,11 +12,11 @@
 let fontURL = 'http://localhost:5500';
 let backURL = 'http://localhost:3300';
 
-window.addEventListener('DOMContentLoaded', event => {
+// Login Check
+if(!sessionStorage.getItem("adminData"))
+    location.href='login.html';
 
-    // Login Check
-    if(!sessionStorage.getItem("adminData"))
-        location.href='login.html';
+window.addEventListener('DOMContentLoaded', event => {
 
     // Toggle the side navigation
     const sidebarToggle = document.body.querySelector('#sidebarToggle');

@@ -10,13 +10,148 @@
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
     </head>
-    <body class="">
-        
+    <body class="p-2">
+        <div id="topContainer" class="d-flex justify-content-between gap-3">
+
+            <!-- 선택되지 않은 이미지 -->
+            <div class="card w-100">
+                <form id="form1">
+                    <div class="card-header">
+                        작가 이미지 목록
+                    </div>
+                    <div class="card-body">
+                        <table id="artistArtworks">
+                            <thead>
+                                <tr>
+                                    <th>선택</th>
+                                    <th>작품명</th>
+                                    <th>등록일</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>선택</th>
+                                    <th>작품명</th>
+                                    <th>등록일</th>
+                                </tr>
+                            </tfoot>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer">
+
+                    </div>
+                </form>
+            </div>
+
+            <!-- 선택된 이미지 -->
+            <div class="card w-100">
+                <form id="form2">
+                    <div class="card-header">
+                        선택된 이미지 목록
+                    </div>
+                    <div class="card-body">
+                        <table id="selectedArtworks">
+                            <thead>
+                                <tr>
+                                    <th>선택</th>
+                                    <th>작품명</th>
+                                    <th>순서</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>선택</th>
+                                    <th>작품명</th>
+                                    <th>순서</th>
+                                </tr>
+                            </tfoot>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer">
+
+                    </div>
+                </form>
+            </div>
+
+        </div>
+        <div id="bottomContainer">
+
+        </div>
+
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script>
+        
+            // start: Fields
+            let exhibitionNo, artistNo;
+            // end: Fields
+
+            // start: Document Ready
+            $(function() {
+                // Set Field
+                setFields();
+
+
+
+            });
+            // end: Document Ready
+
+            // start: Set Fields
+            function setFields() {
+                exhibitionNo = getParameterByName("exhibitionNo");
+                artistNo = getParameterByName("artistNo");
+            }
+            // end: Set Fields
+
+            // start: Load Tables
+            function loadTables() {
+
+                // id="artistArtworks"
+                $.get(
+                      backURL + '/exhibition/artworkList.do'
+                    , {
+                        exhibitionNo: exhibitionNo ,
+                        artistNo: artistNo ,
+                        status: 'false'
+                      }
+                    , function (data, textStatus, jqXHR) {
+                        console.log('artistArtworksTable',data);
+                        
+                      }
+                    , "JSON"
+                );
+
+                // id="selectedArtworks"
+                $.get(
+                      backURL + '/exhibition/artworkList.do'
+                    , {
+                        exhibitionNo: exhibitionNo ,
+                        artistNo: artistNo ,
+                        status: 'true'
+                      }
+                    , function (data, textStatus, jqXHR) {
+                        console.log('selectedArtworksTable',data);
+                        
+                      }
+                    , "JSON"
+                );
+
+            }
+            // end: Load Tables
+
+            // start: Apply simple-datatables
+            function applyTable(idName) {
+                return new simpleDatatables.DataTable($('#' + idName)[0], {
+                    searchable: true,
+                    perPage: 10
+                });
+            }
+            // end: Apply simple-datatables
+
 
         </script>
     </body>
