@@ -93,7 +93,9 @@
             </div>
             <div id="layoutSidenav_content">
                 <main>
-                    <form id="mainForm">
+                    <form id="mainForm" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" id="exhibitionNo" name="exhibitionNo"/>                        
+
                         <div class="container-fluid px-4">
                             <h1 class="mt-4 mb-4">전시회 조회</h1>
                             <div class="card mb-4">
@@ -175,7 +177,7 @@
                                     <div class="form-group row">
                                         <label for="inputPassword" class="col-sm-2 col-form-label">상태</label>
                                         <div class="col-sm-2">
-                                            <select class="form-select" id="statusSelect">
+                                            <select class="form-select" id="statusSelect" name="statusSelect">
                                                 <option value="status1" class="status1">준비중</option>
                                                 <option value="status2" class="status2">대기중</option>
                                                 <option value="status3" class="status3">전시중</option>
@@ -220,6 +222,7 @@
             // start: Document Ready
             $(function() {
                 exhibitionNo = getParameterByName('exhibitionNo');
+                $('#exhibitionNo').val(exhibitionNo);
 
                 // Load Error
                 if(exhibitionNo == null || exhibitionNo == '') {
@@ -307,7 +310,7 @@
 
                 // 전시회 작품 목록 확인/수정 버튼
                 $('#artworkListBtn').click(function() {
-                    window.open('exhibition-artwork-list.html?exhibitionNo=' + getParameterByName('exhibitionNo'),'작품목록',"width=400, height=300, top=10, left=10");
+                    window.open('exhibition-artwork-list.html?exhibitionNo=' + exhibitionNo,'작품목록',"width=400, height=300, top=10, left=10");
                 });
 
                 // 전시회 수정 버튼
@@ -323,7 +326,7 @@
             function deleteExhibition() {
                 $.post(
                       backURL + '/exhibition/deleteExhibtion.do'
-                    , {exhibitionNo:getParameterByName('exhibitionNo')}
+                    , {exhibitionNo: exhibitionNo}
                     , function (data, textStatus, jqXHR) {
                         // TODO    
                     }
@@ -334,18 +337,59 @@
 
             // start: Edit Exhibition
             function editExhibition() {
-                // TODO
-                $.post(
-                      backURL + "/exhibition/editExhibition.do"
-                    , $('#mainForm').serialize()
-                    , function (data, status, jqXHR) {
-
+                $.ajax({
+                    type: 'POST',
+                    url: backURL + '/exhibition/editExhibition.do',
+                    data: $('#mainForm').serialize(),
+                    success: function(data) {
+                        console.log(data);
+                        if(data.isEdit == true) {
+                            alert('전시회내용이 정상적으로 수정되었습니다.');
+                            // Change Exhibition Image
+                            changeExhibitionImage();
+                        } else {
+                            alert('수정중 오류가 발생했습니다.');
+                        }
+                    },
+                    error: function() {
+                        console.log('서버무응답');
                     }
-                    , "JSON"
-                );
+                });
             }
             // end : Edit Exhibition
 
+            // start: Change Exhibition Image
+            function changeExhibitionImage() {
+                if($('#mainImageName').val() == null || $('#mainImageName').val() == '') {
+                    console.log('이미지 없음');
+                } else {
+                    let formData = new FormData($('#mainForm')[0]);
+                    $.ajax({
+                        type: 'POST',
+                        enctype: 'multipart/form-data',
+                        url: backURL + '/exhibition/changeExhibitionImage.do',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        cache: false,
+                        timeout: 600000,
+                        dataType: 'JSON',
+                        success: function (data) {
+                            console.log(data);
+                            if(data.InsertDB == false) {
+                                alert(
+                                    "대표이미지등록 오류발생\n" + 
+                                    "Connect:" + data.Connect + "\n" +
+                                    "Generate:" + data.Generate + "|" + data.GenerateMessage + "\n" +
+                                    "InsertDB:" + data.InsertDB + "|" + data.InsertDBMessage + "\n" +
+                                    "ExceptionMessage: \n" + data.ExceptionMessage
+                                    );
+                            }
+                        }
+                    });
+                }
+            }
+            // end : Change Exhibition Image
 
         </script>
     </body>
