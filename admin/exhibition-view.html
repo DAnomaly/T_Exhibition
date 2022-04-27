@@ -217,6 +217,7 @@
         <script>
             // start: Field
             let exhibitionNo;
+            let artistNo;
             // end: Field
 
             // start: Document Ready
@@ -268,6 +269,7 @@
                         // 추가수정 필요
 
                         // 작가
+                        artistNo = data.artistNo;
                         let artistName = data.artistNameKor;
                         if(artistName == null) {
                             artistName = data.artistNameEng;
@@ -310,7 +312,7 @@
 
                 // 전시회 작품 목록 확인/수정 버튼
                 $('#artworkListBtn').click(function() {
-                    window.open('exhibition-artwork-list.html?exhibitionNo=' + exhibitionNo,'작품목록',"width=400, height=300, top=10, left=10");
+                    window.open('exhibition-artwork-list.html?exhibitionNo=' + exhibitionNo + "&artistNo=" + artistNo,'작품목록관리',"width=800, height=600, top=20, left=20");
                 });
 
                 // 전시회 수정 버튼
@@ -362,6 +364,7 @@
             function changeExhibitionImage() {
                 if($('#mainImageName').val() == null || $('#mainImageName').val() == '') {
                     console.log('이미지 없음');
+                    location.reload();
                 } else {
                     let formData = new FormData($('#mainForm')[0]);
                     $.ajax({

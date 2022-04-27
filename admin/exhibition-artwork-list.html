@@ -9,14 +9,325 @@
         <title>TripleExhibition Management</title>
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+        <style>
+            body {
+                max-width: 1200px;
+                height: auto;
+                margin: 0 auto;
+            }
+            table {
+                width: 100%;
+            }
+            tfoot {
+                display: none;
+            }
+            td, th {
+                padding: 4px 0;
+                vertical-align: middle;   
+            }
+            td input[type="number"] {
+                width: 45px;
+                height: 22px;
+                box-sizing: border-box;
+            }
+            tr {
+                border-bottom: 1px solid rgb(177, 177, 177);
+            }
+            tbody tr:last-of-type {
+                border-bottom: 0;
+            }
+            th {
+                text-align: center;
+            }
+            th:first-of-type, td:first-of-type {
+                width: 48px;
+                text-align: center;
+            }
+            #selectedArtworks th:last-of-type, #selectedArtworks td:last-of-type {
+                width: 68px;
+                text-align: center;
+            }
+            
+        </style>
     </head>
-    <body class="">
-        
+    <body class="p-3">
+
+        <header class="d-flex justify-content-between mb-2">
+            <h1>&nbsp;&nbsp;전시회이미지 수정</h1>
+            <div class="d-flex align-items-end">
+                <button type="button" class="btn btn-primary" id="closeBtn">닫기</button>
+            </div>
+        </header>
+
+        <div id="topContainer" class="d-flex justify-content-between gap-3">
+            <!-- 선택되지 않은 이미지 -->
+            <div class="w-100 mb-3">
+                <div class="card w-100 h-100 mb-2">
+                    <form id="form1">
+                        <input type="hidden" name="exhibitionNo"/>
+
+                        <div class="card-header">
+                            작가 이미지 목록
+                        </div>
+                        <div class="card-body">
+                            <table id="artistArtworks">
+                                <thead>
+                                    <tr>
+                                        <th>선택</th>
+                                        <th>작품명</th>
+                                        <th>등록일</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th>선택</th>
+                                        <th>작품명</th>
+                                        <th>등록일</th>
+                                    </tr>
+                                </tfoot>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="d-flex justify-content-end">
+                    <button type="button" class="btn btn-secondary" id="addArtworkBtn">선택 추가</button>
+                </div>
+            </div>
+
+            <!-- 선택된 이미지 -->
+            <div class="w-100 mb-3">
+                <div class="card w-100 h-100 mb-2">
+                    <form id="form2">
+                        <input type="hidden" name="exhibitionNo"/>
+
+                        <div class="card-header">
+                            선택된 이미지 목록
+                        </div>
+                        <div class="card-body">
+                            <table id="selectedArtworks">
+                                <thead>
+                                    <tr>
+                                        <th>선택</th>
+                                        <th>작품명</th>
+                                        <th>순서</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th>선택</th>
+                                        <th>작품명</th>
+                                        <th>순서</th>
+                                    </tr>
+                                </tfoot>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="d-flex justify-content-end">
+                    <button type="button" class="btn btn-secondary me-1" id="removeArtworkBtn">선택 제거</button>
+                    <button type="button" class="btn btn-secondary" id="replaceOrderBtn">순서 적용</button>
+                </div>
+            </div>
+            
+            
+            
+
+        </div>
+        <div id="bottomContainer">
+            
+        </div>
+
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script>
+        
+            // start: Fields
+            let exhibitionNo, artistNo;
+            // end: Fields
+
+            // start: Document Ready
+            $(function() {
+                // Set Field
+                setFields();
+
+                // Load Tables
+                loadTables();
+
+                // Set Button Event
+                btnEvents();
+
+            });
+            // end: Document Ready
+
+            // start: Set Fields
+            function setFields() {
+                exhibitionNo = getParameterByName("exhibitionNo");
+                $('input[name="exhibitionNo"]').val(exhibitionNo);
+
+                artistNo = getParameterByName("artistNo");
+            }
+            // end: Set Fields
+
+            // start: Load Tables
+            function loadTables() {
+
+                // id="artistArtworks"
+                $.get(
+                      backURL + '/exhibition/artworkList.do'
+                    , {
+                        exhibitionNo: exhibitionNo ,
+                        artistNo: artistNo ,
+                        status: 'false'
+                      }
+                    , function (data, textStatus, jqXHR) {
+                        console.log('artistArtworksTable',data);
+                        
+                        let artworkList = data.artworkList;
+                        $.each(artworkList, function (index, artwork) { 
+                            
+                            let $tr = $('<tr>').appendTo($('#artistArtworks tbody'));
+                            
+                            var $td = $('<td>').appendTo($tr);
+                            var $checkbox = $('<input>')
+                                .attr('type','checkbox').attr('name','artworkNo').val(artwork.artworkNo)
+                                .addClass('form-check-input')
+                                .appendTo($td);
+
+                            var $td = $('<td>').appendTo($tr);
+                            var $span = $('<span>')
+                                .text(artwork.title)
+                                .appendTo($td);
+                            
+                            var $td = $('<td>').appendTo($tr);
+                            var $span = $('<span>')
+                                .text(artwork.regDate)
+                                .appendTo($td);
+
+                        });
+                       
+                      }
+                    , "JSON"
+                );
+
+                // id="selectedArtworks"
+                $.get(
+                      backURL + '/exhibition/artworkList.do'
+                    , {
+                        exhibitionNo: exhibitionNo ,
+                        artistNo: artistNo ,
+                        status: 'true'
+                      }
+                    , function (data, textStatus, jqXHR) {
+                        console.log('selectedArtworksTable',data);
+                        
+                        let artworkList = data.artworkList;
+                        $.each(artworkList, function (index, artwork) { 
+                            
+                            let $tr = $('<tr>').appendTo($('#selectedArtworks tbody'));
+                            
+                            var $td = $('<td>').appendTo($tr);
+                            var $checkbox = $('<input>')
+                                .attr('type','checkbox').attr('name','artworkNo').val(artwork.artworkNo)
+                                .appendTo($td);
+
+                            var $td = $('<td>').appendTo($tr);
+                            var $span = $('<span>')
+                                .text(artwork.title)
+                                .appendTo($td);
+                            
+                            var $td = $('<td>').appendTo($tr);
+                            var $input = $('<input>')
+                                .attr('type','number').attr('name',artwork.artworkNo).val(artwork.orderNo).attr('size','2')
+                                .appendTo($td);
+                                
+                        });
+
+                      }
+                    , "JSON"
+                );
+
+            }
+            // end: Load Tables
+
+            // start: Apply simple-datatables
+            function applyTable(idName) {
+                return new simpleDatatables.DataTable($('#' + idName)[0], {
+                    searchable: true,
+                    perPage: 10,
+                    sort: false
+                });
+            }
+            // end: Apply simple-datatables
+
+            // start: Set Button Evnet
+            function btnEvents() {
+                // id="closeBtn" : 창 닫기
+                $('#closeBtn').click((e) => {
+                    window.close();
+                });
+
+                // id="addArtworkBtn" : 작품 추가
+                $('#addArtworkBtn').click((e) => {
+                    var formData = $("#form1").serialize();
+                    $.post(
+                          backURL + "/exhibition/addArtworks.do"
+                        , formData
+                        , function (data, textStatus, jqXHR) {
+                            console.log(data);
+                            if(data.result) {
+                                location.reload();
+                            } else {
+                                alert(data.message);
+                            }
+                          }
+                        , "JSON"
+                    );
+                });
+
+                // id="removeArtworkBtn" : 작품 제거
+                $('#removeArtworkBtn').click((e) => {
+                    var formData = $("#form2").serialize();
+                    $.post(
+                          backURL + "/exhibition/removeArtworks.do"
+                        , formData
+                        , function (data, textStatus, jqXHR) {
+                            console.log(data);
+                            if(data.result) {
+                                location.reload();
+                            } else {
+                                alert(data.message);
+                            }
+                          }
+                        , "JSON"
+                    );
+                });
+
+                // id="replaceOrderBtn" : 작품 순서 변경
+                $('#replaceOrderBtn').click((e) => {
+                    var formData = $("#form2").serialize();
+                    $.post(
+                          backURL + "/exhibition/replaceOrder.do"
+                        , formData
+                        , function (data, textStatus, jqXHR) {
+                            console.log(data);
+                            if(data.result) {
+                                location.reload();
+                            } else {
+                                alert(data.message);
+                            }
+                          }
+                        , "JSON"
+                    );
+                });
+
+            }
+            // end: Set Button Evnet
 
         </script>
     </body>
