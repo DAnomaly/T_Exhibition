@@ -64,6 +64,8 @@
             <div class="w-100 mb-3">
                 <div class="card w-100 h-100 mb-2">
                     <form id="form1">
+                        <input type="hidden" name="exhibitionNo"/>
+
                         <div class="card-header">
                             작가 이미지 목록
                         </div>
@@ -98,6 +100,8 @@
             <div class="w-100 mb-3">
                 <div class="card w-100 h-100 mb-2">
                     <form id="form2">
+                        <input type="hidden" name="exhibitionNo"/>
+
                         <div class="card-header">
                             선택된 이미지 목록
                         </div>
@@ -164,6 +168,8 @@
             // start: Set Fields
             function setFields() {
                 exhibitionNo = getParameterByName("exhibitionNo");
+                $('input[name="exhibitionNo"]').val(exhibitionNo);
+
                 artistNo = getParameterByName("artistNo");
             }
             // end: Set Fields
@@ -237,7 +243,7 @@
                             
                             var $td = $('<td>').appendTo($tr);
                             var $input = $('<input>')
-                                .attr('type','number').attr('name','orderNo').val(artwork.orderNo).attr('size','2')
+                                .attr('type','number').attr('name',artwork.artworkNo).val(artwork.orderNo).attr('size','2')
                                 .appendTo($td);
                                 
                         });
@@ -287,7 +293,7 @@
                 // id="removeArtworkBtn" : 작품 제거
                 $('#removeArtworkBtn').click((e) => {
                     var formData = $("#form2").serialize();
-                    $.get(
+                    $.post(
                           backURL + "/exhibition/removeArtworks.do"
                         , formData
                         , function (data, textStatus, jqXHR) {
@@ -305,7 +311,7 @@
                 // id="replaceOrderBtn" : 작품 순서 변경
                 $('#replaceOrderBtn').click((e) => {
                     var formData = $("#form2").serialize();
-                    $.get(
+                    $.post(
                           backURL + "/exhibition/replaceOrder.do"
                         , formData
                         , function (data, textStatus, jqXHR) {
