@@ -330,7 +330,13 @@
                       backURL + '/exhibition/deleteExhibtion.do'
                     , {exhibitionNo: exhibitionNo}
                     , function (data, textStatus, jqXHR) {
-                        // TODO    
+                        if(data.result) {
+                            alert('정상적을로 삭제되었습니다.');
+                            location.href = 'exhibition-list.html';
+                        } else {
+                            alert(data.message);
+                            location.reload();
+                        }
                     }
                     , "JSON"
                 );
